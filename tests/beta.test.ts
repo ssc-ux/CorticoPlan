@@ -7,6 +7,7 @@
  * plante jamais et renvoie toujours un résultat cohérent.
  */
 import { describe, expect, it } from 'vitest';
+import { versTexte } from '../src/lib/format';
 import { analyser } from '../src/lib/parser';
 import type { Palier } from '../src/lib/types';
 
@@ -148,7 +149,9 @@ describe('bêta-test génératif', () => {
     for (let i = 0; i < 5000 * tours; i++) {
       const { texte, attendu } = generer(h);
       const r = analyser(texte, { joursParMois: 28 });
-      const ok = r.ok && JSON.stringify(r.paliers) === JSON.stringify(attendu);
+      // Aller-retour : le texte canonique (après édition du tableau) redonne les mêmes paliers.
+      const retour = analyser(versTexte(r.paliers), { joursParMois: 28 });
+      const ok = r.ok && JSON.stringify(r.paliers) === JSON.stringify(attendu) && JSON.stringify(retour.paliers) === JSON.stringify(attendu);
       if (!ok && echecs.length < 15) {
         echecs.push(`« ${texte} »\n  attendu ${JSON.stringify(attendu)}\n  obtenu  ${JSON.stringify(r.paliers)}\n  ${r.problemes.map((p) => p.message).join(' | ')}`);
       }

@@ -1,34 +1,66 @@
 # CorticoPlan
 
-Générateur de schémas de décroissance de corticothérapie (prednisone), pour médecins.
-Site statique, en français, sans serveur : **aucune donnée n'est stockée ni envoyée.**
+Rédiger un schéma de décroissance de **prednisone** en quelques secondes :
+tableau daté, texte d'ordonnance à copier, calendrier patient à imprimer.
+
+**Site : https://ssc-ux.github.io/CorticoPlan/**
 
 > ⚠️ Aide à la rédaction. Ne remplace pas le jugement médical. Le schéma reste sous la
-> responsabilité du prescripteur. Aucune donnée patient dans ce dépôt.
+> responsabilité du prescripteur. Aucune donnée n'est enregistrée ni envoyée : tout est
+> calculé dans le navigateur. Ne jamais saisir de nom de patient.
 
-## État
+## Utilisation
 
-- [x] Étape 2 — Parseur de texte libre (déterministe, sans IA) + corpus de tests
-- [ ] Étape 3 — Tableau daté, édition, texte d'ordonnance
-- [ ] Étape 4 — Mode PNDS
-- [ ] Étape 5 — Impression, partage par lien, hors ligne
-- [ ] Étape 6 — Mise en ligne (GitHub Pages)
+1. **Écrire le schéma** comme dans un courrier, par exemple :
+   `40 mg 1 mois puis baisser de 5 mg tous les 15 jours jusqu'à 20 mg puis -2,5 mg toutes les 2 semaines jusqu'à 10 mg`
+   — ou **Choisir un schéma** dans la liste.
+2. Vérifier la **reformulation** affichée sous le champ (ce qui n'est pas compris est surligné en rouge).
+3. Choisir la **date de début**.
+4. Le **tableau** apparaît : toucher une ligne pour modifier une dose ou une durée.
+5. **Copier le texte de l'ordonnance** et le coller dans votre logiciel.
+6. Au besoin : **Imprimer le calendrier patient** (1 page A4, une case par jour) ou **Partager** le schéma par lien.
 
-## Commandes
+Le site fonctionne aussi **hors ligne** une fois ouvert une première fois, et peut être
+ajouté à l'écran d'accueil du téléphone.
+
+### Ce que comprend le champ libre
+
+| Écriture | Exemples |
+|---|---|
+| Dose | `20`, `20 mg`, `20 mg/j`, `vingt mg`, `12,5`, `7 ½` |
+| Durée | `3 sem`, `15 j`, `1 mois` (= 28 jours, réglable), `pendant 10 jours`, `x 10 j` |
+| Baisse | `-5`, `baisser de 5`, `diminuer de 5`, `par paliers de 2,5` |
+| Rythme | `/sem`, `par semaine`, `tous les 15 jours`, `toutes les 4 semaines` |
+| Borne | `jusqu'à 10`, `→ 10`, `-> 10`, `de 20 à 10`, `jusqu'à l'arrêt` |
+| Un jour sur deux | `20 mg 1 j/2`, `20 mg un jour sur deux` |
+| Fin | `arrêt` ; sinon la dernière dose est **maintenue** (« à poursuivre ») |
+
+Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
+diminution a lieu dès le premier jour du bloc. Non pris en charge (signalé) :
+doses en mg/kg, en comprimés, fourchettes (« 3-4 semaines »), alternance entre deux doses.
+
+## Modifier le contenu (sans programmer)
+
+Depuis github.com, ouvrir le fichier, cliquer sur le crayon ✏️, modifier, puis « Commit changes ».
+Le site se met à jour tout seul en 1 à 2 minutes si les tests passent.
+
+- **Schémas proposés** : `src/data/schemas.json` — copier un bloc existant, modifier
+  `pathologie`, `nom`, `texte` (écrit comme dans le champ libre), `statut` et `source`.
+  Les 2 schémas actuels sont des **EXEMPLES — NON VALIDÉS**.
+- **Seuils d'alerte** : `src/config/alerts.json` — remplacer chaque `"TODO"` par un nombre
+  (sans guillemets) et indiquer la source. Une alerte avec `TODO` reste désactivée.
+- **Cas de test** : `tests/corpus/*.json` (voir `tests/corpus/README.md`).
+
+## Pour les développeurs
 
 ```bash
 npm install
-npm test              # corpus + tests unitaires + bêta-test (5 000 formulations)
-BETA_TOURS=10 npm test  # bêta-test étendu (50 000 formulations)
-npm run typecheck
+npm run dev               # site local
+npm test                  # 60+ tests dont bêta-test (5 000 formulations aléatoires)
+BETA_TOURS=10 npm test    # bêta-test étendu (50 000 formulations)
+npm run build             # site statique dans dist/
 ```
 
-## Organisation
-
-- `src/lib/parser/` : normalisation → découpage en jetons → assemblage en paliers → contrôles.
-- `src/lib/format.ts` : reformulation lisible.
-- `tests/corpus/` : cas « texte → paliers attendus » (voir son README pour en ajouter).
-
-Conventions : un nombre seul est une dose en mg ; la première baisse a lieu à J1 ;
-le schéma se termine sur la dernière dose écrite (« à poursuivre ») sauf « arrêt » ;
-1 mois = 28 jours (réglable). Toute interprétation non évidente est signalée.
+- `src/lib/` : logique pure et testée (parseur, dates, ordonnance, partage, alertes).
+- `src/components/` : interface (Svelte 5).
+- `.github/workflows/deploy.yml` : tests puis publication sur la branche `gh-pages`.

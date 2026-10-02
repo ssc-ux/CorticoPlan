@@ -1,0 +1,33 @@
+{
+  "_lisezmoi": "Schémas proposés dans « Choisir un schéma ». Chaque schéma est un texte passé au même moteur que la saisie libre. Ne rien ajouter sans vérification dans la source (version, page). statut : \"issu du PNDS\" | \"compatible PNDS\" | \"EXEMPLE — NON VALIDÉ\".",
+  "schemas": [
+    {
+      "pathologie": "Vascularite à ANCA (GPA, MPA)",
+      "nom": "Schéma réduit PEXIVAS, 50 à 75 kg (après bolus de méthylprednisolone)",
+      "texte": "60 mg 1 sem, 30 mg 1 sem, 25 mg 2 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 2 sem, puis 5 mg",
+      "mgKg": false,
+      "statut": "EXEMPLE — NON VALIDÉ",
+      "source": {
+        "document": "Protocole de l'essai PEXIVAS (Walsh et al., Trials 2013), tableau 1",
+        "annee": 2013,
+        "version": "Protocole publié",
+        "url": "https://doi.org/10.1186/1745-6215-14-73",
+        "page": "Tableau 1"
+      }
+    },
+    {
+      "pathologie": "Sarcoïdose",
+      "nom": "Atteinte d'organe significative, 20 mg sur 6 mois",
+      "texte": "20 mg 2 mois puis 15 mg 2 mois puis 10 mg 4 sem puis 5 mg 4 sem puis 2,5 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "EXEMPLE — NON VALIDÉ",
+      "source": {
+        "document": "Five principles and protocols for the clinician based on the 2021 ERS and BTS statements for treating sarcoidosis (Lung India 2024)",
+        "annee": 2024,
+        "version": "Article",
+        "url": "https://doi.org/10.4103/lungindia.lungindia_499_24",
+        "page": "Question 2 et 3"
+      }
+    }
+  ]
+}

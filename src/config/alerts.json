@@ -1,0 +1,19 @@
+{
+  "_lisezmoi": "Seuils des alertes discrètes. Remplacer chaque \"TODO\" par un nombre et renseigner la source. Une alerte dont une valeur vaut \"TODO\" est désactivée.",
+  "surrenalien": {
+    "description": "Passage sous le seuil de risque d'insuffisance surrénalienne",
+    "doseMg": "TODO",
+    "source": "TODO"
+  },
+  "pneumocystose": {
+    "description": "Prophylaxie anti-pneumocystose à discuter",
+    "doseMinMg": "TODO",
+    "dureeMinJours": "TODO",
+    "source": "TODO"
+  },
+  "osteoporose": {
+    "description": "Prévention de l'ostéoporose cortico-induite",
+    "dureeMinJours": "TODO",
+    "source": "TODO"
+  }
+}

@@ -29,3 +29,21 @@ export function reformuler(paliers: Palier[]): string[] {
     return `${formatDose(p.dose)} pendant ${formatDuree(p.jours)}`;
   });
 }
+
+/**
+ * Texte canonique d'une liste de paliers, relisible par le parseur.
+ * Sert après une modification dans le tableau : le champ de texte est
+ * remplacé par cette version, qui redonne exactement les mêmes paliers.
+ */
+export function versTexte(paliers: Palier[]): string {
+  return paliers
+    .map((p) => {
+      if (p.dose === 0) return 'arrêt';
+      const duree = p.jours === null ? '' : p.jours % 7 === 0 ? ` ${p.jours / 7} sem` : ` ${p.jours} j`;
+      if (typeof p.dose === 'number') return `${nombreFr(p.dose)} mg${duree}`;
+      const [a, b] = p.dose;
+      if (b === 0) return `${nombreFr(a)} mg 1 j/2${duree}`;
+      return `${nombreFr(a)}/${nombreFr(b)} mg en alternance${duree}`;
+    })
+    .join(' puis ');
+}

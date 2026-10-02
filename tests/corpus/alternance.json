@@ -1,10 +1,60 @@
 [
-  { "id": "alternance-barre", "entree": "10/7,5 en alternance pendant 4 semaines puis 7,5 mg",
-    "paliers": [{ "dose": [10, 7.5], "jours": 28 }, { "dose": 7.5, "jours": null }], "problemes": [] },
-  { "id": "alternance-et", "entree": "10 mg et 7,5 mg en alternance 4 sem puis 7,5 mg",
-    "paliers": [{ "dose": [10, 7.5], "jours": 28 }, { "dose": 7.5, "jours": null }], "problemes": [] },
-  { "id": "un-jour-sur-deux-abrege", "entree": "20 mg 1 j/2 pendant 2 semaines puis arrêt",
-    "paliers": [{ "dose": [20, 0], "jours": 14 }, { "dose": 0, "jours": null }], "problemes": [] },
-  { "id": "un-jour-sur-deux-toutes-lettres", "entree": "10 mg un jour sur deux",
-    "paliers": [{ "dose": [10, 0], "jours": null }], "problemes": [] }
+  {
+    "id": "refus-alternance-barre",
+    "entree": "10/7,5 en alternance pendant 4 semaines puis 7,5 mg",
+    "paliers": [
+      {
+        "dose": 7.5,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "alternance-deux-doses"
+    ]
+  },
+  {
+    "id": "refus-alternance-et",
+    "entree": "10 mg et 7,5 mg en alternance 4 sem puis 7,5 mg",
+    "paliers": [
+      {
+        "dose": 7.5,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "alternance-deux-doses"
+    ]
+  },
+  {
+    "id": "un-jour-sur-deux-abrege",
+    "entree": "20 mg 1 j/2 pendant 2 semaines puis arrêt",
+    "paliers": [
+      {
+        "dose": [
+          20,
+          0
+        ],
+        "jours": 14
+      },
+      {
+        "dose": 0,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "un-jour-sur-deux-toutes-lettres",
+    "entree": "10 mg un jour sur deux",
+    "paliers": [
+      {
+        "dose": [
+          10,
+          0
+        ],
+        "jours": null
+      }
+    ],
+    "problemes": []
+  }
 ]

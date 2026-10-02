@@ -170,12 +170,15 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
     return { type: 'arret', span };
   }
 
-  if (paire) return { type: 'dose', dose: paire, jours: duree, span };
+  // Pas d'alternance entre deux posologies (choix du prescripteur).
+  if (paire) {
+    return echec('alternance-deux-doses', 'Alternance entre deux doses non prise en charge : utilisez une dose fixe, ou « un jour sur deux ».');
+  }
 
   if (doses.length === 1) {
     const d = doses[0]!;
     if (unJourSurDeux) return { type: 'dose', dose: [d, 0], jours: duree, span };
-    if (alternance) return echec('alternance-incomplete', 'Alternance avec une seule dose : indiquez les deux (ex. « 10/7,5 »).');
+    if (alternance) return echec('alternance-incomplete', 'Alternance : précisez « un jour sur deux » (ex. « 20 mg un jour sur deux »).');
     return { type: 'dose', dose: d, jours: duree, span };
   }
 

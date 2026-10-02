@@ -16,7 +16,7 @@ sont exécutés automatiquement par `tests/corpus.test.ts`.
 }
 ```
 
-- `dose` : mg/jour, ou `[jour1, jour2]` pour une alternance (`[20, 0]` = un jour sur deux).
+- `dose` : mg/jour, ou `[dose, 0]` pour « un jour sur deux » (pas d'alternance entre deux doses).
 - `jours` : durée du palier ; `null` = à poursuivre (ou arrêt si dose 0).
 - `problemes` : codes **exacts** des erreurs et avertissements attendus
   (les simples informations ne sont pas vérifiées). Liste des codes :

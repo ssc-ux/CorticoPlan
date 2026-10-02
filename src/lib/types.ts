@@ -5,7 +5,10 @@
  * et l'édition du tableau produisent tous un `Palier[]`.
  */
 
-/** Dose quotidienne en mg, ou alternance [jour 1, jour 2] (ex. [10, 7.5]). */
+/**
+ * Dose quotidienne en mg, ou « un jour sur deux » : [dose, 0].
+ * (L'alternance entre deux doses non nulles, ex. 10/7,5, n'est pas utilisée.)
+ */
 export type Dose = number | [number, number];
 
 export interface Palier {
@@ -36,6 +39,7 @@ export type CodeProbleme =
   | 'borne-incoherente'
   | 'borne-inatteignable'
   | 'alternance-incomplete'
+  | 'alternance-deux-doses'
   | 'dose-remonte'
   | 'dose-non-realisable'
   | 'paliers-apres-arret'

@@ -24,14 +24,12 @@ describe('reformulation', () => {
     expect(
       reformuler([
         { dose: 20, jours: 21 },
-        { dose: [10, 7.5], jours: 10 },
         { dose: [20, 0], jours: 7 },
         { dose: 7.5, jours: null },
         { dose: 0, jours: null },
       ]),
     ).toEqual([
       '20 mg/j pendant 3 semaines',
-      '10 mg et 7,5 mg en alternance un jour sur deux pendant 10 jours',
       '20 mg un jour sur deux pendant 1 semaine',
       '7,5 mg/j, à poursuivre',
       'Arrêt',
