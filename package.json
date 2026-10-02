@@ -1,0 +1,17 @@
+{
+  "name": "corticoplan",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Générateur de schémas de décroissance de corticothérapie (prednisone) — aide à la rédaction.",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "~5.9",
+    "vitest": "^5.0.3"
+  }
+}

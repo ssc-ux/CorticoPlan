@@ -1,0 +1,8 @@
+[
+  { "id": "pexivas-reduit-50-75kg", "entree": "60 mg 1 sem, 30 mg 1 sem, 25 mg 2 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 2 sem, puis 5 mg",
+    "paliers": [{ "dose": 60, "jours": 7 }, { "dose": 30, "jours": 7 }, { "dose": 25, "jours": 14 }, { "dose": 20, "jours": 14 }, { "dose": 15, "jours": 14 }, { "dose": 12.5, "jours": 14 }, { "dose": 10, "jours": 14 }, { "dose": 7.5, "jours": 14 }, { "dose": 5, "jours": null }], "problemes": [] },
+  { "id": "sarcoidose-atteinte-organe", "entree": "20 mg/j 2 mois puis 15 mg 2 mois puis 10 mg 4 sem puis 5 mg 4 sem puis 2,5 mg 4 sem puis arrêt",
+    "paliers": [{ "dose": 20, "jours": 56 }, { "dose": 15, "jours": 56 }, { "dose": 10, "jours": 28 }, { "dose": 5, "jours": 28 }, { "dose": 2.5, "jours": 28 }, { "dose": 0, "jours": null }], "problemes": [] },
+  { "id": "pti-cure-courte", "entree": "prednisone 60 mg pendant 3 semaines puis arrêt",
+    "paliers": [{ "dose": 60, "jours": 21 }, { "dose": 0, "jours": null }], "problemes": [] }
+]

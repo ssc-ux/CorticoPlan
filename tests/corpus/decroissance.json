@@ -1,0 +1,326 @@
+[
+  {
+    "id": "pas-par-semaine-borne",
+    "entree": "20 mg 3 sem puis -5 mg/sem jusqu'à 10 mg",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 21
+      },
+      {
+        "dose": 15,
+        "jours": 7
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "baisser-de-toutes-les",
+    "entree": "40 mg 1 mois puis baisser de 5 mg toutes les 2 semaines jusqu'à 20 mg",
+    "paliers": [
+      {
+        "dose": 40,
+        "jours": 28
+      },
+      {
+        "dose": 35,
+        "jours": 14
+      },
+      {
+        "dose": 30,
+        "jours": 14
+      },
+      {
+        "dose": 25,
+        "jours": 14
+      },
+      {
+        "dose": 20,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "jusqua-arret",
+    "entree": "5 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
+    "paliers": [
+      {
+        "dose": 5,
+        "jours": 28
+      },
+      {
+        "dose": 4,
+        "jours": 28
+      },
+      {
+        "dose": 3,
+        "jours": 28
+      },
+      {
+        "dose": 2,
+        "jours": 28
+      },
+      {
+        "dose": 1,
+        "jours": 28
+      },
+      {
+        "dose": 0,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "de-a-par-paliers",
+    "entree": "de 20 à 10 mg par paliers de 2,5 mg tous les 15 jours",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 15
+      },
+      {
+        "dose": 17.5,
+        "jours": 15
+      },
+      {
+        "dose": 15,
+        "jours": 15
+      },
+      {
+        "dose": 12.5,
+        "jours": 15
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "duree-deduite-du-rythme",
+    "entree": "20 mg puis -5/sem jusqu'à 10",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 7
+      },
+      {
+        "dose": 15,
+        "jours": 7
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "fleche-unicode",
+    "entree": "20 → 10 mg : -2,5 mg/sem",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 7
+      },
+      {
+        "dose": 17.5,
+        "jours": 7
+      },
+      {
+        "dose": 15,
+        "jours": 7
+      },
+      {
+        "dose": 12.5,
+        "jours": 7
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "fleche-ascii-rythme-barre",
+    "entree": "20 mg 2 sem puis -2,5 mg/15 j -> 10 mg",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 14
+      },
+      {
+        "dose": 17.5,
+        "jours": 15
+      },
+      {
+        "dose": 15,
+        "jours": 15
+      },
+      {
+        "dose": 12.5,
+        "jours": 15
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "deux-decroissances",
+    "entree": "50 mg pendant 1 semaine puis diminuer de 10 mg par semaine jusqu'à 20 mg puis diminuer de 5 mg par semaine jusqu'à 10 mg",
+    "paliers": [
+      {
+        "dose": 50,
+        "jours": 7
+      },
+      {
+        "dose": 40,
+        "jours": 7
+      },
+      {
+        "dose": 30,
+        "jours": 7
+      },
+      {
+        "dose": 20,
+        "jours": 7
+      },
+      {
+        "dose": 15,
+        "jours": 7
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "decroissance-sur-duree",
+    "entree": "10 mg 1 mois puis -1 mg tous les mois pendant 3 mois",
+    "paliers": [
+      {
+        "dose": 10,
+        "jours": 28
+      },
+      {
+        "dose": 9,
+        "jours": 28
+      },
+      {
+        "dose": 8,
+        "jours": 28
+      },
+      {
+        "dose": 7,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "decroissance-mot",
+    "entree": "prednisone 40 mg le matin pendant 4 semaines puis décroissance de 5 mg tous les 15 jours jusqu'à 20 mg",
+    "paliers": [
+      {
+        "dose": 40,
+        "jours": 28
+      },
+      {
+        "dose": 35,
+        "jours": 15
+      },
+      {
+        "dose": 30,
+        "jours": 15
+      },
+      {
+        "dose": 25,
+        "jours": 15
+      },
+      {
+        "dose": 20,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "ppr-a-diminuer",
+    "entree": "Cortancyl 15 mg/j, à diminuer de 1 mg toutes les 4 semaines jusqu'à 10 mg",
+    "paliers": [
+      {
+        "dose": 15,
+        "jours": 28
+      },
+      {
+        "dose": 14,
+        "jours": 28
+      },
+      {
+        "dose": 13,
+        "jours": 28
+      },
+      {
+        "dose": 12,
+        "jours": 28
+      },
+      {
+        "dose": 11,
+        "jours": 28
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "verbe-sous-entendu",
+    "entree": "40 mg 2 sem puis diminuer de 5 mg tous les 15 jours jusqu'à 20 mg puis de 2,5 mg toutes les 2 semaines jusqu'à 15 mg",
+    "paliers": [
+      {
+        "dose": 40,
+        "jours": 14
+      },
+      {
+        "dose": 35,
+        "jours": 15
+      },
+      {
+        "dose": 30,
+        "jours": 15
+      },
+      {
+        "dose": 25,
+        "jours": 15
+      },
+      {
+        "dose": 20,
+        "jours": 15
+      },
+      {
+        "dose": 17.5,
+        "jours": 14
+      },
+      {
+        "dose": 15,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  }
+]

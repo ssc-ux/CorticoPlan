@@ -1,0 +1,166 @@
+[
+  {
+    "id": "borne-inatteignable",
+    "entree": "20 mg 1 sem puis -3 mg/sem jusqu'à 10",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 7
+      },
+      {
+        "dose": 17,
+        "jours": 7
+      },
+      {
+        "dose": 14,
+        "jours": 7
+      },
+      {
+        "dose": 11,
+        "jours": 7
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "borne-inatteignable"
+    ]
+  },
+  {
+    "id": "dose-qui-remonte",
+    "entree": "10 mg 2 sem puis 15 mg 2 sem puis 5 mg",
+    "paliers": [
+      {
+        "dose": 10,
+        "jours": 14
+      },
+      {
+        "dose": 15,
+        "jours": 14
+      },
+      {
+        "dose": 5,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "dose-remonte"
+    ]
+  },
+  {
+    "id": "dose-non-realisable",
+    "entree": "10 mg 1 sem puis 7,25 mg",
+    "paliers": [
+      {
+        "dose": 10,
+        "jours": 7
+      },
+      {
+        "dose": 7.25,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "dose-non-realisable"
+    ]
+  },
+  {
+    "id": "mg-kg-refuse",
+    "entree": "1 mg/kg pendant 3 semaines",
+    "paliers": [],
+    "problemes": [
+      "mg-kg-non-pris-en-charge"
+    ]
+  },
+  {
+    "id": "mot-inconnu-surligne",
+    "entree": "20 mg bidule 3 sem puis 10 mg",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 21
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "mot-inconnu"
+    ]
+  },
+  {
+    "id": "fourchette-refusee",
+    "entree": "20 mg 3-4 semaines puis 10 mg",
+    "paliers": [
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "fourchette"
+    ]
+  },
+  {
+    "id": "duree-manquante",
+    "entree": "20 mg puis 10 mg",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": null
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "duree-manquante"
+    ]
+  },
+  {
+    "id": "baisse-sans-pas",
+    "entree": "20 mg 2 sem puis baisser jusqu'à 10 mg en 6 semaines",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "pas-manquant"
+    ]
+  },
+  {
+    "id": "rythme-sans-baisse",
+    "entree": "20 mg toutes les semaines",
+    "paliers": [],
+    "problemes": [
+      "segment-incompris"
+    ]
+  },
+  {
+    "id": "alternance-incomplete",
+    "entree": "10 mg en alternance",
+    "paliers": [],
+    "problemes": [
+      "alternance-incomplete"
+    ]
+  },
+  {
+    "id": "ambiguite-nombres-en-lettres",
+    "entree": "soixante trois semaines puis 30 mg",
+    "paliers": [
+      {
+        "dose": 30,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "segment-incompris"
+    ]
+  }
+]
