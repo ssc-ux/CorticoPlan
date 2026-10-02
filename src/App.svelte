@@ -36,6 +36,13 @@
   const pret = $derived(resultat.ok && resultat.paliers.length > 0 && dateOk);
   const lignes = $derived(pret ? calendrier(resultat.paliers, debut) : []);
   const texteOrdonnance = $derived(ordonnance(lignes));
+
+  // Indication du schéma choisi : effacée avec le texte, et signalée comme
+  // « modifié » dès que le texte ne correspond plus exactement au schéma.
+  $effect(() => {
+    if (!texte.trim()) schemaChoisi = null;
+  });
+  const schemaModifie = $derived(schemaChoisi !== null && texte !== schemaChoisi.texte);
   const listeAlertes = $derived(alertes(lignes));
 
   function choisir(s: Schema) {
@@ -46,7 +53,6 @@
 
   function modifier(paliers: Palier[]) {
     texte = versTexte(paliers);
-    schemaChoisi = null;
   }
 
   async function partager() {
@@ -91,7 +97,7 @@
         <Saisie bind:texte />
         {#if schemaChoisi}
           <p class="discret source">
-            Schéma : {schemaChoisi.nom} — <strong>{schemaChoisi.statut}</strong> —
+            {schemaModifie ? 'Modifié à partir de' : 'Schéma'} : {schemaChoisi.nom} — <strong>{schemaChoisi.statut}</strong> —
             <a href={schemaChoisi.source.url} target="_blank" rel="noopener">source</a>
           </p>
         {/if}
