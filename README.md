@@ -58,9 +58,11 @@ npm install
 npm run dev               # site local
 npm test                  # 60+ tests dont bêta-test (5 000 formulations aléatoires)
 BETA_TOURS=10 npm test    # bêta-test étendu (50 000 formulations)
-npm run build             # site statique dans dist/
+npm run build             # site statique dans site/ (publié tel quel)
 ```
 
 - `src/lib/` : logique pure et testée (parseur, dates, ordonnance, partage, alertes).
 - `src/components/` : interface (Svelte 5).
-- `.github/workflows/deploy.yml` : tests puis publication sur la branche `gh-pages`.
+- `web/index.html` : page d'entrée du site ; `index.html` (racine) redirige vers `site/`.
+- `.github/workflows/deploy.yml` : tests puis mise à jour de `site/` (publié par GitHub Pages depuis `main`).
+- Ne pas modifier `site/` à la main : il est régénéré automatiquement.
