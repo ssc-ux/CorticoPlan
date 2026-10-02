@@ -7,10 +7,22 @@
 
   let { texte, resultat }: { texte: string; resultat: ResultatAnalyse } = $props();
 
+  // Affichage simple : s'il y a des mots non compris, on ne montre qu'eux
+  // (les autres erreurs en découlent souvent) ; sinon les autres erreurs.
+  const inconnus = $derived(resultat.problemes.filter((p) => p.code === 'mot-inconnu'));
+  const erreurs = $derived(
+    inconnus.length ? inconnus : resultat.problemes.filter((p) => p.niveau === 'erreur'),
+  );
+  const messages = $derived(
+    inconnus.length
+      ? [`Mot${inconnus.length > 1 ? 's' : ''} non compris : ${inconnus.map((p) => `« ${texte.slice(...p.span!)} »`).join(', ')}. Reformulez ou supprimez.`]
+      : [...new Set(erreurs.map((p) => p.message))],
+  );
+
   /** Découpe le texte en morceaux normaux / surlignés. */
   const morceaux = $derived.by(() => {
-    const spans: Span[] = resultat.problemes
-      .filter((p) => p.span && p.niveau === 'erreur')
+    const spans: Span[] = erreurs
+      .filter((p) => p.span)
       .map((p) => p.span!)
       .sort((a, b) => a[0] - b[0]);
     const sortie: { t: string; marque: boolean }[] = [];
@@ -25,7 +37,6 @@
     return sortie;
   });
 
-  const erreurs = $derived(resultat.problemes.filter((p) => p.niveau === 'erreur'));
   const avertissements = $derived(resultat.problemes.filter((p) => p.niveau === 'avertissement'));
   const infos = $derived(resultat.problemes.filter((p) => p.niveau === 'info'));
 </script>
@@ -39,7 +50,7 @@
           {#each morceaux as m}{#if m.marque}<mark>{m.t}</mark>{:else}{m.t}{/if}{/each}
         </p>
         <ul>
-          {#each erreurs as e}<li>{e.message}</li>{/each}
+          {#each messages as m}<li>{m}</li>{/each}
         </ul>
       </div>
     {/if}
@@ -56,9 +67,11 @@
     {#each avertissements as a}
       <p class="bloc attention"><span aria-hidden="true">⚠</span> {a.message}</p>
     {/each}
-    {#each infos as i}
-      <p class="info">ⓘ {i.message}</p>
-    {/each}
+    {#if !erreurs.length}
+      {#each infos as i}
+        <p class="info">ⓘ {i.message}</p>
+      {/each}
+    {/if}
   </div>
 {/if}
 

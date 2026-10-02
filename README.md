@@ -29,11 +29,11 @@ ajouté à l'écran d'accueil du téléphone.
 |---|---|
 | Dose | `20`, `20 mg`, `20 mg/j`, `vingt mg`, `12,5`, `7 ½` |
 | Durée | `3 sem`, `15 j`, `1 mois` (= 28 jours, réglable), `pendant 10 jours`, `x 10 j` |
-| Baisse | `-5`, `baisser de 5`, `diminuer de 5`, `par paliers de 2,5` |
+| Baisse | `-5`, `moins 5`, `baisser de 5`, `diminuer de 5`, `enlever 5`, `par paliers de 2,5` |
 | Rythme | `/sem`, `par semaine`, `tous les 15 jours`, `toutes les 4 semaines` |
 | Borne | `jusqu'à 10`, `→ 10`, `-> 10`, `de 20 à 10`, `jusqu'à l'arrêt` |
 | Un jour sur deux | `20 mg 1 j/2`, `20 mg un jour sur deux` |
-| Fin | `arrêt` ; sinon la dernière dose est **maintenue** (« à poursuivre ») |
+| Fin | `arrêt` ; sinon la dernière dose est **maintenue** (« à poursuivre », « jusqu'à réévaluation » acceptés) |
 
 Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
 diminution a lieu dès le premier jour du bloc. Non pris en charge (signalé) :
@@ -46,7 +46,8 @@ Le site se met à jour tout seul en 1 à 2 minutes si les tests passent.
 
 - **Schémas proposés** : `src/data/schemas.json` — copier un bloc existant, modifier
   `pathologie`, `nom`, `texte` (écrit comme dans le champ libre), `statut` et `source`.
-  Les 2 schémas actuels sont des **EXEMPLES — NON VALIDÉS**.
+  16 schémas sont proposés (Horton, PPR, vascularites à ANCA, sarcoïdose, PTI), tous marqués
+  **« À vérifier »** : après vérification dans la source, passer `"valide": false` à `true`.
 - **Seuils d'alerte** : `src/config/alerts.json` — remplacer chaque `"TODO"` par un nombre
   (sans guillemets) et indiquer la source. Une alerte avec `TODO` reste désactivée.
 - **Cas de test** : `tests/corpus/*.json` (voir `tests/corpus/README.md`).

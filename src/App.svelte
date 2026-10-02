@@ -97,7 +97,7 @@
         <Saisie bind:texte />
         {#if schemaChoisi}
           <p class="discret source">
-            {schemaModifie ? 'Modifié à partir de' : 'Schéma'} : {schemaChoisi.nom} — <strong>{schemaChoisi.statut}</strong> —
+            {schemaModifie ? 'Modifié à partir de' : 'Schéma'} : {schemaChoisi.nom} — <strong>{schemaChoisi.valide ? 'vérifié' : 'à vérifier'}</strong> —
             <a href={schemaChoisi.source.url} target="_blank" rel="noopener">source</a>
           </p>
         {/if}

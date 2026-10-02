@@ -20,7 +20,7 @@
   {#each liste as s}
     <button type="button" class="schema" onclick={() => onchoix(s)}>
       <span class="nom">{s.nom}</span>
-      <span class="statut" class:non-valide={s.statut.includes('NON VALIDÉ')}>{s.statut}</span>
+      <span class="statut" class:non-valide={!s.valide}>{s.valide ? '✓ Vérifié' : 'À vérifier'} — {s.statut}</span>
       <span class="source">{s.source.document} — {s.source.page}</span>
     </button>
   {/each}

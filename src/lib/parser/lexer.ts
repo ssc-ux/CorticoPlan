@@ -41,6 +41,9 @@ export interface Jeton {
 const re = (source: string) => new RegExp(source, 'y');
 
 const FIN_MOT = '(?![a-z])';
+const JUSQUA_SUITE =
+  "jusqu[ ]*'?[ ]*(?:a|au)[ ]+(?:nouvel[ ]+(?:ordre|avis)|(?:la[ ]+|l'|le[ ]+)?(?:prochaine?[ ]+)?" +
+  "(?:reevaluation|consultation|rdv|rendez[- ]vous|controle|avis[ ]+medical|bilan))";
 const UNITE = `[ ]*(?:(jours?|jrs?|j)|(semaines?|sem|s)|(mois)|(cps?|cpr|comprimes?))${FIN_MOT}`;
 const RE_UNITE = re(UNITE);
 
@@ -50,7 +53,7 @@ const MOTS_NEUTRES = new Set([
   'des', 'pendant', 'pdt', 'durant', 'sur', 'matin', 'matins', 'au', 'en',
   'prise', 'prises', 'dose', 'doses', 'soit', 'par', 'jour', 'jours',
   'quotidien', 'quotidienne', 'partir', 'x', 'po', 'os', 'per', 'unique',
-  'une', 'un', 'fois',
+  'une', 'un', 'fois', 'maintien', 'entretien',
 ]);
 
 interface Regle {
@@ -75,6 +78,14 @@ const REGLES: Regle[] = [
     ),
     jeton: () => ({ type: 'fourchette' }),
   },
+  // « à poursuivre », « à maintenir jusqu'à réévaluation », « jusqu'à nouvel ordre » :
+  // confirment que la dernière dose est maintenue (c'est déjà la règle) → ignorés.
+  {
+    re: re(
+      `(?:(?:a[ ]+)?(?:poursuivre|continuer|maintenir)(?:[ ]+${JUSQUA_SUITE})?|${JUSQUA_SUITE})${FIN_MOT}`,
+    ),
+    jeton: () => null,
+  },
   { re: re(`mg[ ]*\\/[ ]*kg(?:[ ]*\\/[ ]*(?:jours?|j))?${FIN_MOT}`), jeton: () => ({ type: 'mgkg' }) },
   {
     re: re(`(?:mg|milligrammes?)(?:[ ]*\\/[ ]*(?:jours?|j|24[ ]*h))?${FIN_MOT}`),
@@ -88,7 +99,7 @@ const REGLES: Regle[] = [
   { re: re(`jusqu[ ]*'?[ ]*(?:a|au)${FIN_MOT}|jusqu'`), jeton: () => ({ type: 'jusqua' }) },
   {
     re: re(
-      `(?:baisser|diminuer|reduire|decroitre|descendre|baisse|diminution|reduction|decroissance|degression)` +
+      `(?:baisser|diminuer|reduire|decroitre|descendre|baisse|diminution|reduction|decroissance|degression|moins|enlever|retirer|oter)` +
         `(?:[ ]+(?:de|par))?${FIN_MOT}|(?:par[ ]+)?paliers?[ ]+de${FIN_MOT}`,
     ),
     jeton: () => ({ type: 'pas' }),

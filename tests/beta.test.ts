@@ -110,7 +110,8 @@ function generer(h: ReturnType<typeof hasard>): Genere {
     const borne = Math.round((derniere - nbBaisses * pas) * 100) / 100;
     if (borne < 0 || nbBaisses < 1) return generer(h);
     const p = ecrireNombre(pas, h);
-    const verbe = h.choisir([`-${p} mg`, `- ${p} mg`, `-${p}`, `baisser de ${p} mg`, `diminuer de ${p} mg`, `décroissance de ${p} mg`, `par paliers de ${p} mg`, `réduire de ${p} mg`]);
+    const verbe = h.choisir([`-${p} mg`, `- ${p} mg`, `-${p}`, `baisser de ${p} mg`, `diminuer de ${p} mg`, `décroissance de ${p} mg`,
+      `par paliers de ${p} mg`, `réduire de ${p} mg`, `moins ${p} mg`, `enlever ${p} mg`, `retirer ${p} mg`]);
     const cible = jusquaArret
       ? h.choisir(["jusqu'à l'arrêt", "jusqu'à arrêt", 'jusqu’à l’arrêt'])
       : h.choisir([`jusqu'à ${ecrireDose(borne, h)}`, `jusqu’à ${borne} mg`, `-> ${borne} mg`, `→ ${borne}`, `jusqu'a ${borne}`]);
@@ -125,6 +126,10 @@ function generer(h: ReturnType<typeof hasard>): Genere {
       attendu.push({ dose: 0, jours: null });
     } else {
       attendu.push({ dose: borne, jours: null });
+      // Confirmation du maintien, écrite ou non : ne change rien au résultat.
+      if (h.pile(0.3)) {
+        morceaux[morceaux.length - 1] += ' ' + h.choisir(['à poursuivre', 'à poursuivre jusqu’à réévaluation', 'à maintenir jusqu’à nouvel ordre', 'jusqu’à la prochaine consultation']);
+      }
     }
   } else if (fin === 'arret') {
     morceaux.push(h.choisir(['arrêt', 'arret', 'stop', 'arrêter', 'Arrêt']));

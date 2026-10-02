@@ -9,6 +9,10 @@ export interface Schema {
   texte: string;
   mgKg: boolean;
   statut: string;
+  /** Ce que CorticoPlan a réellement lu pour établir ce schéma. */
+  verification: string;
+  /** Passe à true quand le prescripteur a vérifié le schéma dans sa source. */
+  valide: boolean;
   source: { document: string; annee: number; version: string; url: string; page: string };
 }
 
