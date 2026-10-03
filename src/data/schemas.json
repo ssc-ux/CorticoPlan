@@ -880,6 +880,822 @@
         "url": "https://www.corticomed.fr/kdigo/",
         "page": "Tableau du calculateur"
       }
+    },
+    {
+      "pathologie": "Maladie de Still de l'adulte",
+      "nom": "1 mg/kg pour 50 kg — 0,1 mg/kg à S6, arrêt à M3",
+      "texte": "50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 20 mg 1 sem puis 12,5 mg 1 sem puis 5 mg 1 sem puis 4 mg 2 sem puis 3 mg 1 sem puis 2 mg 1 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Still de l'adulte (HAS), tableau 4 : prednisone 1 mg/kg/j, objectif 0,1 mg/kg/j à 6 semaines, arrêt à 3 mois",
+        "annee": 2018,
+        "version": "2017-2018",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2018-04/pnds_-_maladie_de_still_de_ladulte.pdf",
+        "page": "p. 23, tableau 4"
+      }
+    },
+    {
+      "pathologie": "Maladie de Still de l'adulte",
+      "nom": "1 mg/kg pour 60 kg — 0,1 mg/kg à S6, arrêt à M3",
+      "texte": "60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 25 mg 1 sem puis 15 mg 1 sem puis 6 mg 1 sem puis 5 mg 1 sem puis 4 mg 1 sem puis 3 mg 2 sem puis 2 mg 1 sem puis 1 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Still de l'adulte (HAS), tableau 4 : prednisone 1 mg/kg/j, objectif 0,1 mg/kg/j à 6 semaines, arrêt à 3 mois",
+        "annee": 2018,
+        "version": "2017-2018",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2018-04/pnds_-_maladie_de_still_de_ladulte.pdf",
+        "page": "p. 23, tableau 4"
+      }
+    },
+    {
+      "pathologie": "Maladie de Still de l'adulte",
+      "nom": "1 mg/kg pour 70 kg — 0,1 mg/kg à S6, arrêt à M3",
+      "texte": "70 mg 1 sem puis 60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 30 mg 1 sem puis 17,5 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 1 sem puis 4 mg 1 sem puis 3 mg 1 sem puis 2 mg 1 sem puis 1 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Still de l'adulte (HAS), tableau 4 : prednisone 1 mg/kg/j, objectif 0,1 mg/kg/j à 6 semaines, arrêt à 3 mois",
+        "annee": 2018,
+        "version": "2017-2018",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2018-04/pnds_-_maladie_de_still_de_ladulte.pdf",
+        "page": "p. 23, tableau 4"
+      }
+    },
+    {
+      "pathologie": "Maladie de Still de l'adulte",
+      "nom": "1 mg/kg pour 80 kg — 0,1 mg/kg à S6, arrêt à M3",
+      "texte": "80 mg 1 sem puis 70 mg 1 sem puis 55 mg 1 sem puis 45 mg 1 sem puis 30 mg 1 sem puis 20 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 1 sem puis 3 mg 1 sem puis 2 mg 1 sem puis 1 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Still de l'adulte (HAS), tableau 4 : prednisone 1 mg/kg/j, objectif 0,1 mg/kg/j à 6 semaines, arrêt à 3 mois",
+        "annee": 2018,
+        "version": "2017-2018",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2018-04/pnds_-_maladie_de_still_de_ladulte.pdf",
+        "page": "p. 23, tableau 4"
+      }
+    },
+    {
+      "pathologie": "Maladie de Behçet (atteinte grave)",
+      "nom": "1 mg/kg pour 50 kg — 15-20 mg à M3, ≤ 0,1 mg/kg à M6",
+      "texte": "50 mg 3 sem puis 45 mg 2 sem puis 40 mg 2 sem puis 35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 4 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 1 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Behçet (HAS) : atteintes graves (neurologiques, vasculaires) — 1 mg/kg/j (max 80 mg) 3 semaines, puis 15 à 20 mg/j à 3 mois et ≤ 0,1 mg/kg/j à 6 mois",
+        "annee": 2019,
+        "version": "Décembre 2019",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2019-12/pnds_behcet.pdf",
+        "page": "p. 35-37"
+      }
+    },
+    {
+      "pathologie": "Maladie de Behçet (atteinte grave)",
+      "nom": "1 mg/kg pour 60 kg — 15-20 mg à M3, ≤ 0,1 mg/kg à M6",
+      "texte": "60 mg 3 sem puis 55 mg 2 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 7 mg 1 sem puis 6 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Behçet (HAS) : atteintes graves (neurologiques, vasculaires) — 1 mg/kg/j (max 80 mg) 3 semaines, puis 15 à 20 mg/j à 3 mois et ≤ 0,1 mg/kg/j à 6 mois",
+        "annee": 2019,
+        "version": "Décembre 2019",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2019-12/pnds_behcet.pdf",
+        "page": "p. 35-37"
+      }
+    },
+    {
+      "pathologie": "Maladie de Behçet (atteinte grave)",
+      "nom": "1 mg/kg pour 70 kg — 15-20 mg à M3, ≤ 0,1 mg/kg à M6",
+      "texte": "70 mg 3 sem puis 65 mg 2 sem puis 55 mg 2 sem puis 45 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 8 mg 1 sem puis 7 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Behçet (HAS) : atteintes graves (neurologiques, vasculaires) — 1 mg/kg/j (max 80 mg) 3 semaines, puis 15 à 20 mg/j à 3 mois et ≤ 0,1 mg/kg/j à 6 mois",
+        "annee": 2019,
+        "version": "Décembre 2019",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2019-12/pnds_behcet.pdf",
+        "page": "p. 35-37"
+      }
+    },
+    {
+      "pathologie": "Maladie de Behçet (atteinte grave)",
+      "nom": "1 mg/kg pour 80 kg — 15-20 mg à M3, ≤ 0,1 mg/kg à M6",
+      "texte": "80 mg 3 sem puis 75 mg 2 sem puis 65 mg 2 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 2 sem puis 9 mg 1 sem puis 8 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Behçet (HAS) : atteintes graves (neurologiques, vasculaires) — 1 mg/kg/j (max 80 mg) 3 semaines, puis 15 à 20 mg/j à 3 mois et ≤ 0,1 mg/kg/j à 6 mois",
+        "annee": 2019,
+        "version": "Décembre 2019",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2019-12/pnds_behcet.pdf",
+        "page": "p. 35-37"
+      }
+    },
+    {
+      "pathologie": "Dermatomyosite",
+      "nom": "1 mg/kg pour 50 kg, 4 semaines, puis -10 % toutes les 2 semaines jusqu'à 0,5 mg/kg",
+      "texte": "50 mg 4 sem puis 45 mg 2 sem puis 40 mg 2 sem puis 35 mg 2 sem puis 32,5 mg 2 sem puis 30 mg 2 sem puis 27,5 mg 2 sem puis 25 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Dermatomyosite (HAS) : 1 mg/kg/j en plateau 4 à 6 semaines, puis diminution de 10 % de la dose toutes les 2 à 4 semaines",
+        "annee": 2016,
+        "version": "2016",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2016-11/pnds_dermatomyosite.pdf",
+        "page": "p. 41"
+      }
+    },
+    {
+      "pathologie": "Dermatomyosite",
+      "nom": "1 mg/kg pour 60 kg, 4 semaines, puis -10 % toutes les 2 semaines jusqu'à 0,5 mg/kg",
+      "texte": "60 mg 4 sem puis 55 mg 2 sem puis 50 mg 2 sem puis 45 mg 2 sem puis 40 mg 2 sem puis 35 mg 2 sem puis 32,5 mg 2 sem puis 30 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Dermatomyosite (HAS) : 1 mg/kg/j en plateau 4 à 6 semaines, puis diminution de 10 % de la dose toutes les 2 à 4 semaines",
+        "annee": 2016,
+        "version": "2016",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2016-11/pnds_dermatomyosite.pdf",
+        "page": "p. 41"
+      }
+    },
+    {
+      "pathologie": "Dermatomyosite",
+      "nom": "1 mg/kg pour 70 kg, 4 semaines, puis -10 % toutes les 2 semaines jusqu'à 0,5 mg/kg",
+      "texte": "70 mg 4 sem puis 62,5 mg 2 sem puis 55 mg 2 sem puis 50 mg 2 sem puis 45 mg 2 sem puis 40 mg 2 sem puis 35 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Dermatomyosite (HAS) : 1 mg/kg/j en plateau 4 à 6 semaines, puis diminution de 10 % de la dose toutes les 2 à 4 semaines",
+        "annee": 2016,
+        "version": "2016",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2016-11/pnds_dermatomyosite.pdf",
+        "page": "p. 41"
+      }
+    },
+    {
+      "pathologie": "Dermatomyosite",
+      "nom": "1 mg/kg pour 80 kg, 4 semaines, puis -10 % toutes les 2 semaines jusqu'à 0,5 mg/kg",
+      "texte": "80 mg 4 sem puis 72,5 mg 2 sem puis 65 mg 2 sem puis 57,5 mg 2 sem puis 52,5 mg 2 sem puis 47,5 mg 2 sem puis 42,5 mg 2 sem puis 37,5 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus dans le texte du PNDS",
+      "valide": false,
+      "source": {
+        "document": "PNDS Dermatomyosite (HAS) : 1 mg/kg/j en plateau 4 à 6 semaines, puis diminution de 10 % de la dose toutes les 2 à 4 semaines",
+        "annee": 2016,
+        "version": "2016",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2016-11/pnds_dermatomyosite.pdf",
+        "page": "p. 41"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "ACR 2024, 50 kg — départ 25 mg, ≤ 5 mg à M6",
+      "texte": "25 mg 2 sem puis 20 mg 8 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 7 mg 2 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "compatible recommandations ACR 2024 — paliers calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus sur CORTICOMED (source non relue)",
+      "valide": false,
+      "source": {
+        "document": "ACR 2024, néphrite lupique (cité par CORTICOMED) : après bolus de méthylprednisolone, prednisone ≤ 0,5 mg/kg/j (max 40 mg), objectif ≤ 5 mg/j à M6",
+        "annee": 2024,
+        "version": "ACR 2024 Lupus Nephritis Guideline",
+        "url": "https://www.corticomed.fr/acr/",
+        "page": "Calculateur ACR 2024"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "ACR 2024, 60 kg — départ 30 mg, ≤ 5 mg à M6",
+      "texte": "30 mg 2 sem puis 25 mg 8 sem puis 20 mg 4 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 7 mg 2 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "compatible recommandations ACR 2024 — paliers calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus sur CORTICOMED (source non relue)",
+      "valide": false,
+      "source": {
+        "document": "ACR 2024, néphrite lupique (cité par CORTICOMED) : après bolus de méthylprednisolone, prednisone ≤ 0,5 mg/kg/j (max 40 mg), objectif ≤ 5 mg/j à M6",
+        "annee": 2024,
+        "version": "ACR 2024 Lupus Nephritis Guideline",
+        "url": "https://www.corticomed.fr/acr/",
+        "page": "Calculateur ACR 2024"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "ACR 2024, 70 kg — départ 35 mg, ≤ 5 mg à M6",
+      "texte": "35 mg 2 sem puis 30 mg 6 sem puis 25 mg 4 sem puis 20 mg 4 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7 mg 2 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "compatible recommandations ACR 2024 — paliers calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus sur CORTICOMED (source non relue)",
+      "valide": false,
+      "source": {
+        "document": "ACR 2024, néphrite lupique (cité par CORTICOMED) : après bolus de méthylprednisolone, prednisone ≤ 0,5 mg/kg/j (max 40 mg), objectif ≤ 5 mg/j à M6",
+        "annee": 2024,
+        "version": "ACR 2024 Lupus Nephritis Guideline",
+        "url": "https://www.corticomed.fr/acr/",
+        "page": "Calculateur ACR 2024"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "ACR 2024, 80 kg — départ 40 mg, ≤ 5 mg à M6",
+      "texte": "40 mg 2 sem puis 35 mg 6 sem puis 30 mg 2 sem puis 25 mg 4 sem puis 20 mg 4 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "compatible recommandations ACR 2024 — paliers calculés par CorticoPlan pour atteindre les repères",
+      "verification": "Repères lus sur CORTICOMED (source non relue)",
+      "valide": false,
+      "source": {
+        "document": "ACR 2024, néphrite lupique (cité par CORTICOMED) : après bolus de méthylprednisolone, prednisone ≤ 0,5 mg/kg/j (max 40 mg), objectif ≤ 5 mg/j à M6",
+        "annee": 2024,
+        "version": "ACR 2024 Lupus Nephritis Guideline",
+        "url": "https://www.corticomed.fr/acr/",
+        "page": "Calculateur ACR 2024"
+      }
+    },
+    {
+      "pathologie": "Lupus systémique (hors néphrite)",
+      "nom": "EULAR 2025, lupus léger : arrêt à S4 si lupus contrôlé",
+      "texte": "12,5 mg 1 sem puis 7,5 mg 1 sem puis 4 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu de recommandations — milieu de chaque fourchette hebdomadaire",
+      "verification": "Repères lus sur CORTICOMED (source non relue)",
+      "valide": false,
+      "source": {
+        "document": "Consensus Delphi EULAR 2025 sur la décroissance des glucocorticoïdes dans le lupus (cité par CORTICOMED) — fourchettes hebdomadaires",
+        "annee": 2025,
+        "version": "EULAR 2025",
+        "url": "https://www.corticomed.fr/consensus-delphi/",
+        "page": "Calculateur EULAR 2025"
+      }
+    },
+    {
+      "pathologie": "Lupus systémique (hors néphrite)",
+      "nom": "EULAR 2025, lupus modéré : arrêt à S15 si lupus contrôlé",
+      "texte": "25 mg 1 sem puis 22,5 mg 1 sem puis 17,5 mg 2 sem puis 12,5 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu de recommandations — milieu de chaque fourchette hebdomadaire",
+      "verification": "Repères lus sur CORTICOMED (source non relue)",
+      "valide": false,
+      "source": {
+        "document": "Consensus Delphi EULAR 2025 sur la décroissance des glucocorticoïdes dans le lupus (cité par CORTICOMED) — fourchettes hebdomadaires",
+        "annee": 2025,
+        "version": "EULAR 2025",
+        "url": "https://www.corticomed.fr/consensus-delphi/",
+        "page": "Calculateur EULAR 2025"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Essai ADVOCATE : bras prednisone, adulte ≥ 55 kg, arrêt à S20",
+      "texte": "60 mg 1 sem puis 45 mg 1 sem puis 30 mg 1 sem puis 25 mg 3 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 4 sem puis 5 mg 6 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai — bras contrôle (prednisone + cyclophosphamide ou rituximab) ; arrêt à J141",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai ADVOCATE (ChemoCentryx CL010_168, amendement 4.0), tableau 6 « Prednisone schedule for the control group » — bras contrôle (prednisone)",
+        "annee": 2019,
+        "version": "Amendement 4.0 (ClinicalTrials.gov NCT02994927)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/27/NCT02994927/Prot_000.pdf",
+        "page": "Tableau 6, p. 122"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Essai ADVOCATE : bras prednisone, adulte < 55 kg, arrêt à S20",
+      "texte": "45 mg 2 sem puis 30 mg 1 sem puis 25 mg 3 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 4 sem puis 5 mg 6 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai — bras contrôle (prednisone + cyclophosphamide ou rituximab) ; arrêt à J141",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai ADVOCATE (ChemoCentryx CL010_168, amendement 4.0), tableau 6 « Prednisone schedule for the control group » — bras contrôle (prednisone)",
+        "annee": 2019,
+        "version": "Amendement 4.0 (ClinicalTrials.gov NCT02994927)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/27/NCT02994927/Prot_000.pdf",
+        "page": "Tableau 6, p. 122"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Essai AURORA : prednisone orale, ≥ 45 kg (après bolus J1-J2)",
+      "texte": "25 mg 11 jours puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 5 mg 8 sem puis 2,5 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — méthylprednisolone IV 500 mg J1 et J2 non incluse : la prednisone commence à J3 (date de début = J3) ; 2,5 mg dès S16, arrêt possible si indiqué",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai AURORA 1 (Aurinia AUR-VCS-2016-01, v2.0), tableau 1 « Dosing schedule for IV methylprednisolone and daily oral prednisone »",
+        "annee": 2017,
+        "version": "Version 2.0 du 04/05/2017 (ClinicalTrials.gov NCT03021499)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/99/NCT03021499/Prot_002.pdf",
+        "page": "Tableau 1, p. 49"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Essai AURORA : prednisone orale, < 45 kg (après bolus J1-J2)",
+      "texte": "20 mg 11 jours puis 15 mg 2 sem puis 10 mg 4 sem puis 5 mg 8 sem puis 2,5 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — méthylprednisolone IV 250 mg J1 et J2 non incluse : la prednisone commence à J3 (date de début = J3) ; 2,5 mg dès S16, arrêt possible si indiqué",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai AURORA 1 (Aurinia AUR-VCS-2016-01, v2.0), tableau 1 « Dosing schedule for IV methylprednisolone and daily oral prednisone »",
+        "annee": 2017,
+        "version": "Version 2.0 du 04/05/2017 (ClinicalTrials.gov NCT03021499)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/99/NCT03021499/Prot_002.pdf",
+        "page": "Tableau 1, p. 49"
+      }
+    },
+    {
+      "pathologie": "Pseudopolyarthrite rhizomélique",
+      "nom": "Essai SAPHYR : départ 15 mg, arrêt à S14 (bras sarilumab)",
+      "texte": "15 mg 2 sem puis 14 mg 1 sem puis 12 mg 1 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 1 sem puis 4 mg 1 sem puis 3 mg 1 sem puis 2 mg 1 sem puis 1 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai — décroissance courte associée au sarilumab",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai SAPHYR (Sanofi EFC15160, sarilumab, amendement 02), annexe A « Standardized corticosteroid-taper regimen »",
+        "annee": 2021,
+        "version": "Amendement 02 du 19/04/2021 (ClinicalTrials.gov NCT03600818)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03600818/Prot_000.pdf",
+        "page": "Annexe A, p. 104-105"
+      }
+    },
+    {
+      "pathologie": "Pseudopolyarthrite rhizomélique",
+      "nom": "Essai SAPHYR : départ 15 mg, arrêt à S52 (bras placebo)",
+      "texte": "15 mg 2 sem puis 14 mg 1 sem puis 12 mg 3 sem puis 10 mg 2 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 8 sem puis 1 mg 8 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai — bras corticoïdes seuls",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai SAPHYR (Sanofi EFC15160, sarilumab, amendement 02), annexe A « Standardized corticosteroid-taper regimen »",
+        "annee": 2021,
+        "version": "Amendement 02 du 19/04/2021 (ClinicalTrials.gov NCT03600818)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03600818/Prot_000.pdf",
+        "page": "Annexe A, p. 104-105"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 45 à 50 mg",
+      "texte": "40 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 40 à 44 mg",
+      "texte": "35 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 35 à 39 mg",
+      "texte": "30 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 30 à 34 mg",
+      "texte": "25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 25 à 29 mg",
+      "texte": "20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 20 à 24 mg",
+      "texte": "17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 17,5 à 19,5 mg",
+      "texte": "15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 15 à 17 mg",
+      "texte": "12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 12,5 à 14,5 mg",
+      "texte": "10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 9 à 12 mg",
+      "texte": "8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
+      "nom": "Essai MANDARA : décroissance depuis 7,5 à 8,5 mg",
+      "texte": "6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MANDARA (AstraZeneca D3253C00001, benralizumab, v6.0), annexe H « Recommended prednisolone/prednisone tapering schedule from week 4 »",
+        "annee": 2024,
+        "version": "Version 6.0 (ClinicalTrials.gov NCT04157348)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/48/NCT04157348/Prot_016.pdf",
+        "page": "Annexe H, p. 156"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Essai RITAZAREM (rechute) : schéma 1 mg/kg, ≥ 60 kg",
+      "texte": "60 mg 2 sem puis 45 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 6 sem puis 7,5 mg 4 sem puis 5 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — rechute traitée par rituximab ; 5 mg jusqu'au 16e mois, puis 2,5 mg, arrêt au 20e mois",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai RITAZAREM (v5.1), « Schedule 1 » (induction) et « Schedule 2 » (entretien) — prednisolone",
+        "annee": 2019,
+        "version": "Version 5.1 du 12/07/2019 (ClinicalTrials.gov NCT01697267)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/67/NCT01697267/Prot_000.pdf",
+        "page": "Schedules 1 et 2, p. 28-29"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Essai RITAZAREM (rechute) : schéma 1 mg/kg, < 60 kg",
+      "texte": "50 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 6 sem puis 7,5 mg 4 sem puis 5 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — rechute traitée par rituximab ; 5 mg jusqu'au 16e mois, puis 2,5 mg, arrêt au 20e mois",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai RITAZAREM (v5.1), « Schedule 1 » (induction) et « Schedule 2 » (entretien) — prednisolone",
+        "annee": 2019,
+        "version": "Version 5.1 du 12/07/2019 (ClinicalTrials.gov NCT01697267)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/67/NCT01697267/Prot_000.pdf",
+        "page": "Schedules 1 et 2, p. 28-29"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Essai RITAZAREM (rechute) : schéma 0,5 mg/kg, ≥ 60 kg",
+      "texte": "30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 6 sem puis 7,5 mg 4 sem puis 5 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — rechute traitée par rituximab ; 5 mg jusqu'au 16e mois, puis 2,5 mg, arrêt au 20e mois",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai RITAZAREM (v5.1), « Schedule 1 » (induction) et « Schedule 2 » (entretien) — prednisolone",
+        "annee": 2019,
+        "version": "Version 5.1 du 12/07/2019 (ClinicalTrials.gov NCT01697267)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/67/NCT01697267/Prot_000.pdf",
+        "page": "Schedules 1 et 2, p. 28-29"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Essai RITAZAREM (rechute) : schéma 0,5 mg/kg, < 60 kg",
+      "texte": "25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 4 sem puis 10 mg 6 sem puis 7,5 mg 4 sem puis 5 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — rechute traitée par rituximab ; 5 mg jusqu'au 16e mois, puis 2,5 mg, arrêt au 20e mois",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai RITAZAREM (v5.1), « Schedule 1 » (induction) et « Schedule 2 » (entretien) — prednisolone",
+        "annee": 2019,
+        "version": "Version 5.1 du 12/07/2019 (ClinicalTrials.gov NCT01697267)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/67/NCT01697267/Prot_000.pdf",
+        "page": "Schedules 1 et 2, p. 28-29"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Essai BLISS-LN : décroissance recommandée depuis 60 mg",
+      "texte": "60 mg 2 sem puis 50 mg 1 sem puis 45 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 1 sem puis 10 mg à poursuivre",
+      "mgKg": false,
+      "statut": "issu d'un essai — après 0 à 3 bolus de méthylprednisolone (non inclus) ; ≤ 10 mg exigé à S24",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai BLISS-LN (HGS1006-C1121, belimumab, amendement 07), tableau 5-1 « Recommended oral prednisone taper regimen »",
+        "annee": 2019,
+        "version": "Amendement 07 du 24/01/2019 (ClinicalTrials.gov NCT01639339)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/39/NCT01639339/Prot_000.pdf",
+        "page": "Tableau 5-1, p. 50"
+      }
+    },
+    {
+      "pathologie": "Maladie associée aux IgG4",
+      "nom": "Essai MITIGATE : 20 mg, arrêt à S8",
+      "texte": "20 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 5 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai — décroissance imposée aux deux bras (inébilizumab ou placebo)",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai MITIGATE (Horizon/Amgen, inébilizumab, amendement 9.1), tableau 9 « Glucocorticoid taper schedule »",
+        "annee": 2023,
+        "version": "Amendement 9.1 du 08/08/2023 (ClinicalTrials.gov NCT04540497)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/97/NCT04540497/Prot_000.pdf",
+        "page": "Tableau 9, p. 78"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai mavrilimumab (KPL-301-C001) : départ 60 mg, arrêt à S26",
+      "texte": "60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — décroissance de 26 semaines au plus, entrée selon la dose du jour 0",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai KPL-301-C001 (Kiniksa, mavrilimumab, v4.0), tableau 3 « Prednisone tapering schedule »",
+        "annee": 2020,
+        "version": "Version 4.0 du 30/03/2020 (ClinicalTrials.gov NCT03827018)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03827018/Prot_002.pdf",
+        "page": "Tableau 3, p. 41-42"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai mavrilimumab (KPL-301-C001) : départ 50 mg, arrêt à S25",
+      "texte": "50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — décroissance de 26 semaines au plus, entrée selon la dose du jour 0",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai KPL-301-C001 (Kiniksa, mavrilimumab, v4.0), tableau 3 « Prednisone tapering schedule »",
+        "annee": 2020,
+        "version": "Version 4.0 du 30/03/2020 (ClinicalTrials.gov NCT03827018)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03827018/Prot_002.pdf",
+        "page": "Tableau 3, p. 41-42"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai mavrilimumab (KPL-301-C001) : départ 40 mg, arrêt à S24",
+      "texte": "40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — décroissance de 26 semaines au plus, entrée selon la dose du jour 0",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai KPL-301-C001 (Kiniksa, mavrilimumab, v4.0), tableau 3 « Prednisone tapering schedule »",
+        "annee": 2020,
+        "version": "Version 4.0 du 30/03/2020 (ClinicalTrials.gov NCT03827018)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03827018/Prot_002.pdf",
+        "page": "Tableau 3, p. 41-42"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai mavrilimumab (KPL-301-C001) : départ 35 mg, arrêt à S23",
+      "texte": "35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — décroissance de 26 semaines au plus, entrée selon la dose du jour 0",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai KPL-301-C001 (Kiniksa, mavrilimumab, v4.0), tableau 3 « Prednisone tapering schedule »",
+        "annee": 2020,
+        "version": "Version 4.0 du 30/03/2020 (ClinicalTrials.gov NCT03827018)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03827018/Prot_002.pdf",
+        "page": "Tableau 3, p. 41-42"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai mavrilimumab (KPL-301-C001) : départ 30 mg, arrêt à S22",
+      "texte": "30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — décroissance de 26 semaines au plus, entrée selon la dose du jour 0",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai KPL-301-C001 (Kiniksa, mavrilimumab, v4.0), tableau 3 « Prednisone tapering schedule »",
+        "annee": 2020,
+        "version": "Version 4.0 du 30/03/2020 (ClinicalTrials.gov NCT03827018)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03827018/Prot_002.pdf",
+        "page": "Tableau 3, p. 41-42"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai mavrilimumab (KPL-301-C001) : départ 25 mg, arrêt à S22",
+      "texte": "25 mg 1 sem puis 20 mg 2 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — décroissance de 26 semaines au plus, entrée selon la dose du jour 0",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai KPL-301-C001 (Kiniksa, mavrilimumab, v4.0), tableau 3 « Prednisone tapering schedule »",
+        "annee": 2020,
+        "version": "Version 4.0 du 30/03/2020 (ClinicalTrials.gov NCT03827018)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03827018/Prot_002.pdf",
+        "page": "Tableau 3, p. 41-42"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai mavrilimumab (KPL-301-C001) : départ 20 mg, arrêt à S22",
+      "texte": "20 mg 3 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — décroissance de 26 semaines au plus, entrée selon la dose du jour 0",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai KPL-301-C001 (Kiniksa, mavrilimumab, v4.0), tableau 3 « Prednisone tapering schedule »",
+        "annee": 2020,
+        "version": "Version 4.0 du 30/03/2020 (ClinicalTrials.gov NCT03827018)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/18/NCT03827018/Prot_002.pdf",
+        "page": "Tableau 3, p. 41-42"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai TitAIN : départ 60 mg, arrêt à S27",
+      "texte": "60 mg 1 sem puis 55 mg 1 sem puis 50 mg 1 sem puis 45 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 15 mg 1 sem puis 13 mg 1 sem puis 12 mg 1 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — valeurs hautes des fourchettes S0-S6 du tableau 5-3 (60-40 mg) ; doses identiques pour tous à partir de S7-S8",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai TitAIN (Novartis CAIN457ADE11C, sécukinumab, v03), tableau 5-3 — prednisolone",
+        "annee": 2019,
+        "version": "Version 03 du 29/11/2019 (ClinicalTrials.gov NCT03765788)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/88/NCT03765788/Prot_000.pdf",
+        "page": "Tableaux 5-3 et 5-4, p. 40-41"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai TitAIN : départ 40 mg, arrêt à S27",
+      "texte": "40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 27 mg 1 sem puis 25 mg 1 sem puis 22 mg 1 sem puis 20 mg 1 sem puis 16 mg 1 sem puis 15 mg 1 sem puis 13 mg 1 sem puis 12 mg 1 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — valeurs hautes des fourchettes S0-S6 du tableau 5-4 (40-25 mg) ; doses identiques pour tous à partir de S7-S8",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai TitAIN (Novartis CAIN457ADE11C, sécukinumab, v03), tableau 5-4 — prednisolone",
+        "annee": 2019,
+        "version": "Version 03 du 29/11/2019 (ClinicalTrials.gov NCT03765788)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/88/NCT03765788/Prot_000.pdf",
+        "page": "Tableaux 5-3 et 5-4, p. 40-41"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai TitAIN : départ 25 mg, arrêt à S27",
+      "texte": "25 mg 1 sem puis 22 mg 1 sem puis 21 mg 1 sem puis 20 mg 1 sem puis 19 mg 1 sem puis 18 mg 1 sem puis 17 mg 1 sem puis 16 mg 1 sem puis 15 mg 1 sem puis 13 mg 1 sem puis 12 mg 1 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai (phase 2) — valeurs basses des fourchettes S0-S6 du tableau 5-4 (40-25 mg) ; doses identiques pour tous à partir de S7-S8",
+      "verification": "Texte intégral du protocole lu (tableau de décroissance)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai TitAIN (Novartis CAIN457ADE11C, sécukinumab, v03), tableau 5-4 — prednisolone",
+        "annee": 2019,
+        "version": "Version 03 du 29/11/2019 (ClinicalTrials.gov NCT03765788)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/88/NCT03765788/Prot_000.pdf",
+        "page": "Tableaux 5-3 et 5-4, p. 40-41"
+      }
     }
   ]
 }

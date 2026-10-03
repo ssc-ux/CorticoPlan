@@ -23,6 +23,7 @@ const VOCABULAIRE = [
   'definitif', 'maintien', 'entretien', 'quotidien', 'quotidienne', 'traitement', 'deux', 'trois', 'quatre', 'cinq',
   'six', 'sept', 'huit', 'neuf', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'vingt', 'trente',
   'quarante', 'cinquante', 'soixante', 'pendant', 'jusqu', 'dose', 'doses', 'prise', 'schema', 'posologie',
+  'ligne', 'nouvelle', 'retour', 'point', 'virgule', 'kilo', 'kilos', 'kilogramme', 'kilogrammes', // dictée vocale
 ];
 
 /** Mots courts ou abréviations connus : jamais corrigés. */

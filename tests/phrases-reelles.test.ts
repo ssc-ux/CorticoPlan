@@ -49,6 +49,15 @@ const CAS: [string, string][] = [
   ['15 mg puis -1 mg toutes les 4 semainnes jusqu\'à l\'arrett', '15:28 14:28 13:28 12:28 11:28 10:28 9:28 8:28 7:28 6:28 5:28 4:28 3:28 2:28 1:28 0'],
   ['Cortancyl 25 mg/j pendant 2 semaine puis 20 mg/j pendant 2 semaine puis decroissance de 2,5 mg tout les 15 jours jusqua 10 mg',
     '25:14 20:14 17.5:15 15:15 12.5:15 10'],
+  // Dictée vocale (texte tel que produit par la dictée du téléphone).
+  ['Prednisone 20 milligrammes pendant 15 jours puis 15 milligrammes pendant 2 semaines puis diminuer de 2,5 milligrammes tous les 15 jours jusqu\'à 5 milligrammes.',
+    '20:15 15:14 12.5:15 10:15 7.5:15 5'],
+  ['Vingt milligrammes pendant quinze jours, puis quinze milligrammes pendant quinze jours, puis dix milligrammes', '20:15 15:15 10'],
+  ['20 mg pendant 7 jours à la ligne 15 mg pendant 7 jours nouvelle ligne 10 mg', '20:7 15:7 10'],
+  ['prednisone 20 mg/j pendant 2 semaines point puis 10 mg point', '20:14 10'],
+  ['prednisone deux virgule cinq milligrammes pendant un mois puis arrêt', '2.5:28 0'],
+  ['Prednisone 20 mg pendant 1 semaine puis 10 mg pendant 1 semaine et arrêter', '20:7 10:7 0'],
+  ['Prednisone 30 milligrammes par jour durant 3 semaines virgule puis 20 milligrammes', '30:21 20'],
 ];
 
 function noter(texte: string): string {

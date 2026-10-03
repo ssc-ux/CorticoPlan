@@ -7,7 +7,7 @@
  * l'assembleur combinera ensuite.
  */
 import type { Span } from '../types';
-import { lireChiffres, lireLettres, lireNombre, type NombreLu } from './numbers';
+import { avecVirgule, lireChiffres, lireLettres, lireNombre, type NombreLu } from './numbers';
 
 export type TypeJeton =
   | 'nombre' // 20, vingt, 12,5
@@ -102,6 +102,11 @@ const REGLES: Regle[] = [
     jeton: () => null,
   },
   { re: re(`mg[ ]*\\/[ ]*kg(?:[ ]*\\/[ ]*(?:jours?|j))?${FIN_MOT}`), jeton: () => ({ type: 'mgkg' }) },
+  // Dictée vocale : « milligramme par kilo ».
+  {
+    re: re(`(?:mg|milligrammes?)[ ]*(?:par|\\/)[ ]*(?:kilos?|kilogrammes?|kg)(?:[ ]*(?:par|\\/)[ ]*(?:jours?|j))?${FIN_MOT}`),
+    jeton: () => ({ type: 'mgkg' }),
+  },
   {
     re: re(`(?:mg|milligrammes?)(?:[ ]*\\/[ ]*(?:jours?|j|24[ ]*h))?${FIN_MOT}`),
     jeton: () => ({ type: 'mg' }),
@@ -124,7 +129,13 @@ const REGLES: Regle[] = [
   },
   { re: re(`(?:en[ ]+)?alternance${FIN_MOT}|altern(?:e|es|ee|ees|er|ant)${FIN_MOT}`), jeton: () => ({ type: 'alternance' }) },
   { re: re(`arret(?:er)?${FIN_MOT}|stop(?:per)?${FIN_MOT}`), jeton: () => ({ type: 'arret' }) },
-  { re: re(`(?:puis|apres|ensuite)${FIN_MOT}|[,;.]`), jeton: () => ({ type: 'sep' }) },
+  {
+    // Dictée vocale : « à la ligne », « point », « virgule » dits à voix haute ; « et arrêter ».
+    re: re(
+      `(?:puis|apres|ensuite)${FIN_MOT}|[,;.]|(?:(?:retour|passage|passer)[ ]+)?a[ ]+la[ ]+ligne${FIN_MOT}|nouvelle[ ]+ligne${FIN_MOT}|point(?:[ ]+virgule)?${FIN_MOT}|virgule${FIN_MOT}|et(?=[ ]+(?:arret|stop))`,
+    ),
+    jeton: () => ({ type: 'sep' }),
+  },
   { re: re('\\/'), jeton: () => ({ type: 'slash' }) },
   { re: re(`et${FIN_MOT}`), jeton: () => ({ type: 'et' }) },
   { re: re(`a(?![a-z'])`), jeton: () => ({ type: 'a' }) },
@@ -174,6 +185,7 @@ function lireQuantite(s: string, pos: number, joursParMois: number) {
     enLettres = true;
   }
   if (!nombre) return null;
+  nombre = avecVirgule(s, nombre);
   const unite = lireUnite(s, nombre.fin, nombre.valeur, joursParMois);
   if (unite) return unite;
   // « un », « une » sans unité sont des articles, pas des doses.

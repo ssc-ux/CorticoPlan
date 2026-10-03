@@ -10,13 +10,13 @@
   let recherche = $state('');
 
   /** Libellé court pour les pastilles : « Lupus : néphropathie… » → « Lupus ». */
-  const court = (p: string) => p.split(/[(:]/)[0]!.replace('Anémie hémolytique auto-immune', 'AHAI').replace('Purpura thrombopénique immunologique', 'PTI').trim();
+  const court = (p: string) => p.split(/[(:]/)[0]!.replace('Anémie hémolytique auto-immune', 'AHAI').replace('Purpura thrombopénique immunologique', 'PTI').replace(/^Granulomatose éosinophilique.*/, 'GEPA').trim();
   const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const liste = $derived(
     SCHEMAS.filter(
       (s) =>
         (pathologie === 'Toutes' || s.pathologie === pathologie) &&
-        (!recherche.trim() || norm(`${s.pathologie} ${s.nom} ${s.statut}`).includes(norm(recherche.trim()))),
+        (!recherche.trim() || norm(`${s.pathologie} ${s.nom} ${s.statut} ${s.source.document}`).includes(norm(recherche.trim()))),
     ),
   );
 </script>
@@ -41,8 +41,10 @@
           <span>{s.pathologie}</span>
           <span class:av={!s.valide}>{s.valide ? '✓ vérifié' : 'à vérifier'}</span>
           <span>{s.statut.split(' — ')[0]}</span>
-          <a href={s.source.url} target="_blank" rel="noopener">source{s.source.page ? `, ${s.source.page}` : ''}</a>
         </span>
+        <a class="src" href={s.source.url} target="_blank" rel="noopener"
+          >Source : {s.source.document}{s.source.page ? `, ${s.source.page}` : ''} ({s.source.annee})</a
+        >
       </div>
     {:else}
       <p class="vide">Aucun schéma ne correspond.</p>
@@ -138,13 +140,16 @@
     margin-right: 6px;
     color: var(--muted);
   }
-  .m a {
+  .src {
     position: relative;
     z-index: 1;
+    justify-self: start;
     color: var(--accent);
+    font-size: 0.8rem;
+    line-height: 1.35;
     text-decoration: none;
   }
-  .m a:hover {
+  .src:hover {
     text-decoration: underline;
   }
   .av {

@@ -75,6 +75,14 @@
     ]
   },
   {
+    "id": "mg-kg-dicte-refuse",
+    "entree": "Prednisone 1 milligramme par kilo pendant 3 semaines",
+    "paliers": [],
+    "problemes": [
+      "mg-kg-non-pris-en-charge"
+    ]
+  },
+  {
     "id": "mot-inconnu-surligne",
     "entree": "20 mg bidule 3 sem puis 10 mg",
     "paliers": [

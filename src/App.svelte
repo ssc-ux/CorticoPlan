@@ -43,6 +43,11 @@
   $effect(() => {
     if (!texte.trim()) schemaChoisi = null;
   });
+  /** Précision du schéma (ce qui suit « — » dans le statut), avec majuscule. */
+  const note = $derived.by(() => {
+    const n = schemaChoisi?.statut.split(' — ').slice(1).join(' — ') ?? '';
+    return n && n[0]!.toUpperCase() + n.slice(1);
+  });
   const schemaModifie = $derived(schemaChoisi !== null && texte !== schemaChoisi.texte);
 
   // Lien partagé ouvert alors que le site est déjà affiché : on le charge aussi.
@@ -89,12 +94,12 @@
 <div class="ecran wrap">
   <header class="top">
     <h1><img src="./icon.svg" alt="" width="22" height="22" /> CorticoPlan</h1>
-    <nav class="tabs" role="tablist">
+    <div class="tabs" role="tablist">
       <button role="tab" aria-selected={onglet === 'ecrire'} onclick={() => (onglet = 'ecrire')}>Écrire</button>
       <button role="tab" aria-selected={onglet === 'schemas'} onclick={() => (onglet = 'schemas')}>
         Schémas <span class="n">{SCHEMAS.length}</span>
       </button>
-    </nav>
+    </div>
   </header>
 
   {#if onglet === 'schemas'}
@@ -103,11 +108,16 @@
     <main>
       <p class="accroche">Écrivez le schéma comme dans un courrier : l'ordonnance se rédige toute seule.</p>
       <Saisie bind:texte />
+      {#if !texte}
+        <p class="discret dictee">🎙 Astuce : dictez le schéma avec la dictée vocale de votre téléphone, collez-le ici, et c'est prêt.</p>
+      {/if}
       {#if schemaChoisi}
         <p class="discret source">
           {schemaModifie ? 'Modifié à partir de' : 'Schéma'} : {schemaChoisi.nom} —
-          <strong>{schemaChoisi.valide ? 'vérifié' : 'à vérifier'}</strong> —
-          <a href={schemaChoisi.source.url} target="_blank" rel="noopener">source</a>
+          <strong>{schemaChoisi.valide ? 'vérifié' : 'à vérifier'}</strong><br />
+          Source : <a href={schemaChoisi.source.url} target="_blank" rel="noopener">{schemaChoisi.source.document}</a>{schemaChoisi.source.page ? `, ${schemaChoisi.source.page}` : ''}
+          ({schemaChoisi.source.annee}).
+          {#if note}<br />{note}.{/if}
         </p>
       {/if}
 
@@ -220,6 +230,11 @@
   }
   .source {
     margin: 0.4rem 0 0;
+    line-height: 1.45;
+  }
+  .dictee {
+    margin: 0.4rem 0 0;
+    font-size: 0.82rem;
   }
   .source a {
     color: var(--accent);

@@ -33,6 +33,7 @@ ajouté à l'écran d'accueil du téléphone.
 | Rythme | `/sem`, `par semaine`, `tous les 15 jours`, `toutes les 4 semaines` |
 | Borne | `jusqu'à 10`, `→ 10`, `-> 10`, `de 20 à 10`, `jusqu'à l'arrêt` |
 | Un jour sur deux | `20 mg 1 j/2`, `20 mg un jour sur deux` |
+| Dictée vocale | texte dicté au téléphone puis collé : `vingt milligrammes`, `deux virgule cinq`, `à la ligne`, `point` |
 | Fin | `arrêt` ; sinon la dernière dose est **maintenue** (« à poursuivre », « jusqu'à réévaluation » acceptés) |
 
 Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
@@ -46,7 +47,10 @@ Le site se met à jour tout seul en 1 à 2 minutes si les tests passent.
 
 - **Schémas proposés** : `src/data/schemas.json` — copier un bloc existant, modifier
   `pathologie`, `nom`, `texte` (écrit comme dans le champ libre), `statut` et `source`.
-  55 schémas sont proposés (PNDS HAS, essais, KDIGO 2024, tableaux CORTICOMED), tous marqués
+  106 schémas sont proposés (PNDS HAS, recommandations KDIGO/ACR/EULAR, tableaux CORTICOMED et
+  protocoles d'essais publiés sur ClinicalTrials.gov : ADVOCATE, AURORA, BLISS-LN, MANDARA, MITIGATE,
+  RITAZAREM, SAPHYR, SELECT-GCA, TitAIN, mavrilimumab-ACG), chacun avec sa source (document, page,
+  lien), tous marqués
   **« À vérifier »** : après vérification dans la source, passer `"valide": false` à `true`.
 - **Seuils d'alerte** : `src/config/alerts.json` — remplacer chaque `"TODO"` par un nombre
   (sans guillemets) et indiquer la source. Une alerte avec `TODO` reste désactivée.

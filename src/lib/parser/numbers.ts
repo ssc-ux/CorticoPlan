@@ -87,5 +87,17 @@ export function lireLettres(s: string, pos: number): NombreLu | null {
 
 /** Lit un nombre en chiffres ou en lettres. */
 export function lireNombre(s: string, pos: number): NombreLu | null {
-  return lireChiffres(s, pos) ?? lireLettres(s, pos);
+  const n = lireChiffres(s, pos) ?? lireLettres(s, pos);
+  return n && avecVirgule(s, n);
 }
+
+/** Dictée vocale : « deux virgule cinq » = 2,5 ; sinon le nombre tel quel. */
+export function avecVirgule(s: string, n: NombreLu): NombreLu {
+  RE_VIRGULE.lastIndex = n.fin;
+  const v = RE_VIRGULE.exec(s);
+  if (!v) return n;
+  const d = lireChiffres(s, n.fin + v[0].length) ?? lireLettres(s, n.fin + v[0].length);
+  if (!d || !Number.isInteger(d.valeur) || d.valeur >= 100) return n;
+  return { valeur: n.valeur + d.valeur / 10 ** String(d.valeur).length, fin: d.fin };
+}
+const RE_VIRGULE = /[ ]+virgule[ ]+/y;
