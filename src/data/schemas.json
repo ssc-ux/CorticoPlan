@@ -1,36 +1,452 @@
 {
-  "_lisezmoi": "Schémas proposés dans « Choisir un schéma ». Chaque texte est lu par le même moteur que la saisie libre. Avant usage, vérifier chaque schéma dans sa source puis passer \"valide\" à true. statut : issu du PNDS | compatible PNDS | issu d'un essai | issu de recommandations. verification : ce que CorticoPlan a réellement lu.",
+  "_lisezmoi": "Schémas proposés dans « Choisir un schéma ». Chaque texte est lu par le même moteur que la saisie libre. Avant usage, vérifier chaque schéma dans sa source puis passer \"valide\" à true. statut : issu du PNDS | compatible PNDS | issu d'un essai. verification : ce que CorticoPlan a réellement lu.",
   "schemas": [
     {
-      "pathologie": "Artérite à cellules géantes (Horton)",
-      "nom": "Forme non compliquée, départ 40 mg (20 mg à M3, 10 mg à M6, 5 mg à M12)",
-      "texte": "40 mg 4 sem puis 35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 4 sem puis 17,5 mg 4 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 13 sem puis 7,5 mg 13 sem puis 5 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Décroissance rapide (PEXIVAS), < 50 kg — 5 mg jusqu'à M12",
+      "texte": "50 mg 1 sem, 25 mg 1 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 2 sem, 6 mg 2 sem, puis 5 mg",
       "mgKg": false,
-      "statut": "compatible PNDS — paliers intermédiaires construits par CorticoPlan",
-      "verification": "Cibles du PNDS lues dans un extrait (site HAS inaccessible depuis l'outil de rédaction)",
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu",
       "valide": false,
       "source": {
-        "document": "PNDS Artérite à cellules géantes (HAS) — cibles : 15-20 mg à M3, 10 mg à M6, 7,5 mg à M9, 5 mg à M12, puis -1 mg toutes les 4 semaines",
+        "document": "PNDS Vascularites associées aux ANCA (HAS), tableau « bras réduit PEXIVAS » — après bolus de méthylprednisolone",
+        "annee": 2026,
+        "version": "2026",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2026-02/pnds_vaa_janvier_2026_vf.pdf",
+        "page": "p. 46 (recommandation) et p. 48 (tableau)"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Décroissance rapide (PEXIVAS), 50 à 75 kg — 5 mg jusqu'à M12",
+      "texte": "60 mg 1 sem, 30 mg 1 sem, 25 mg 2 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 2 sem, puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Vascularites associées aux ANCA (HAS), tableau « bras réduit PEXIVAS » — après bolus de méthylprednisolone",
+        "annee": 2026,
+        "version": "2026",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2026-02/pnds_vaa_janvier_2026_vf.pdf",
+        "page": "p. 46 (recommandation) et p. 48 (tableau)"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Décroissance rapide (PEXIVAS), > 75 kg — 5 mg jusqu'à M12",
+      "texte": "75 mg 1 sem, 40 mg 1 sem, 30 mg 2 sem, 25 mg 2 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 4 sem, puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Vascularites associées aux ANCA (HAS), tableau « bras réduit PEXIVAS » — après bolus de méthylprednisolone",
+        "annee": 2026,
+        "version": "2026",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2026-02/pnds_vaa_janvier_2026_vf.pdf",
+        "page": "p. 46 (recommandation) et p. 48 (tableau)"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Dose modérée (cas usuels), 80 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "40 mg 2 sem puis 35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 8 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
         "annee": 2024,
-        "version": "Révision 2024 (PNDS 2017)",
-        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-03/pnds_acg_vf_1.pdf",
-        "page": "Chapitre traitement — à vérifier"
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Dose modérée (cas usuels), 70 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 10 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Dose modérée (cas usuels), 60 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 10 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Dose modérée (cas usuels), 50 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 12 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Dose modérée (cas usuels), 40 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 14 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Forme sévère, 80 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "80 mg 2 sem puis 60 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 22,5 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 8 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Forme sévère, 70 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "70 mg 2 sem puis 50 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 10 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Forme sévère, 60 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "60 mg 2 sem puis 45 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 10 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Forme sévère, 50 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "50 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 12 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "Forme sévère, 40 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "texte": "40 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 14 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS",
+      "verification": "Texte intégral du PNDS lu (tableau vérifié sur l'image de la page)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Lupus systémique (HAS), tableau 14 « Schémas indicatifs pour la corticothérapie » — néphropathie lupique, après bolus de méthylprednisolone",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-02/pnds_ls.pdf",
+        "page": "p. 75-76, tableau 14"
+      }
+    },
+    {
+      "pathologie": "Anémie hémolytique auto-immune chaude",
+      "nom": "1 mg/kg pour 50 kg, sevrage en 3 mois environ",
+      "texte": "50 mg 3 sem puis -10 mg tous les 10 jours jusqu'à 10 mg puis 10 mg 2 sem puis 7,5 mg 1 sem puis 5 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu du PNDS — dose calculée pour le poids ; durée des paliers 7,5 et 5 mg (1 sem) choisie pour un sevrage en 3 mois",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS AHAI de l'adulte (HAS) : 1 mg/kg/j 3 semaines, puis -10 mg tous les 10 jours jusqu'à 10 mg/j, 10 mg/j 2 à 3 semaines, puis paliers 7,5 et 5 mg (sevrage idéalement en 3 mois)",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-07/pnds_ahai_de_ladulte_version_2024.pdf",
+        "page": "p. 32-33"
+      }
+    },
+    {
+      "pathologie": "Anémie hémolytique auto-immune chaude",
+      "nom": "1 mg/kg pour 60 kg, sevrage en 3 mois environ",
+      "texte": "60 mg 3 sem puis -10 mg tous les 10 jours jusqu'à 10 mg puis 10 mg 2 sem puis 7,5 mg 1 sem puis 5 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu du PNDS — dose calculée pour le poids ; durée des paliers 7,5 et 5 mg (1 sem) choisie pour un sevrage en 3 mois",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS AHAI de l'adulte (HAS) : 1 mg/kg/j 3 semaines, puis -10 mg tous les 10 jours jusqu'à 10 mg/j, 10 mg/j 2 à 3 semaines, puis paliers 7,5 et 5 mg (sevrage idéalement en 3 mois)",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-07/pnds_ahai_de_ladulte_version_2024.pdf",
+        "page": "p. 32-33"
+      }
+    },
+    {
+      "pathologie": "Anémie hémolytique auto-immune chaude",
+      "nom": "1 mg/kg pour 70 kg, sevrage en 3 mois environ",
+      "texte": "70 mg 3 sem puis -10 mg tous les 10 jours jusqu'à 10 mg puis 10 mg 2 sem puis 7,5 mg 1 sem puis 5 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu du PNDS — dose calculée pour le poids ; durée des paliers 7,5 et 5 mg (1 sem) choisie pour un sevrage en 3 mois",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS AHAI de l'adulte (HAS) : 1 mg/kg/j 3 semaines, puis -10 mg tous les 10 jours jusqu'à 10 mg/j, 10 mg/j 2 à 3 semaines, puis paliers 7,5 et 5 mg (sevrage idéalement en 3 mois)",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-07/pnds_ahai_de_ladulte_version_2024.pdf",
+        "page": "p. 32-33"
+      }
+    },
+    {
+      "pathologie": "Anémie hémolytique auto-immune chaude",
+      "nom": "1 mg/kg pour 80 kg, sevrage en 3 mois environ",
+      "texte": "80 mg 3 sem puis -10 mg tous les 10 jours jusqu'à 10 mg puis 10 mg 2 sem puis 7,5 mg 1 sem puis 5 mg 1 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu du PNDS — dose calculée pour le poids ; durée des paliers 7,5 et 5 mg (1 sem) choisie pour un sevrage en 3 mois",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS AHAI de l'adulte (HAS) : 1 mg/kg/j 3 semaines, puis -10 mg tous les 10 jours jusqu'à 10 mg/j, 10 mg/j 2 à 3 semaines, puis paliers 7,5 et 5 mg (sevrage idéalement en 3 mois)",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-07/pnds_ahai_de_ladulte_version_2024.pdf",
+        "page": "p. 32-33"
+      }
+    },
+    {
+      "pathologie": "Purpura thrombopénique immunologique (PTI)",
+      "nom": "1 mg/kg pendant 3 semaines puis arrêt — 50 kg (50 mg)",
+      "texte": "50 mg 3 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu du PNDS — dose calculée pour le poids",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS PTI de l'adulte (HAS) : prednisone 1 mg/kg/j (max 80 mg) 3 semaines, arrêt immédiat ou décroissance rapide",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-01/pnds_pti_de_ladulte_cerecai_2024.pdf",
+        "page": "p. 31"
+      }
+    },
+    {
+      "pathologie": "Purpura thrombopénique immunologique (PTI)",
+      "nom": "1 mg/kg pendant 3 semaines puis arrêt — 60 kg (60 mg)",
+      "texte": "60 mg 3 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu du PNDS — dose calculée pour le poids",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS PTI de l'adulte (HAS) : prednisone 1 mg/kg/j (max 80 mg) 3 semaines, arrêt immédiat ou décroissance rapide",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-01/pnds_pti_de_ladulte_cerecai_2024.pdf",
+        "page": "p. 31"
+      }
+    },
+    {
+      "pathologie": "Purpura thrombopénique immunologique (PTI)",
+      "nom": "1 mg/kg pendant 3 semaines puis arrêt — 70 kg (70 mg)",
+      "texte": "70 mg 3 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu du PNDS — dose calculée pour le poids",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS PTI de l'adulte (HAS) : prednisone 1 mg/kg/j (max 80 mg) 3 semaines, arrêt immédiat ou décroissance rapide",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-01/pnds_pti_de_ladulte_cerecai_2024.pdf",
+        "page": "p. 31"
+      }
+    },
+    {
+      "pathologie": "Purpura thrombopénique immunologique (PTI)",
+      "nom": "1 mg/kg (max 80 mg) pendant 3 semaines puis arrêt — 80 kg et plus (80 mg)",
+      "texte": "80 mg 3 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu du PNDS — dose calculée pour le poids",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS PTI de l'adulte (HAS) : prednisone 1 mg/kg/j (max 80 mg) 3 semaines, arrêt immédiat ou décroissance rapide",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-01/pnds_pti_de_ladulte_cerecai_2024.pdf",
+        "page": "p. 31"
       }
     },
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
-      "nom": "Forme compliquée, départ 60 mg (20 mg à M3, 10 mg à M6, 5 mg à M12)",
-      "texte": "60 mg 4 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 4 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 13 sem puis 7,5 mg 13 sem puis 5 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
+      "nom": "Départ 40 mg — 15 mg à M3, 7,5 mg à M6, arrêt vers M11",
+      "texte": "40 mg 4 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 4 sem puis 7,5 mg 4 sem puis 5 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
       "mgKg": false,
-      "statut": "compatible PNDS — paliers intermédiaires construits par CorticoPlan",
-      "verification": "Cibles du PNDS lues dans un extrait (site HAS inaccessible depuis l'outil de rédaction)",
+      "statut": "compatible PNDS — paliers intermédiaires construits par CorticoPlan sur les repères du PNDS",
+      "verification": "Texte intégral du PNDS lu",
       "valide": false,
       "source": {
-        "document": "PNDS Artérite à cellules géantes (HAS) — cibles : 15-20 mg à M3, 10 mg à M6, 7,5 mg à M9, 5 mg à M12, puis -1 mg toutes les 4 semaines",
+        "document": "PNDS ACG (HAS) : 40 à 80 mg/j maintenus 1 à 4 semaines ; repères 15 mg/j à M3, 5-10 mg/j à M6, sevrage à M12 ; sous 5 mg, -1 mg toutes les 2 à 4 semaines",
         "annee": 2024,
-        "version": "Révision 2024 (PNDS 2017)",
+        "version": "2024",
         "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-03/pnds_acg_vf_1.pdf",
-        "page": "Chapitre traitement — à vérifier"
+        "page": "p. 27, 30-31"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Départ 60 mg — 15 mg à M3, 7,5 mg à M6, arrêt vers M11",
+      "texte": "60 mg 4 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 4 sem puis 7,5 mg 4 sem puis 5 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires construits par CorticoPlan sur les repères du PNDS",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS ACG (HAS) : 40 à 80 mg/j maintenus 1 à 4 semaines ; repères 15 mg/j à M3, 5-10 mg/j à M6, sevrage à M12 ; sous 5 mg, -1 mg toutes les 2 à 4 semaines",
+        "annee": 2024,
+        "version": "2024",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-03/pnds_acg_vf_1.pdf",
+        "page": "p. 27, 30-31"
+      }
+    },
+    {
+      "pathologie": "Périartérite noueuse (PAN)",
+      "nom": "60 mg (1 mg/kg plafonné) — 20 mg à M3, 10 mg à M6, 5 mg à M12",
+      "texte": "60 mg 3 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 4 sem puis 17,5 mg 4 sem puis 15 mg 4 sem puis 12,5 mg 3 sem puis 10 mg 5 sem puis -1 mg toutes les 5 semaines jusqu'à 5 mg",
+      "mgKg": false,
+      "statut": "compatible PNDS — paliers intermédiaires construits par CorticoPlan sur les repères du PNDS",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Vascularites nécrosantes systémiques — PAN (HAS) : 1 mg/kg/j plafonné à 60 mg pendant 3 semaines ; repères 20 mg/j à M3, 10 mg/j à M6, 5 mg/j à 1 an",
+        "annee": 2019,
+        "version": "2019",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2019-06/pnds_vns.pdf",
+        "page": "p. 37"
+      }
+    },
+    {
+      "pathologie": "Maladie associée aux IgG4",
+      "nom": "Départ 40 mg 4 semaines puis -5 mg toutes les 2 semaines jusqu'à 5 mg",
+      "texte": "40 mg 4 sem puis -5 mg toutes les 2 semaines jusqu'à 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS (valeurs choisies dans les fourchettes : 40 mg, 4 semaines)",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie associée aux IgG4 (HAS) : 0,4-0,6 mg/kg/j (30 à 40 mg le plus souvent) 2 à 4 semaines, puis -5 mg toutes les 2 semaines jusqu'à ≤ 5 mg/j",
+        "annee": 2025,
+        "version": "2025",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-12/pnds_mag4_vf.pdf",
+        "page": "p. 8, 38 et 43"
+      }
+    },
+    {
+      "pathologie": "Maladie associée aux IgG4",
+      "nom": "Départ 30 mg 2 semaines puis -5 mg toutes les 2 semaines jusqu'à 5 mg",
+      "texte": "30 mg 2 sem puis -5 mg toutes les 2 semaines jusqu'à 5 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS (valeurs choisies dans les fourchettes : 30 mg, 2 semaines)",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie associée aux IgG4 (HAS) : 0,4-0,6 mg/kg/j (30 à 40 mg le plus souvent) 2 à 4 semaines, puis -5 mg toutes les 2 semaines jusqu'à ≤ 5 mg/j",
+        "annee": 2025,
+        "version": "2025",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-12/pnds_mag4_vf.pdf",
+        "page": "p. 8, 38 et 43"
+      }
+    },
+    {
+      "pathologie": "Sarcoïdose pulmonaire",
+      "nom": "Départ 20 mg, entretien 10 mg",
+      "texte": "20 mg 4 sem puis -5 mg toutes les 4 semaines jusqu'à 10 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS (valeurs choisies dans les fourchettes)",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Sarcoïdose pulmonaire (HAS) : 20 à 40 mg/j 4 à 6 semaines, puis -5 à 10 mg toutes les 2 à 4 semaines jusqu'à 5-10 mg/j d'entretien pendant 6 à 12 mois",
+        "annee": 2026,
+        "version": "2026",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2026-04/dir2/respifil_pnds-sarcoidose.pdf",
+        "page": "p. 60"
+      }
+    },
+    {
+      "pathologie": "Sarcoïdose pulmonaire",
+      "nom": "Départ 40 mg, entretien 10 mg",
+      "texte": "40 mg 4 sem puis -10 mg toutes les 2 semaines jusqu'à 10 mg",
+      "mgKg": false,
+      "statut": "issu du PNDS (valeurs choisies dans les fourchettes)",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Sarcoïdose pulmonaire (HAS) : 20 à 40 mg/j 4 à 6 semaines, puis -5 à 10 mg toutes les 2 à 4 semaines jusqu'à 5-10 mg/j d'entretien pendant 6 à 12 mois",
+        "annee": 2026,
+        "version": "2026",
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2026-04/dir2/respifil_pnds-sarcoidose.pdf",
+        "page": "p. 60"
       }
     },
     {
@@ -44,7 +460,7 @@
       "source": {
         "document": "Recommandations SFR pour la PPR (Wendling et al., Joint Bone Spine 2024) : 12,5-25 mg, 10 mg en 4-8 semaines, puis -1 mg toutes les 4 semaines",
         "annee": 2024,
-        "version": "Article",
+        "version": "2024",
         "url": "https://doi.org/10.1016/j.jbspin.2024.105730",
         "page": "Recommandations sur la décroissance"
       }
@@ -60,7 +476,7 @@
       "source": {
         "document": "Recommandations SFR pour la PPR (Wendling et al., Joint Bone Spine 2024) : 12,5-25 mg, 10 mg en 4-8 semaines, puis -1 mg toutes les 4 semaines",
         "annee": 2024,
-        "version": "Article",
+        "version": "2024",
         "url": "https://doi.org/10.1016/j.jbspin.2024.105730",
         "page": "Recommandations sur la décroissance"
       }
@@ -76,185 +492,9 @@
       "source": {
         "document": "Protocole de l'essai PMR MODE (Marsman et al., Trials 2022) — prednisolone",
         "annee": 2022,
-        "version": "Protocole publié",
+        "version": "2022",
         "url": "https://doi.org/10.1186/s13063-022-06263-3",
         "page": "Intervention description {11a}"
-      }
-    },
-    {
-      "pathologie": "Pseudopolyarthrite rhizomélique",
-      "nom": "Essai PMR MODE : non-réponse initiale (25 → 20 → 15 mg puis même décroissance)",
-      "texte": "25 mg 2 sem puis 20 mg 2 sem puis 15 mg 4 sem puis -2,5 mg toutes les 4 semaines jusqu'à l'arrêt",
-      "mgKg": false,
-      "statut": "issu d'un essai",
-      "verification": "Texte intégral lu",
-      "valide": false,
-      "source": {
-        "document": "Protocole de l'essai PMR MODE (Marsman et al., Trials 2022) — prednisolone",
-        "annee": 2022,
-        "version": "Protocole publié",
-        "url": "https://doi.org/10.1186/s13063-022-06263-3",
-        "page": "Intervention description {11a}"
-      }
-    },
-    {
-      "pathologie": "Vascularite à ANCA (GPA, MPA)",
-      "nom": "PEXIVAS schéma réduit, poids < 50 kg",
-      "texte": "50 mg 1 sem, 25 mg 1 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 2 sem, 6 mg 2 sem, puis 5 mg",
-      "mgKg": false,
-      "statut": "issu d'un essai",
-      "verification": "Texte intégral lu",
-      "valide": false,
-      "source": {
-        "document": "Protocole de l'essai PEXIVAS (Walsh et al., Trials 2013), tableau 1 — après bolus IV de méthylprednisolone (1 à 3 g)",
-        "annee": 2013,
-        "version": "Protocole publié",
-        "url": "https://doi.org/10.1186/1745-6215-14-73",
-        "page": "Tableau 1"
-      }
-    },
-    {
-      "pathologie": "Vascularite à ANCA (GPA, MPA)",
-      "nom": "PEXIVAS schéma réduit, poids 50 à 75 kg",
-      "texte": "60 mg 1 sem, 30 mg 1 sem, 25 mg 2 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 2 sem, puis 5 mg",
-      "mgKg": false,
-      "statut": "issu d'un essai",
-      "verification": "Texte intégral lu",
-      "valide": false,
-      "source": {
-        "document": "Protocole de l'essai PEXIVAS (Walsh et al., Trials 2013), tableau 1 — après bolus IV de méthylprednisolone (1 à 3 g)",
-        "annee": 2013,
-        "version": "Protocole publié",
-        "url": "https://doi.org/10.1186/1745-6215-14-73",
-        "page": "Tableau 1"
-      }
-    },
-    {
-      "pathologie": "Vascularite à ANCA (GPA, MPA)",
-      "nom": "PEXIVAS schéma réduit, poids > 75 kg",
-      "texte": "75 mg 1 sem, 40 mg 1 sem, 30 mg 2 sem, 25 mg 2 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 4 sem, puis 5 mg",
-      "mgKg": false,
-      "statut": "issu d'un essai",
-      "verification": "Texte intégral lu",
-      "valide": false,
-      "source": {
-        "document": "Protocole de l'essai PEXIVAS (Walsh et al., Trials 2013), tableau 1 — après bolus IV de méthylprednisolone (1 à 3 g)",
-        "annee": 2013,
-        "version": "Protocole publié",
-        "url": "https://doi.org/10.1186/1745-6215-14-73",
-        "page": "Tableau 1"
-      }
-    },
-    {
-      "pathologie": "Sarcoïdose",
-      "nom": "Atteinte d'organe : 20 mg, arrêt à 6 mois",
-      "texte": "20 mg 2 mois puis 15 mg 2 mois puis 10 mg 4 sem puis 5 mg 4 sem puis 2,5 mg 4 sem puis arrêt",
-      "mgKg": false,
-      "statut": "issu de recommandations (ERS/BTS 2021, synthèse)",
-      "verification": "Texte intégral lu",
-      "valide": false,
-      "source": {
-        "document": "Five principles and protocols… based on the 2021 ERS and BTS statements for treating sarcoidosis (Lung India 2024)",
-        "annee": 2024,
-        "version": "Article",
-        "url": "https://doi.org/10.4103/lungindia.lungindia_499_24",
-        "page": "Questions 2, 3 et 5"
-      }
-    },
-    {
-      "pathologie": "Sarcoïdose",
-      "nom": "Gêne fonctionnelle seule : 10 mg, arrêt à 3 mois",
-      "texte": "10 mg 3 sem puis 7,5 mg 3 sem puis 5 mg 3 sem puis 2,5 mg 3 sem puis arrêt",
-      "mgKg": false,
-      "statut": "issu de recommandations (ERS/BTS 2021, synthèse) — baisse toutes les 3 semaines (3 à 4 semaines proposées)",
-      "verification": "Texte intégral lu",
-      "valide": false,
-      "source": {
-        "document": "Five principles and protocols… based on the 2021 ERS and BTS statements for treating sarcoidosis (Lung India 2024)",
-        "annee": 2024,
-        "version": "Article",
-        "url": "https://doi.org/10.4103/lungindia.lungindia_499_24",
-        "page": "Questions 2, 3 et 5"
-      }
-    },
-    {
-      "pathologie": "Sarcoïdose",
-      "nom": "Rechute : 20 mg puis décroissance (+ traitement de 2e ligne)",
-      "texte": "20 mg 2 sem puis 15 mg 2 sem puis 10 mg 4 sem puis 5 mg 12 sem puis 2,5 mg 4 sem puis arrêt",
-      "mgKg": false,
-      "statut": "issu de recommandations (ERS/BTS 2021, synthèse) — 5 mg 12 sem et 2,5 mg 4 sem (fourchettes 8-16 et 2-8 sem)",
-      "verification": "Texte intégral lu",
-      "valide": false,
-      "source": {
-        "document": "Five principles and protocols… based on the 2021 ERS and BTS statements for treating sarcoidosis (Lung India 2024)",
-        "annee": 2024,
-        "version": "Article",
-        "url": "https://doi.org/10.4103/lungindia.lungindia_499_24",
-        "page": "Questions 2, 3 et 5"
-      }
-    },
-    {
-      "pathologie": "Purpura thrombopénique immunologique (PTI)",
-      "nom": "1 mg/kg pendant 3 semaines puis arrêt — 50 kg (50 mg)",
-      "texte": "50 mg 3 sem puis arrêt",
-      "mgKg": false,
-      "statut": "compatible PNDS — dose calculée pour le poids indiqué",
-      "verification": "PNDS lu dans un extrait (site HAS inaccessible depuis l'outil de rédaction)",
-      "valide": false,
-      "source": {
-        "document": "PNDS Purpura thrombopénique immunologique de l'adulte (HAS) : prednisone 1 mg/kg/j (max 80 mg) 3 semaines, arrêt immédiat ou rapide",
-        "annee": 2024,
-        "version": "2024",
-        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-01/pnds_pti_de_ladulte_cerecai_2024.pdf",
-        "page": "Traitement de première ligne — à vérifier"
-      }
-    },
-    {
-      "pathologie": "Purpura thrombopénique immunologique (PTI)",
-      "nom": "1 mg/kg pendant 3 semaines puis arrêt — 60 kg (60 mg)",
-      "texte": "60 mg 3 sem puis arrêt",
-      "mgKg": false,
-      "statut": "compatible PNDS — dose calculée pour le poids indiqué",
-      "verification": "PNDS lu dans un extrait (site HAS inaccessible depuis l'outil de rédaction)",
-      "valide": false,
-      "source": {
-        "document": "PNDS Purpura thrombopénique immunologique de l'adulte (HAS) : prednisone 1 mg/kg/j (max 80 mg) 3 semaines, arrêt immédiat ou rapide",
-        "annee": 2024,
-        "version": "2024",
-        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-01/pnds_pti_de_ladulte_cerecai_2024.pdf",
-        "page": "Traitement de première ligne — à vérifier"
-      }
-    },
-    {
-      "pathologie": "Purpura thrombopénique immunologique (PTI)",
-      "nom": "1 mg/kg pendant 3 semaines puis arrêt — 70 kg (70 mg)",
-      "texte": "70 mg 3 sem puis arrêt",
-      "mgKg": false,
-      "statut": "compatible PNDS — dose calculée pour le poids indiqué",
-      "verification": "PNDS lu dans un extrait (site HAS inaccessible depuis l'outil de rédaction)",
-      "valide": false,
-      "source": {
-        "document": "PNDS Purpura thrombopénique immunologique de l'adulte (HAS) : prednisone 1 mg/kg/j (max 80 mg) 3 semaines, arrêt immédiat ou rapide",
-        "annee": 2024,
-        "version": "2024",
-        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-01/pnds_pti_de_ladulte_cerecai_2024.pdf",
-        "page": "Traitement de première ligne — à vérifier"
-      }
-    },
-    {
-      "pathologie": "Purpura thrombopénique immunologique (PTI)",
-      "nom": "1 mg/kg (max 80 mg) pendant 3 semaines puis arrêt — 80 kg et plus (80 mg)",
-      "texte": "80 mg 3 sem puis arrêt",
-      "mgKg": false,
-      "statut": "compatible PNDS — dose calculée pour le poids indiqué",
-      "verification": "PNDS lu dans un extrait (site HAS inaccessible depuis l'outil de rédaction)",
-      "valide": false,
-      "source": {
-        "document": "PNDS Purpura thrombopénique immunologique de l'adulte (HAS) : prednisone 1 mg/kg/j (max 80 mg) 3 semaines, arrêt immédiat ou rapide",
-        "annee": 2024,
-        "version": "2024",
-        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2025-01/pnds_pti_de_ladulte_cerecai_2024.pdf",
-        "page": "Traitement de première ligne — à vérifier"
       }
     }
   ]
