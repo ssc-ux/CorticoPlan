@@ -11,7 +11,7 @@ import type { CodeProbleme, Palier } from '../src/lib/types';
 interface Cas {
   id: string;
   entree: string;
-  paliers: Palier[];
+  paliers: Palier[] | null;
   problemes: CodeProbleme[];
 }
 
@@ -27,7 +27,7 @@ for (const fichier of fichiers) {
         expect(ids.has(c.id), `identifiant en double : ${c.id}`).toBe(false);
         ids.add(c.id);
         const r = analyser(c.entree, { joursParMois: 28 });
-        expect(r.paliers).toEqual(c.paliers);
+        if (c.paliers !== null) expect(r.paliers).toEqual(c.paliers); // null : seul le problème compte
         const codes = [...new Set(r.problemes.filter((p) => p.niveau !== 'info').map((p) => p.code))].sort();
         expect(codes).toEqual([...c.problemes].sort());
       });

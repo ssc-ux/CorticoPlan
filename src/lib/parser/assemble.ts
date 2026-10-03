@@ -29,6 +29,8 @@ type Bloc =
       rythme: number;
       borne: number | null;
       jours: number | null;
+      /** Aucune borne écrite : déterminée au déroulé selon ce qui suit. */
+      sansBorne?: boolean;
       span: Span;
     }
   | { type: 'arret'; span: Span };
@@ -275,14 +277,8 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
     const borneFinale = borne ?? borneFaible ?? doses[1] ?? (arret ? 0 : null);
     if (rythme === null) return echec('rythme-manquant', 'Rythme de baisse non précisé (ex. « toutes les 2 semaines »).');
     if (borneFinale === null && duree === null) {
-      // « -20 mg par 2 semaines » sans borne : baisse jusqu'à l'arrêt, signalée.
-      problemes.push({
-        code: 'borne-par-defaut',
-        niveau: 'info',
-        message: 'Aucune borne indiquée : la baisse est poursuivie jusqu’à l’arrêt (ajoutez « jusqu’à 10 mg » sinon).',
-        span,
-      });
-      return { type: 'decroissance', depart, pas, rythme, borne: 0, jours: null, span };
+      // Pas de borne écrite : décidée au déroulé (arrêt, dose suivante, ou question).
+      return { type: 'decroissance', depart, pas, rythme, borne: 0, jours: null, sansBorne: true, span };
     }
     return { type: 'decroissance', depart, pas, rythme, borne: borneFinale, jours: duree, span };
   }
@@ -364,6 +360,32 @@ function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
 
     // Décroissance régulière.
     const { pas, rythme, span } = bloc;
+    if (bloc.sansBorne) {
+      const suite = premiereDose(suivant);
+      if (dernier || suivant?.type === 'arret') {
+        problemes.push({ code: 'borne-par-defaut', niveau: 'info', span,
+          message: 'Aucune borne indiquée : la baisse est poursuivie jusqu’à l’arrêt (ajoutez « jusqu’à 10 mg » sinon).' });
+      } else if (suite !== null && suite > 0) {
+        // « -10 mg par 2 semaines puis 20 mg 1 mois » : on baisse jusqu'à la dose suivante.
+        bloc.borne = suite;
+        problemes.push({ code: 'borne-par-defaut', niveau: 'info', span,
+          message: `Baisse poursuivie jusqu’à ${nombreFr(suite)} mg, la dose écrite ensuite.` });
+      } else {
+        // Réellement ambigu : on demande, avec des réponses en un geste.
+        const depuis = bloc.depart ?? (courante !== null ? courante - pas : null);
+        const choix: number[] = [];
+        if (depuis !== null) {
+          for (let d = arrondi(depuis - pas); d > 0; d = arrondi(d - pas)) if (d % 5 === 0 || pas < 1) choix.push(d);
+        }
+        const rythmeTxt = rythme === 7 ? 'chaque semaine' : rythme % 7 === 0 ? `toutes les ${rythme / 7} semaines` : `tous les ${rythme} jours`;
+        problemes.push({
+          code: 'borne-manquante', niveau: 'erreur', span,
+          message: `Jusqu’où baisser de ${nombreFr(pas)} mg ${rythmeTxt} ?`,
+          suggestions: choix.slice(-4).map((d) => ({ libelle: `jusqu’à ${nombreFr(d)} mg`, position: span[1], insertion: ` jusqu’à ${nombreFr(d)} mg` })),
+        });
+        return;
+      }
+    }
     let depart = bloc.depart;
     if (depart === null) {
       if (courante === null) {
@@ -371,6 +393,11 @@ function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
         return;
       }
       depart = arrondi(courante - pas); // première baisse à J1
+      if (depart < 0 || (depart === 0 && courante === 0)) {
+        problemes.push({ code: 'borne-incoherente', niveau: 'erreur', span,
+          message: 'Cette baisse part d’une dose déjà à 0 mg : vérifiez l’étape précédente.' });
+        return;
+      }
     }
 
     const niveaux: number[] = [];

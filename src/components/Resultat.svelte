@@ -5,13 +5,19 @@
    */
   import type { ResultatAnalyse, Span } from '../lib/types';
 
-  let { texte, resultat }: { texte: string; resultat: ResultatAnalyse } = $props();
+  let { texte, resultat, onappliquer }: { texte: string; resultat: ResultatAnalyse; onappliquer?: (t: string) => void } = $props();
+
+  function appliquer(position: number, insertion: string) {
+    onappliquer?.(texte.slice(0, position) + insertion + texte.slice(position));
+  }
 
   // Affichage simple : s'il y a des mots non compris, on ne montre qu'eux
   // (les autres erreurs en découlent souvent) ; sinon les autres erreurs.
   const inconnus = $derived(resultat.problemes.filter((p) => p.code === 'mot-inconnu'));
+  /** Une seule question à la fois, avec réponses en un geste (« Jusqu'où baisser ? »). */
+  const question = $derived(inconnus.length ? undefined : resultat.problemes.find((p) => p.suggestions?.length));
   const erreurs = $derived(
-    inconnus.length ? inconnus : resultat.problemes.filter((p) => p.niveau === 'erreur'),
+    inconnus.length ? inconnus : question ? [question] : resultat.problemes.filter((p) => p.niveau === 'erreur'),
   );
   const messages = $derived(
     inconnus.length
@@ -45,19 +51,27 @@
   <div class="resultat" aria-live="polite">
     {#if erreurs.length}
       <div class="bloc erreur">
-        <p class="titre">À corriger</p>
+        <p class="titre">{question ? 'Une précision' : 'À corriger'}</p>
         <p class="texte-surligne">
           {#each morceaux as m}{#if m.marque}<mark>{m.t}</mark>{:else}{m.t}{/if}{/each}
         </p>
         <ul>
           {#each messages as m}<li>{m}</li>{/each}
         </ul>
+        {#if question}
+          <div class="reponses">
+            {#each question.suggestions ?? [] as r}
+              <button type="button" onclick={() => appliquer(r.position, r.insertion)}>{r.libelle}</button>
+            {/each}
+          </div>
+        {/if}
       </div>
     {/if}
 
-    {#if resultat.reformulation.length}
+    <!-- Tant qu'il reste une erreur ou une question, un déroulé partiel serait trompeur : on ne l'affiche pas. -->
+    {#if resultat.reformulation.length && !erreurs.length}
       <div class="bloc compris">
-        <p class="titre">{erreurs.length ? 'Compris pour l’instant' : 'Compris'}</p>
+        <p class="titre">Compris</p>
         <ol>
           {#each resultat.reformulation as ligne}<li>{ligne}</li>{/each}
         </ol>
@@ -110,6 +124,25 @@
     border-radius: 3px;
     padding: 0 2px;
     text-decoration: underline wavy var(--erreur);
+  }
+  .reponses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .reponses button {
+    min-height: 40px;
+    padding: 6px 14px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--accent);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .reponses button:hover {
+    background: var(--c1s);
   }
   .compris {
     background: var(--accent-doux);

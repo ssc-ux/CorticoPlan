@@ -52,6 +52,8 @@ export interface Probleme {
   niveau: Niveau;
   message: string;
   span?: Span;
+  /** Réponses proposées en un geste : texte à insérer à une position du texte d'origine. */
+  suggestions?: { libelle: string; position: number; insertion: string }[];
 }
 
 export interface Options {

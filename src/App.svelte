@@ -116,7 +116,7 @@
         <input type="date" bind:value={debut} required />
       </label>
 
-      <Resultat {texte} {resultat} />
+      <Resultat {texte} {resultat} onappliquer={(t) => (texte = t)} />
 
       {#if pret}
         <section class="carte">
