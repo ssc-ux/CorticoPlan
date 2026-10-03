@@ -62,7 +62,12 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
   let alternance = false;
   let unJourSurDeux = false;
   let arret = false;
+  let sevrageSeul = false;
   let incompris = false;
+  let attentePas = false; // « baisser toutes les 2 sem de 5 mg » : le pas vient après
+  // Annotations non prises en charge (« soit 0,7 mg/kg », « 1 cp ») : ignorées
+  // si le segment donne aussi une dose en mg, sinon signalées en erreur.
+  const annotations: Jeton[] = [];
 
   for (let k = 0; k < seg.length; k++) {
     const t = seg[k]!;
@@ -77,22 +82,35 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
         } else if (s1?.type === 'mg' && (seg[k + 2]?.type === 'slash' || seg[k + 2]?.type === 'et') && seg[k + 3]?.type === 'nombre') {
           paire = [t.valeur!, seg[k + 3]!.valeur!];
           k += 3;
+        } else if (s1?.type === 'mgkg') {
+          annotations.push(s1);
+          k++;
+        } else if (attentePas && pas === null) {
+          pas = t.valeur!;
+          attentePas = false;
         } else {
           doses.push(t.valeur!);
         }
+        break;
+      case 'mgkg':
+      case 'cp':
+        annotations.push(t);
         break;
       case 'pas':
       case 'moins':
         if (s1?.type === 'nombre') {
           pas = s1.valeur!;
           k++;
-        } else motPasSansValeur = true;
+        } else {
+          motPasSansValeur = true;
+          attentePas = true;
+        }
         break;
       case 'jusqua':
         if (s1?.type === 'nombre') {
           borne = s1.valeur!;
           k++;
-        } else if (s1?.type === 'arret') {
+        } else if (s1?.type === 'arret' || s1?.type === 'sevrage') {
           borne = 0;
           k++;
         } else incompris = true;
@@ -101,10 +119,13 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
         if (s1?.type === 'nombre') {
           borneFaible = s1.valeur!;
           k++;
-        } else if (s1?.type === 'arret') {
+        } else if (s1?.type === 'arret' || s1?.type === 'sevrage') {
           borneFaible = 0;
           k++;
         }
+        break;
+      case 'sevrage':
+        sevrageSeul = true;
         break;
       case 'rythme':
         if (rythme !== null) incompris = true;
@@ -128,13 +149,32 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
     }
   }
 
+
   const echec = (code: Probleme['code'], message: string) => {
     problemes.push({ code, niveau: 'erreur', message, span });
     return null;
   };
 
-  // Segment contenant une brique non prise en charge (déjà signalée) : ignoré.
-  if (seg.some((t) => t.type === 'mgkg' || t.type === 'cp' || t.type === 'fourchette')) return null;
+  // Fourchette (« 3-4 semaines », déjà signalée) : segment ignoré.
+  if (seg.some((t) => t.type === 'fourchette')) return null;
+  // « 20 mg (1 cp de 20 mg) » : la même dose répétée compte une fois.
+  if (doses.length > 1 && doses.every((d) => d === doses[0])) doses.splice(1);
+  for (const t of annotations) {
+    const mgkg = t.type === 'mgkg';
+    const autreDose = doses.length > 0 || paire !== null || pas !== null;
+    problemes.push({
+      code: mgkg ? 'mg-kg-non-pris-en-charge' : 'dose-en-comprimes',
+      niveau: autreDose ? 'info' : 'erreur',
+      message: autreDose
+        ? `Mention ${mgkg ? 'en mg/kg' : 'en comprimés'} ignorée : seule la dose en mg est retenue.`
+        : `Dose ${mgkg ? 'en mg/kg' : 'en comprimés'} non prise en charge : indiquez la dose en mg.`,
+      span: t.span,
+    });
+    if (!autreDose) return null;
+  }
+  if (sevrageSeul && borne === null && borneFaible === null) {
+    return echec('pas-manquant', 'Sevrage : précisez la baisse (ex. « -1 mg toutes les 4 semaines jusqu’au sevrage »).');
+  }
   if (incompris) return echec('segment-incompris', 'Segment non compris : reformulez-le.');
   // Verbe sous-entendu après une première baisse : « puis de 2,5 mg toutes les
   // 2 semaines jusqu'à 10 mg » → la dose unique est le pas.
@@ -157,7 +197,14 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
     const borneFinale = borne ?? borneFaible ?? doses[1] ?? (arret ? 0 : null);
     if (rythme === null) return echec('rythme-manquant', 'Rythme de baisse non précisé (ex. « toutes les 2 semaines »).');
     if (borneFinale === null && duree === null) {
-      return echec('borne-manquante', 'Jusqu’où baisser ? Ajoutez une borne (ex. « jusqu’à 10 mg ») ou une durée.');
+      // « -20 mg par 2 semaines » sans borne : baisse jusqu'à l'arrêt, signalée.
+      problemes.push({
+        code: 'borne-par-defaut',
+        niveau: 'info',
+        message: 'Aucune borne indiquée : la baisse est poursuivie jusqu’à l’arrêt (ajoutez « jusqu’à 10 mg » sinon).',
+        span,
+      });
+      return { type: 'decroissance', depart, pas, rythme, borne: 0, jours: null, span };
     }
     return { type: 'decroissance', depart, pas, rythme, borne: borneFinale, jours: duree, span };
   }

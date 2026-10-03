@@ -26,6 +26,7 @@ export type TypeJeton =
   | 'alternance' // en alternance
   | 'unJourSurDeux' // 1 j/2, un jour sur deux
   | 'arret' // arrêt, stop
+  | 'sevrage' // « jusqu'au sevrage » = arrêt ; seul, il manque le rythme
   | 'sep' // puis, virgule, point-virgule, point, retour à la ligne
   | 'inconnu';
 
@@ -46,6 +47,7 @@ const JUSQUA_SUITE =
   "(?:reevaluation|consultation|rdv|rendez[- ]vous|controle|avis[ ]+medical|bilan))";
 const UNITE = `[ ]*(?:(jours?|jrs?|j)|(semaines?|sem|s)|(mois)|(cps?|cpr|comprimes?))${FIN_MOT}`;
 const RE_UNITE = re(UNITE);
+const RE_ET_DEMI = re(`[ ]+et[ ]+demie?${FIN_MOT}`);
 
 /** Mots sans importance pour le sens, ignorés sans signalement. */
 const MOTS_NEUTRES = new Set([
@@ -53,7 +55,11 @@ const MOTS_NEUTRES = new Set([
   'des', 'pendant', 'pdt', 'durant', 'sur', 'matin', 'matins', 'au', 'en',
   'prise', 'prises', 'dose', 'doses', 'soit', 'par', 'jour', 'jours',
   'quotidien', 'quotidienne', 'partir', 'x', 'po', 'os', 'per', 'unique',
-  'une', 'un', 'fois', 'maintien', 'entretien',
+  'une', 'un', 'fois', 'maintien', 'entretien', 'atteindre', 'atteint', 'obtenir',
+  'arriver', 'complet', 'complete', 'total', 'totale', 'definitif', 'definitive',
+  'inclus', 'incluse', 'progressif', 'progressive', 'progressivement', 'lent', 'lente',
+  'lentement', 'on', 'prednisolone', 'solupred', 'oral', 'orale', 'voie', 'chaque',
+  'ainsi', 'environ', 'corticotherapie', 'corticoide', 'corticoides', 'cortisone', 'traitement', 'par', 'apres', 'a', 'jusque', 'dose', 'debut', 'debuter', 'commencer',
 ]);
 
 interface Regle {
@@ -94,13 +100,16 @@ const REGLES: Regle[] = [
   // « /j », « par jour », « chaque jour », « tous les jours » : simple précision.
   { re: re(`(?:\\/|par|chaque|tous[ ]+les)[ ]*(?:jours?|j)${FIN_MOT}`), jeton: () => null },
   { re: re(`(?:\\/|par|chaque|toutes[ ]+les)[ ]*(?:semaines?|sem|s)${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 7 }) },
-  { re: re(`hebdomadaire${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 7 }) },
-  { re: re(`(?:\\/|par|chaque|tous[ ]+les)[ ]*mois${FIN_MOT}|mensuel(?:le)?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 1, mois: true }) },
+  { re: re(`hebdomadaire(?:ment)?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 7 }) },
+  { re: re(`(?:par|chaque|toutes[ ]+les)[ ]+quinzaines?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 14 }) },
+  { re: re(`au[ ]+long[ ]+cours${FIN_MOT}|a[ ]+vie${FIN_MOT}|sans[ ]+limitation[ ]+de[ ]+duree${FIN_MOT}`), jeton: () => null },
+  { re: re(`(?:le[ ]+)?sevrage${FIN_MOT}`), jeton: () => ({ type: 'sevrage' }) },
+  { re: re(`(?:\\/|par|chaque|tous[ ]+les)[ ]*mois${FIN_MOT}|mensuel(?:le|lement)?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 1, mois: true }) },
   { re: re(`jusqu[ ]*'?[ ]*(?:a|au)${FIN_MOT}|jusqu'`), jeton: () => ({ type: 'jusqua' }) },
   {
     re: re(
       `(?:baisser|diminuer|reduire|decroitre|descendre|baisse|diminution|reduction|decroissance|degression|moins|enlever|retirer|oter)` +
-        `(?:[ ]+(?:de|par))?${FIN_MOT}|(?:par[ ]+)?paliers?[ ]+de${FIN_MOT}`,
+        `(?:[ ]+de)?${FIN_MOT}|(?:par[ ]+)?paliers?[ ]+de${FIN_MOT}`,
     ),
     jeton: () => ({ type: 'pas' }),
   },
@@ -110,18 +119,25 @@ const REGLES: Regle[] = [
   { re: re('\\/'), jeton: () => ({ type: 'slash' }) },
   { re: re(`et${FIN_MOT}`), jeton: () => ({ type: 'et' }) },
   { re: re(`a(?![a-z'])`), jeton: () => ({ type: 'a' }) },
-  { re: re('[:×*+()]'), jeton: () => null },
+  { re: re('[:×*+()®™"«»\\[\\]]'), jeton: () => null },
 ];
 
 const RE_MOT = re("[a-z]+'?");
-const RE_TOUS_LES = re(`(?:tou(?:te)?s[ ]+les|chaque)[ ]+`);
+const RE_TOUS_LES = re(`(?:tou(?:te)?s[ ]+les|chaque|par|\\/)[ ]*`);
 
 /** Lit une unité (jours, semaines, mois, comprimés) juste après un nombre. */
 function lireUnite(s: string, pos: number, valeur: number, joursParMois: number) {
   RE_UNITE.lastIndex = pos;
   const m = RE_UNITE.exec(s);
   if (!m) return null;
-  const fin = pos + m[0].length;
+  let fin = pos + m[0].length;
+  // « 1 mois et demi » : un demi-mois de plus.
+  RE_ET_DEMI.lastIndex = fin;
+  const demi = m[3] ? RE_ET_DEMI.exec(s) : null; // mois seulement (jours entiers)
+  if (demi) {
+    fin += demi[0].length;
+    valeur += 0.5;
+  }
   if (m[1]) return { fin, jeton: { type: 'duree' as const, valeur } };
   if (m[2]) return { fin, jeton: { type: 'duree' as const, valeur: valeur * 7 } };
   if (m[3]) return { fin, jeton: { type: 'duree' as const, valeur: valeur * joursParMois, mois: true } };

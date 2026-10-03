@@ -36,6 +36,7 @@ export type CodeProbleme =
   | 'pas-manquant'
   | 'rythme-manquant'
   | 'borne-manquante'
+  | 'borne-par-defaut'
   | 'borne-incoherente'
   | 'borne-inatteignable'
   | 'alternance-incomplete'

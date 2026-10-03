@@ -51,16 +51,18 @@ function ecrireDuree(jours: number, h: ReturnType<typeof hasard>): string {
     options.push(`${n} sem`, `${n} semaine${jours > 7 ? 's' : ''}`, `pendant ${n} semaine${jours > 7 ? 's' : ''}`, `x ${n} sem`);
     if (/^\d+$/.test(n)) options.push(`${n}s`, `${n} s`);
   }
-  if (jours % 28 === 0) options.push(`${jours / 28} mois`, `pendant ${jours / 28} mois`);
+  if (jours % 28 === 0) options.push(`${jours / 28} mois`, `pendant ${jours / 28} mois`, `x ${jours / 28} mois`);
+  if (jours === 42) options.push('1 mois et demi', 'pendant un mois et demi');
   options.push(`${jours} j`, `${jours}j`, `${jours} jours`, `pendant ${jours} jours`, `${jours} jrs`, `durant ${jours} jours`);
   return h.choisir(options);
 }
 
 function ecrireRythme(jours: number, h: ReturnType<typeof hasard>): string {
-  const options = [`tous les ${jours} jours`, `tous les ${jours} j`, `/${jours} j`];
-  if (jours === 7) options.push('/sem', 'par semaine', 'toutes les semaines', 'chaque semaine', 'tous les 7 jours');
-  if (jours === 14) options.push('toutes les 2 semaines', 'toutes les deux semaines', '/2 sem', 'tous les quinze jours'.replace('quinze', '14'));
-  if (jours === 28) options.push('toutes les 4 semaines', 'tous les mois', 'par mois', '/mois');
+  const options = [`tous les ${jours} jours`, `tous les ${jours} j`, `/${jours} j`, `par ${jours} jours`, `chaque ${jours} jours`];
+  if (jours === 7) options.push('/sem', 'par semaine', 'toutes les semaines', 'chaque semaine', 'tous les 7 jours', 'hebdomadairement', '/ semaine');
+  if (jours === 14) options.push('toutes les 2 semaines', 'toutes les deux semaines', '/2 sem', 'par 2 semaines', 'chaque 2 semaines', 'par quinzaine', 'toutes les 2 sem');
+  if (jours === 15) options.push('tous les quinze jours', 'tous les 15j', 'par 15 jours');
+  if (jours === 28) options.push('toutes les 4 semaines', 'tous les mois', 'par mois', '/mois', 'mensuellement', 'par 4 semaines', 'chaque mois');
   return h.choisir(options);
 }
 
@@ -72,7 +74,7 @@ interface Genere { texte: string; attendu: Palier[] }
 function generer(h: ReturnType<typeof hasard>): Genere {
   const morceaux: string[] = [];
   const attendu: Palier[] = [];
-  const dureesPossibles = [7, 10, 14, 15, 21, 28, 56];
+  const dureesPossibles = [7, 10, 14, 15, 21, 28, 42, 56];
 
   // 1 à 4 paliers fixes, doses strictement décroissantes.
   const doses = [60, 50, 40, 30, 25, 20, 17.5, 15, 12.5, 10, 7.5, 5, 2.5]
@@ -110,12 +112,22 @@ function generer(h: ReturnType<typeof hasard>): Genere {
     const borne = Math.round((derniere - nbBaisses * pas) * 100) / 100;
     if (borne < 0 || nbBaisses < 1) return generer(h);
     const p = ecrireNombre(pas, h);
-    const verbe = h.choisir([`-${p} mg`, `- ${p} mg`, `-${p}`, `baisser de ${p} mg`, `diminuer de ${p} mg`, `décroissance de ${p} mg`,
-      `par paliers de ${p} mg`, `réduire de ${p} mg`, `moins ${p} mg`, `enlever ${p} mg`, `retirer ${p} mg`]);
+    const verbe = h.choisir([`-${p} mg`, `- ${p} mg`, `-${p}`, `−${p} mg`, `baisser de ${p} mg`, `diminuer de ${p} mg`, `décroissance de ${p} mg`,
+      `par paliers de ${p} mg`, `réduire de ${p} mg`, `moins ${p} mg`, `enlever ${p} mg`, `retirer ${p} mg`, `diminution de ${p} mg`,
+      `baisse de ${p} mg`, `réduction de ${p} mg`, `dégression de ${p} mg`, `puis on baisse de ${p} mg`.replace('puis ', '')]);
+    const b = ecrireNombre(borne, h);
     const cible = jusquaArret
-      ? h.choisir(["jusqu'à l'arrêt", "jusqu'à arrêt", 'jusqu’à l’arrêt'])
-      : h.choisir([`jusqu'à ${ecrireDose(borne, h)}`, `jusqu’à ${borne} mg`, `-> ${borne} mg`, `→ ${borne}`, `jusqu'a ${borne}`]);
-    morceaux.push(h.pile() ? `${verbe} ${ecrireRythme(rythme, h)} ${cible}` : `${verbe} ${cible} ${ecrireRythme(rythme, h)}`);
+      ? h.choisir(["jusqu'à l'arrêt", "jusqu'à arrêt", 'jusqu’à l’arrêt', "jusqu'au sevrage", "jusqu'à l'arrêt complet", "jusqu'à arrêt total", '']) // '' : sans borne = arrêt
+      : h.choisir([`jusqu'à ${ecrireDose(borne, h)}`, `jusqu’à ${b} mg`, `-> ${b} mg`, `→ ${b}`, `jusqu'a ${b}`, `jusqu'à atteindre ${b} mg`, `jusqu'à la dose de ${b} mg`, `jusqu'à ${b} mg/j`]);
+    const r = ecrireRythme(rythme, h);
+    const motSeul = h.choisir(['baisser', 'diminuer', 'réduire', 'décroissance']);
+    morceaux.push(
+      h.choisir([
+        `${verbe} ${r} ${cible}`,
+        `${verbe} ${cible} ${r}`,
+        `${motSeul} ${r} de ${p} mg ${cible}`, // le pas après le rythme
+      ]).trim(),
+    );
     for (let k = 1; k <= nbBaisses - (borne === 0 ? 1 : 0); k++) {
       const d = Math.round((derniere - k * pas) * 100) / 100;
       if (d !== borne) attendu.push({ dose: d, jours: rythme });
@@ -128,7 +140,8 @@ function generer(h: ReturnType<typeof hasard>): Genere {
       attendu.push({ dose: borne, jours: null });
       // Confirmation du maintien, écrite ou non : ne change rien au résultat.
       if (h.pile(0.3)) {
-        morceaux[morceaux.length - 1] += ' ' + h.choisir(['à poursuivre', 'à poursuivre jusqu’à réévaluation', 'à maintenir jusqu’à nouvel ordre', 'jusqu’à la prochaine consultation']);
+        morceaux[morceaux.length - 1] += ' ' + h.choisir(['à poursuivre', 'à poursuivre jusqu’à réévaluation', 'à maintenir jusqu’à nouvel ordre',
+          'jusqu’à la prochaine consultation', 'au long cours', 'à poursuivre au long cours', 'puis maintien']);
       }
     }
   } else if (fin === 'arret') {
@@ -136,9 +149,11 @@ function generer(h: ReturnType<typeof hasard>): Genere {
     attendu.push({ dose: 0, jours: null });
   }
 
+  // Annotations ignorées par le moteur : « (soit 0,7 mg/kg) », « (1 cp de 20 mg) ».
+  if (h.pile(0.15)) morceaux[0] = morceaux[0]!.replace(/^(\d+(?:[.,]\d+)?) mg\b/, (m, d) => `${m} ${h.choisir(['(soit 0,7 mg/kg)', `(1 cp de ${d} mg)`, '(environ 1 mg/kg)'])}`);
   // Assemblage avec séparateurs, préfixe et casse aléatoires.
   let texte = morceaux.map((m, i) => (i === 0 ? m : h.choisir(SEPARATEURS) + m)).join('');
-  texte = h.choisir(['', 'Prednisone ', 'prednisone ', 'Cortancyl ', 'PREDNISONE ']) + texte;
+  texte = h.choisir(['', 'Prednisone ', 'prednisone ', 'Cortancyl ', 'PREDNISONE ', 'Prednisone : ', 'Cortancyl® ', 'Corticothérapie par prednisone ']) + texte;
   if (h.pile(0.2)) texte = texte.toUpperCase();
   if (h.pile(0.2)) texte = texte.replace(/ /g, '  ');
   if (h.pile(0.2)) texte += h.choisir(['.', ' le matin', ', le matin.', '\n']);
@@ -164,11 +179,12 @@ describe('bêta-test génératif', () => {
     expect(echecs, echecs.join('\n\n')).toEqual([]);
   });
 
-  it('10 000 saisies aléatoires ne font jamais planter l’analyseur', () => {
+  it(`${10000 * tours} saisies aléatoires ne font jamais planter l’analyseur`, () => {
     const h = hasard(42);
     const briques = ['20', 'mg', ' ', 'puis', '-', '5', '/', 'sem', 'jusqu’à', '->', '½', ',', '.', '\n', 'j', 'mois', 'arrêt',
-      'un jour sur deux', 'en alternance', 'de', 'à', 'baisser', '0', '12,5', 'vingt', 'cp', 'mg/kg', '3-4', 'xyz', 'é', '(', ')', '1 j/2'];
-    for (let i = 0; i < 10000; i++) {
+      'un jour sur deux', 'en alternance', 'de', 'à', 'baisser', '0', '12,5', 'vingt', 'cp', 'mg/kg', '3-4', 'xyz', 'é', '(', ')', '1 j/2',
+      'par', '2 semaines', 'sevrage', 'quinzaine', 'et demi', 'atteindre', 'au long cours', 'soit', 'chaque', 'moins', '®'];
+    for (let i = 0; i < 10000 * tours; i++) {
       const texte = Array.from({ length: 1 + Math.floor(h.suivant() * 14) }, () => h.choisir(briques)).join(h.pile() ? ' ' : '');
       const r = analyser(texte);
       for (const p of r.problemes) if (p.span) expect(p.span[1]).toBeLessThanOrEqual(texte.length);

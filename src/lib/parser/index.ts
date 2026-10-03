@@ -24,10 +24,6 @@ export function analyser(texte: string, options: Partial<Options> = {}): Resulta
     const extrait = texte.slice(t.span[0], t.span[1]);
     if (t.type === 'inconnu') {
       problemes.push({ code: 'mot-inconnu', niveau: 'erreur', message: `Mot non compris : « ${extrait} ».`, span: t.span });
-    } else if (t.type === 'mgkg') {
-      problemes.push({ code: 'mg-kg-non-pris-en-charge', niveau: 'erreur', message: 'Les doses en mg/kg ne sont pas prises en charge : indiquez la dose en mg.', span: t.span });
-    } else if (t.type === 'cp') {
-      problemes.push({ code: 'dose-en-comprimes', niveau: 'erreur', message: 'Dose en comprimés : indiquez la dose en mg.', span: t.span });
     } else if (t.type === 'fourchette') {
       problemes.push({ code: 'fourchette', niveau: 'erreur', message: `Fourchette « ${extrait} » : choisissez une valeur.`, span: t.span });
     }
