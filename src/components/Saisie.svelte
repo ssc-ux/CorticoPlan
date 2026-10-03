@@ -53,16 +53,17 @@
     width: 100%;
     min-height: 7.5rem;
     padding: 0.85rem 2.6rem 0.85rem 0.9rem;
-    border: 2px solid var(--bord);
-    border-radius: var(--rayon);
-    background: var(--fond);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--fg);
     resize: vertical;
     font-size: 1.05rem;
     line-height: 1.5;
   }
   textarea:focus {
-    border-color: var(--accent);
-    outline: none;
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
   }
   .exemple {
     position: absolute;

@@ -1,8 +1,9 @@
 <script lang="ts">
   /**
-   * Écran unique de CorticoPlan.
-   * 1. Le médecin écrit (ou choisit) un schéma → 2. tableau daté modifiable
-   * → 3. texte d'ordonnance à copier → courbe, calendrier patient, partage.
+   * Écran unique de CorticoPlan (style PNDSthèque).
+   * Onglet « Écrire » : le médecin écrit le schéma → l'ordonnance à copier
+   * apparaît juste dessous, puis le tableau (modifiable), la courbe, l'impression.
+   * Onglet « Schémas » : schémas des PNDS et des essais, qui remplissent le champ.
    * Rien n'est enregistré ni envoyé : tout se calcule dans le navigateur.
    */
   import CalendrierPatient from './components/CalendrierPatient.svelte';
@@ -18,7 +19,7 @@
   import { analyser } from './lib/parser';
   import { ordonnance } from './lib/prescription';
   import { calendrier } from './lib/schedule';
-  import type { Schema } from './lib/schemas';
+  import { SCHEMAS, type Schema } from './lib/schemas';
   import { decoderPartage, encoderPartage } from './lib/share';
   import type { Palier } from './lib/types';
 
@@ -26,7 +27,7 @@
   const partage = decoderPartage(location.hash);
   let texte = $state(partage?.texte ?? '');
   let debut = $state(partage?.debut && estDateValide(partage.debut) ? partage.debut : aujourdhui());
-  let mode = $state<'ecrire' | 'choisir'>('ecrire');
+  let onglet = $state<'ecrire' | 'schemas'>('ecrire');
   let joursParMois = $state(28);
   let schemaChoisi = $state<Schema | null>(null);
   let lienCopie = $state(false);
@@ -36,19 +37,32 @@
   const pret = $derived(resultat.ok && resultat.paliers.length > 0 && dateOk);
   const lignes = $derived(pret ? calendrier(resultat.paliers, debut) : []);
   const texteOrdonnance = $derived(ordonnance(lignes));
+  const listeAlertes = $derived(alertes(lignes));
 
-  // Indication du schéma choisi : effacée avec le texte, et signalée comme
-  // « modifié » dès que le texte ne correspond plus exactement au schéma.
+  // Indication du schéma choisi : effacée avec le texte, « modifié » si le texte change.
   $effect(() => {
     if (!texte.trim()) schemaChoisi = null;
   });
   const schemaModifie = $derived(schemaChoisi !== null && texte !== schemaChoisi.texte);
-  const listeAlertes = $derived(alertes(lignes));
+
+  // Lien partagé ouvert alors que le site est déjà affiché : on le charge aussi.
+  $effect(() => {
+    const charger = () => {
+      const p = decoderPartage(location.hash);
+      if (!p) return;
+      texte = p.texte;
+      if (p.debut && estDateValide(p.debut)) debut = p.debut;
+      onglet = 'ecrire';
+    };
+    window.addEventListener('hashchange', charger);
+    return () => window.removeEventListener('hashchange', charger);
+  });
 
   function choisir(s: Schema) {
     texte = s.texte;
     schemaChoisi = s;
-    mode = 'ecrire';
+    onglet = 'ecrire';
+    window.scrollTo({ top: 0 });
   }
 
   function modifier(paliers: Palier[]) {
@@ -72,37 +86,29 @@
   }
 </script>
 
-<div class="ecran">
-  <header>
-    <div class="marque">
-      <img src="./icon.svg" alt="" width="32" height="32" />
-      <h1>CorticoPlan</h1>
-    </div>
-    <p class="avertissement">
-      Aide à la rédaction : ne remplace pas le jugement médical. Le schéma reste sous la responsabilité du prescripteur.
-    </p>
+<div class="ecran wrap">
+  <header class="top">
+    <h1><img src="./icon.svg" alt="" width="22" height="22" /> CorticoPlan</h1>
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected={onglet === 'ecrire'} onclick={() => (onglet = 'ecrire')}>Écrire</button>
+      <button role="tab" aria-selected={onglet === 'schemas'} onclick={() => (onglet = 'schemas')}>
+        Schémas <span class="n">{SCHEMAS.length}</span>
+      </button>
+    </nav>
   </header>
 
-  <main>
-    <section class="carte">
-      <div class="entete">
-        <h2>1. Le schéma</h2>
-        <div class="onglets" role="tablist">
-          <button role="tab" aria-selected={mode === 'ecrire'} class:actif={mode === 'ecrire'} onclick={() => (mode = 'ecrire')}>Écrire</button>
-          <button role="tab" aria-selected={mode === 'choisir'} class:actif={mode === 'choisir'} onclick={() => (mode = 'choisir')}>Choisir un schéma</button>
-        </div>
-      </div>
-
-      {#if mode === 'ecrire'}
-        <Saisie bind:texte />
-        {#if schemaChoisi}
-          <p class="discret source">
-            {schemaModifie ? 'Modifié à partir de' : 'Schéma'} : {schemaChoisi.nom} — <strong>{schemaChoisi.valide ? 'vérifié' : 'à vérifier'}</strong> —
-            <a href={schemaChoisi.source.url} target="_blank" rel="noopener">source</a>
-          </p>
-        {/if}
-      {:else}
-        <ChoixSchema onchoix={choisir} />
+  {#if onglet === 'schemas'}
+    <ChoixSchema onchoix={choisir} />
+  {:else}
+    <main>
+      <p class="accroche">Écrivez le schéma comme dans un courrier : l'ordonnance se rédige toute seule.</p>
+      <Saisie bind:texte />
+      {#if schemaChoisi}
+        <p class="discret source">
+          {schemaModifie ? 'Modifié à partir de' : 'Schéma'} : {schemaChoisi.nom} —
+          <strong>{schemaChoisi.valide ? 'vérifié' : 'à vérifier'}</strong> —
+          <a href={schemaChoisi.source.url} target="_blank" rel="noopener">source</a>
+        </p>
       {/if}
 
       <label class="date">
@@ -110,47 +116,46 @@
         <input type="date" bind:value={debut} required />
       </label>
 
-      {#if mode === 'ecrire'}<Resultat {texte} {resultat} />{/if}
-    </section>
+      <Resultat {texte} {resultat} />
 
-    {#if pret}
-      <section class="carte">
-        <h2>2. Tableau <span class="discret">— touchez une ligne pour la modifier</span></h2>
-        <Tableau {lignes} onchange={modifier} />
-        {#if listeAlertes.length}
-          <ul class="alertes">
-            {#each listeAlertes as a}<li>ⓘ {a.message} <span class="discret">({a.source})</span></li>{/each}
-          </ul>
-        {/if}
-      </section>
+      {#if pret}
+        <section class="carte">
+          <h2>Ordonnance</h2>
+          <Ordonnance texte={texteOrdonnance} />
+        </section>
 
-      <section class="carte">
-        <h2>3. Ordonnance</h2>
-        <Ordonnance texte={texteOrdonnance} />
-      </section>
+        <section class="carte">
+          <h2>Tableau <span class="aide">· touchez une ligne pour la modifier</span></h2>
+          <Tableau {lignes} onchange={modifier} />
+          {#if listeAlertes.length}
+            <ul class="alertes">
+              {#each listeAlertes as a}<li>ⓘ {a.message} <span class="discret">({a.source})</span></li>{/each}
+            </ul>
+          {/if}
+        </section>
 
-      <section class="carte">
-        <h2>Courbe</h2>
-        <Courbe paliers={resultat.paliers} {debut} />
-      </section>
+        <section class="carte">
+          <h2>Courbe</h2>
+          <Courbe paliers={resultat.paliers} {debut} />
+        </section>
 
-      <div class="actions">
-        <button type="button" class="bouton" onclick={() => window.print()}>🖨 Imprimer le calendrier patient</button>
-        <button type="button" class="bouton" onclick={partager}>{lienCopie ? '✓ Lien copié' : '🔗 Partager ce schéma'}</button>
-      </div>
-    {:else if texte.trim() && !resultat.ok}
-      <p class="discret attente">Corrigez le texte ci-dessus : le tableau et l'ordonnance apparaîtront ici.</p>
-    {/if}
-  </main>
+        <div class="actions">
+          <button type="button" class="lien-action" onclick={() => window.print()}>Imprimer le calendrier patient</button>
+          <button type="button" class="lien-action" onclick={partager}>{lienCopie ? '✓ Lien copié' : 'Partager ce schéma'}</button>
+        </div>
+      {/if}
+    </main>
+  {/if}
 
   <footer>
+    <p>
+      Aide à la rédaction : ne remplace pas le jugement médical ; le schéma reste sous la responsabilité du
+      prescripteur. Aucune donnée n'est enregistrée ni envoyée. Ne saisissez jamais de nom de patient.
+    </p>
     <details>
       <summary>Réglages</summary>
       <label>1 mois = <input type="number" min="28" max="31" bind:value={joursParMois} /> jours</label>
     </details>
-    <p>
-      Aucune donnée n'est enregistrée ni envoyée : tout est calculé sur cet appareil. Ne saisissez jamais de nom de patient.
-    </p>
   </footer>
 </div>
 
@@ -159,85 +164,86 @@
 {/if}
 
 <style>
-  .ecran {
-    max-width: 760px;
+  .wrap {
+    max-width: 780px;
     margin: 0 auto;
-    padding: 1rem 16px 2rem;
+    padding: 0 16px 48px;
   }
-  header {
-    margin-bottom: 1rem;
-  }
-  .marque {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
+  .top {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    background: var(--bg);
+    margin: 0 -16px;
+    padding: 14px 16px 0;
+    border-bottom: 1px solid var(--line);
   }
   h1 {
-    font-size: 1.5rem;
-  }
-  .avertissement {
-    margin: 0.6rem 0 0;
-    padding: 0.55rem 0.8rem;
-    border-radius: var(--rayon);
-    background: var(--attention-fond);
-    border-left: 4px solid var(--attention);
-    font-size: 0.875rem;
-  }
-  main {
-    display: grid;
-    gap: 1rem;
-  }
-  .entete {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
+    gap: 8px;
+    margin: 0 0 6px;
+    font: 600 1.3rem/1.2 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.01em;
   }
-  .entete h2 {
-    margin: 0;
+  h1 img {
+    border-radius: 5px;
   }
-  .onglets {
-    display: inline-flex;
-    padding: 3px;
-    border-radius: 999px;
-    background: var(--fond);
-    border: 1px solid var(--bord);
+  .tabs {
+    display: flex;
+    gap: 22px;
   }
-  .onglets button {
-    min-height: 38px;
-    padding: 0.3rem 0.9rem;
+  .tabs button {
     border: 0;
-    border-radius: 999px;
-    background: transparent;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--texte-2);
+    background: none;
+    color: var(--muted);
+    padding: 10px 0;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 500;
   }
-  .onglets button.actif {
-    background: var(--accent);
-    color: var(--accent-texte);
-  }
-  .date {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-top: 0.75rem;
+  .tabs button[aria-selected='true'] {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
     font-weight: 600;
   }
-  .date input {
-    min-height: 44px;
-    padding: 0.3rem 0.6rem;
-    border: 2px solid var(--bord);
-    border-radius: var(--rayon);
-    background: var(--fond);
+  .n {
+    margin-left: 5px;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .accroche {
+    margin: 22px 0 10px;
+    color: var(--muted);
   }
   .source {
     margin: 0.4rem 0 0;
   }
   .source a {
     color: var(--accent);
+  }
+  .date {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .date input {
+    min-height: 40px;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--fg);
+  }
+  .aide {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
   }
   .alertes {
     margin: 0.75rem 0 0;
@@ -249,24 +255,33 @@
   .actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 6px 22px;
+    padding: 1rem 0;
   }
-  .attente {
-    text-align: center;
-    margin: 0.5rem 0;
+  .lien-action {
+    border: 0;
+    background: none;
+    padding: 6px 0;
+    color: var(--accent);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .lien-action:hover {
+    text-decoration: underline;
   }
   footer {
     margin-top: 2rem;
     font-size: 0.85rem;
-    color: var(--texte-3);
+    color: var(--muted);
   }
   footer input {
     width: 4.5rem;
-    min-height: 36px;
+    min-height: 34px;
     padding: 0.2rem 0.4rem;
-    border: 1px solid var(--bord);
+    border: 1px solid var(--line);
     border-radius: 6px;
-    background: var(--fond);
+    background: var(--card);
+    color: var(--fg);
   }
   summary {
     cursor: pointer;

@@ -1,61 +1,71 @@
-/* Couleurs et espacements : définis une fois, déclinés en mode sombre. */
+/* Style aligné sur PNDSthèque : fond clair, lignes fines, accent bleu. */
 :root {
-  --fond: #ffffff;
-  --surface: #f5f7fa;
-  --bord: #d9dee6;
-  --texte: #16202c;
-  --texte-2: #4a5768;
-  --texte-3: #6b7787;
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --fg: #1c1d1f;
+  --muted: #6d6f73;
+  --line: #e4e7ee;
+  --chip: #eceef3;
+  --c1s: #e8f0fb;
+  /* Noms utilisés par les composants */
+  --fond: var(--card);
+  --surface: var(--card);
+  --bord: var(--line);
+  --texte: var(--fg);
+  --texte-2: #45474b;
+  --texte-3: var(--muted);
   --accent: #1f5fbf;
   --accent-texte: #ffffff;
-  --accent-doux: #e8f0fc;
+  --accent-doux: var(--c1s);
   --erreur: #b3261e;
   --erreur-fond: #fdecea;
-  --attention: #8a5300;
-  --attention-fond: #fff4e0;
+  --attention: #a0570a;
+  --attention-fond: #fcece3;
   --surligne: #ffd8d4;
   --courbe: #1f5fbf;
-  --rayon: 10px;
+  --rayon: 8px;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --fond: #11161d;
-    --surface: #1a212b;
-    --bord: #2e3846;
-    --texte: #e8edf3;
-    --texte-2: #b3bdca;
-    --texte-3: #8c97a5;
-    --accent: #6ea8ff;
+    --bg: #111318;
+    --card: #1b1d21;
+    --fg: #e9e8e4;
+    --muted: #9b9ea4;
+    --line: #2b2e33;
+    --chip: #202329;
+    --c1s: #1c2740;
+    --texte-2: #c9c8c4;
+    --accent: #7aa7ff;
     --accent-texte: #0b1320;
-    --accent-doux: #1b2a40;
     --erreur: #ff8a80;
     --erreur-fond: #3a1d1b;
-    --attention: #ffc46b;
-    --attention-fond: #33270f;
+    --attention: #eaa452;
+    --attention-fond: #35231a;
     --surligne: #6b2b26;
-    --courbe: #6ea8ff;
+    --courbe: #7aa7ff;
     color-scheme: dark;
   }
 }
 
 :root[data-theme='dark'] {
-  --fond: #11161d;
-  --surface: #1a212b;
-  --bord: #2e3846;
-  --texte: #e8edf3;
-  --texte-2: #b3bdca;
-  --texte-3: #8c97a5;
-  --accent: #6ea8ff;
+  --bg: #111318;
+  --card: #1b1d21;
+  --fg: #e9e8e4;
+  --muted: #9b9ea4;
+  --line: #2b2e33;
+  --chip: #202329;
+  --c1s: #1c2740;
+  --texte-2: #c9c8c4;
+  --accent: #7aa7ff;
   --accent-texte: #0b1320;
-  --accent-doux: #1b2a40;
   --erreur: #ff8a80;
   --erreur-fond: #3a1d1b;
-  --attention: #ffc46b;
-  --attention-fond: #33270f;
+  --attention: #eaa452;
+  --attention-fond: #35231a;
   --surligne: #6b2b26;
-  --courbe: #6ea8ff;
+  --courbe: #7aa7ff;
   color-scheme: dark;
 }
 
@@ -69,9 +79,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--fond);
-  color: var(--texte);
-  font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.5 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
 h1,
@@ -81,7 +91,11 @@ h2 {
 }
 
 h2 {
-  font-size: 1.05rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
   margin-bottom: 0.6rem;
 }
 
@@ -125,10 +139,8 @@ button {
 }
 
 .carte {
-  background: var(--surface);
-  border: 1px solid var(--bord);
-  border-radius: var(--rayon);
-  padding: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .discret {

@@ -496,6 +496,102 @@
         "url": "https://doi.org/10.1186/s13063-022-06263-3",
         "page": "Intervention description {11a}"
       }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai SELECT-GCA : départ 60 mg, arrêt à S52 — bras placebo (corticoïdes seuls)",
+      "texte": "60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17 mg 2 sem puis 15 mg 2 sem puis 12 mg 1 sem puis 10 mg 4 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu (tableau semaine par semaine)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai SELECT-GCA (AbbVie M16-852, version 7.0), annexe E « Corticosteroid tapering schedule » — prednisone ou prednisolone",
+        "annee": 2025,
+        "version": "Protocole v7.0 (ClinicalTrials.gov NCT03725202)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/02/NCT03725202/Prot_000.pdf",
+        "page": "Annexe E, p. 69"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai SELECT-GCA : départ 60 mg, arrêt à S26 — bras upadacitinib (à associer à un traitement d’épargne)",
+      "texte": "60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 15 mg 1 sem puis 12 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu (tableau semaine par semaine)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai SELECT-GCA (AbbVie M16-852, version 7.0), annexe E « Corticosteroid tapering schedule » — prednisone ou prednisolone",
+        "annee": 2025,
+        "version": "Protocole v7.0 (ClinicalTrials.gov NCT03725202)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/02/NCT03725202/Prot_000.pdf",
+        "page": "Annexe E, p. 69"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai SELECT-GCA : départ 50 mg, arrêt à S52 — bras placebo (corticoïdes seuls)",
+      "texte": "50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17 mg 2 sem puis 15 mg 2 sem puis 12 mg 1 sem puis 10 mg 4 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu (tableau semaine par semaine)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai SELECT-GCA (AbbVie M16-852, version 7.0), annexe E « Corticosteroid tapering schedule » — prednisone ou prednisolone",
+        "annee": 2025,
+        "version": "Protocole v7.0 (ClinicalTrials.gov NCT03725202)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/02/NCT03725202/Prot_000.pdf",
+        "page": "Annexe E, p. 69"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai SELECT-GCA : départ 50 mg, arrêt à S26 — bras upadacitinib (à associer à un traitement d’épargne)",
+      "texte": "50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 15 mg 1 sem puis 12 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu (tableau semaine par semaine)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai SELECT-GCA (AbbVie M16-852, version 7.0), annexe E « Corticosteroid tapering schedule » — prednisone ou prednisolone",
+        "annee": 2025,
+        "version": "Protocole v7.0 (ClinicalTrials.gov NCT03725202)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/02/NCT03725202/Prot_000.pdf",
+        "page": "Annexe E, p. 69"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai SELECT-GCA : départ 40 mg, arrêt à S52 — bras placebo (corticoïdes seuls)",
+      "texte": "40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17 mg 2 sem puis 15 mg 2 sem puis 12 mg 1 sem puis 10 mg 4 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu (tableau semaine par semaine)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai SELECT-GCA (AbbVie M16-852, version 7.0), annexe E « Corticosteroid tapering schedule » — prednisone ou prednisolone",
+        "annee": 2025,
+        "version": "Protocole v7.0 (ClinicalTrials.gov NCT03725202)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/02/NCT03725202/Prot_000.pdf",
+        "page": "Annexe E, p. 69"
+      }
+    },
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "nom": "Essai SELECT-GCA : départ 40 mg, arrêt à S26 — bras upadacitinib (à associer à un traitement d’épargne)",
+      "texte": "40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 15 mg 1 sem puis 12 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu (tableau semaine par semaine)",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai SELECT-GCA (AbbVie M16-852, version 7.0), annexe E « Corticosteroid tapering schedule » — prednisone ou prednisolone",
+        "annee": 2025,
+        "version": "Protocole v7.0 (ClinicalTrials.gov NCT03725202)",
+        "url": "https://cdn.clinicaltrials.gov/large-docs/02/NCT03725202/Prot_000.pdf",
+        "page": "Annexe E, p. 69"
+      }
     }
   ]
 }
