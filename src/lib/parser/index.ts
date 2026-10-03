@@ -8,16 +8,30 @@
  */
 import { OPTIONS_PAR_DEFAUT } from '../config';
 import { reformuler } from '../format';
-import type { Options, Probleme, ResultatAnalyse } from '../types';
+import type { Options, Probleme, ResultatAnalyse, Span } from '../types';
 import { assembler } from './assemble';
 import { verifier } from './checks';
+import { corriger } from './correct';
 import { decouper } from './lexer';
 import { normaliser } from './normalize';
 
 export function analyser(texte: string, options: Partial<Options> = {}): ResultatAnalyse {
   const opts: Options = { ...OPTIONS_PAR_DEFAUT, ...options };
-  const jetons = decouper(normaliser(texte), opts.joursParMois);
+  // Fautes de frappe corrigées avant le découpage ; les positions sont
+  // ramenées au texte d'origine pour le surlignage.
+  const corrige = corriger(normaliser(texte));
+  const jetons = decouper(corrige.texte, opts.joursParMois).map((t) => ({
+    ...t,
+    span: [corrige.debut[t.span[0]] ?? texte.length, corrige.fin[t.span[1] - 1] ?? texte.length] as Span,
+  }));
   const problemes: Probleme[] = [];
+  if (corrige.corrections.length) {
+    problemes.push({
+      code: 'correction-auto',
+      niveau: 'info',
+      message: `Corrigé automatiquement : ${corrige.corrections.map((c) => `« ${texte.slice(...c.span)} » → « ${c.apres} »`).join(', ')}.`,
+    });
+  }
 
   // Jetons signalés directement, avec leur position pour le surlignage.
   for (const t of jetons) {

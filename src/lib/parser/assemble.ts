@@ -42,14 +42,37 @@ function segmenter(jetons: Jeton[]): Jeton[][] {
     if (t.type === 'sep') segments.push([]);
     else segments[segments.length - 1]!.push(t);
   }
-  return segments.filter((s) => s.length > 0);
+  // « 20 mg 3 sem → 15 mg 3 sem → 10 mg » : sans baisse dans le segment, la
+  // flèche sépare des paliers (elle veut dire « puis », pas « jusqu'à »).
+  const sortie: Jeton[][] = [];
+  for (const seg of segments) {
+    const avecBaisse = seg.some((t) => t.type === 'pas' || t.type === 'moins');
+    if (avecBaisse || !seg.some((t) => t.fleche)) {
+      sortie.push(seg);
+      continue;
+    }
+    let courant: Jeton[] = [];
+    for (const t of seg) {
+      if (t.fleche) {
+        sortie.push(courant);
+        courant = [];
+      } else courant.push(t);
+    }
+    sortie.push(courant);
+  }
+  return sortie.filter((s) => s.length > 0);
 }
 
 /** Jetons déjà signalés par ailleurs : ils ne participent pas au sens. */
 const IGNORES = new Set(['inconnu', 'mgkg', 'cp', 'fourchette', 'mg', 'et', 'slash']);
 
 /** Transforme un segment en bloc (ou `null` s'il ne porte aucune information). */
-function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | undefined): Bloc | 'duree-seule' | null {
+/** Ce qui se transmet d'un segment à l'autre (dosage du comprimé déjà écrit). */
+interface Contexte {
+  dosageCp: number | null;
+}
+
+function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | undefined, ctx: Contexte): Bloc | 'duree-seule' | null {
   const span: Span = [seg[0]!.span[0], seg[seg.length - 1]!.span[1]];
   const doses: number[] = [];
   let paire: [number, number] | null = null;
@@ -65,9 +88,11 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
   let sevrageSeul = false;
   let incompris = false;
   let attentePas = false; // « baisser toutes les 2 sem de 5 mg » : le pas vient après
+  let pasDiffere = false; // pas donné par un mot (« baisser de… ») plutôt que par « - »
   // Annotations non prises en charge (« soit 0,7 mg/kg », « 1 cp ») : ignorées
   // si le segment donne aussi une dose en mg, sinon signalées en erreur.
   const annotations: Jeton[] = [];
+  const comprimes: { jeton: Jeton; nombre: number; dosage: number | null }[] = [];
 
   for (let k = 0; k < seg.length; k++) {
     const t = seg[k]!;
@@ -87,19 +112,30 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
           k++;
         } else if (attentePas && pas === null) {
           pas = t.valeur!;
+          pasDiffere = true;
           attentePas = false;
         } else {
           doses.push(t.valeur!);
         }
         break;
       case 'mgkg':
-      case 'cp':
         annotations.push(t);
+        break;
+      case 'cp':
+        // « 2 cp de 5 mg », « 2 cp à 5 mg » : dosage du comprimé juste après.
+        if (s1?.type === 'nombre') {
+          comprimes.push({ jeton: t, nombre: t.valeur!, dosage: s1.valeur! });
+          k++;
+        } else if (s1?.type === 'a' && s2?.type === 'nombre') {
+          comprimes.push({ jeton: t, nombre: t.valeur!, dosage: s2.valeur! });
+          k += 2;
+        } else comprimes.push({ jeton: t, nombre: t.valeur!, dosage: null });
         break;
       case 'pas':
       case 'moins':
         if (s1?.type === 'nombre') {
           pas = s1.valeur!;
+          if (t.type === 'pas') pasDiffere = true; // mot (« décroissance de ») et non signe « - »
           k++;
         } else {
           motPasSansValeur = true;
@@ -107,7 +143,10 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
         }
         break;
       case 'jusqua':
-        if (s1?.type === 'nombre') {
+        if (s1?.type === 'nombre' && s2?.type === 'mgkg') {
+          annotations.push(s2);
+          k += 2;
+        } else if (s1?.type === 'nombre') {
           borne = s1.valeur!;
           k++;
         } else if (s1?.type === 'arret' || s1?.type === 'sevrage') {
@@ -116,7 +155,10 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
         } else incompris = true;
         break;
       case 'a':
-        if (s1?.type === 'nombre') {
+        if (s1?.type === 'nombre' && s2?.type === 'mgkg') {
+          annotations.push(s2);
+          k += 2;
+        } else if (s1?.type === 'nombre') {
           borneFaible = s1.valeur!;
           k++;
         } else if (s1?.type === 'arret' || s1?.type === 'sevrage') {
@@ -157,8 +199,45 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
 
   // Fourchette (« 3-4 semaines », déjà signalée) : segment ignoré.
   if (seg.some((t) => t.type === 'fourchette')) return null;
-  // « 20 mg (1 cp de 20 mg) » : la même dose répétée compte une fois.
+  // Comprimés : la dose en mg est déduite seulement si elle est certaine.
+  for (const c of comprimes) {
+    const info = (message: string) => problemes.push({ code: 'dose-en-comprimes', niveau: 'info', message, span: c.jeton.span });
+    if (c.dosage !== null) {
+      // « 2 cp de 5 mg » = 10 mg ; une autre dose écrite doit concorder.
+      const total = arrondi(c.nombre * c.dosage);
+      if (doses.some((d) => d !== total)) {
+        return echec('dose-ambigue', `${c.nombre} cp de ${nombreFr(c.dosage)} mg = ${nombreFr(total)} mg : ne concorde pas avec la dose écrite.`);
+      }
+      doses.splice(0, doses.length, total);
+      ctx.dosageCp = c.dosage;
+      info(`${c.nombre} cp de ${nombreFr(c.dosage)} mg compris comme ${nombreFr(total)} mg/j.`);
+    } else if (doses.length === 1 && c.nombre === 1) {
+      ctx.dosageCp = doses[0]!;
+      info('« 1 cp » : la dose en mg écrite est retenue.');
+    } else if (doses.length === 0 && ctx.dosageCp !== null) {
+      // « … puis 1 cp » : même comprimé que plus haut.
+      const total = arrondi(c.nombre * ctx.dosageCp);
+      doses.push(total);
+      info(`${c.nombre} cp compris comme ${nombreFr(total)} mg/j (comprimé de ${nombreFr(ctx.dosageCp)} mg écrit plus haut).`);
+    } else if (doses.length === 1) {
+      // « Cortancyl 5 mg : 2 cp » : 5 mg est le dosage du comprimé → 10 mg.
+      const total = arrondi(c.nombre * doses[0]!);
+      ctx.dosageCp = doses[0]!;
+      info(`${nombreFr(doses[0]!)} mg × ${c.nombre} cp compris comme ${nombreFr(total)} mg/j (écrivez la dose totale en mg pour éviter toute ambiguïté).`);
+      doses.splice(0, 1, total);
+    } else {
+      return echec('dose-en-comprimes', 'Dose en comprimés sans dosage : indiquez la dose en mg (ex. « 20 mg »).');
+    }
+  }
+  // « 20 mg (20 mg) » : la même dose répétée compte une fois.
   if (doses.length > 1 && doses.every((d) => d === doses[0])) doses.splice(1);
+  // « Décroissance : 20 mg pendant 2 semaines » : mot de baisse servant de titre
+  // (ni rythme ni borne) → le nombre pris pour un pas est en fait la dose.
+  if (pasDiffere && rythme === null && borne === null && borneFaible === null && duree !== null) {
+    doses.unshift(pas!);
+    pas = null;
+    motPasSansValeur = false;
+  }
   for (const t of annotations) {
     const mgkg = t.type === 'mgkg';
     const autreDose = doses.length > 0 || paire !== null || pas !== null;
@@ -179,8 +258,7 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
   // Verbe sous-entendu après une première baisse : « puis de 2,5 mg toutes les
   // 2 semaines jusqu'à 10 mg » → la dose unique est le pas.
   if (
-    pas === null && !motPasSansValeur && rythme !== null && (borne !== null || borneFaible !== null) &&
-    doses.length === 1 && !paire && precedent?.type === 'decroissance'
+    pas === null && !motPasSansValeur && rythme !== null && doses.length === 1 && !paire && precedent?.type === 'decroissance'
   ) {
     pas = doses.pop()!;
   }
@@ -347,8 +425,9 @@ function formatDoseCourte(dose: Dose): string {
 /** Point d'entrée de l'assemblage. */
 export function assembler(jetons: Jeton[], problemes: Probleme[]): Palier[] {
   const blocs: Bloc[] = [];
+  const ctx: Contexte = { dosageCp: null };
   for (const seg of segmenter(jetons)) {
-    const bloc = lireSegment(seg, problemes, blocs[blocs.length - 1]);
+    const bloc = lireSegment(seg, problemes, blocs[blocs.length - 1], ctx);
     if (bloc && bloc !== 'duree-seule') blocs.push(bloc);
   }
   return derouler(blocs, problemes);

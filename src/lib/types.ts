@@ -25,6 +25,7 @@ export type Niveau = 'erreur' | 'avertissement' | 'info';
 /** Codes stables, utilisés par l'interface et par les tests du corpus. */
 export type CodeProbleme =
   | 'mot-inconnu'
+  | 'correction-auto'
   | 'mg-kg-non-pris-en-charge'
   | 'dose-en-comprimes'
   | 'fourchette'

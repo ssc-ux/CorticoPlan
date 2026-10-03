@@ -36,6 +36,8 @@ export interface Jeton {
   valeur?: number;
   /** Vrai si la durée ou le rythme est exprimé en mois. */
   mois?: boolean;
+  /** Jeton « jusqu'à » écrit avec une flèche (peut aussi vouloir dire « puis »). */
+  fleche?: boolean;
 }
 
 /** Fabrique une expression régulière « collante » (ancrée à la position). */
@@ -59,7 +61,7 @@ const MOTS_NEUTRES = new Set([
   'arriver', 'complet', 'complete', 'total', 'totale', 'definitif', 'definitive',
   'inclus', 'incluse', 'progressif', 'progressive', 'progressivement', 'lent', 'lente',
   'lentement', 'on', 'prednisolone', 'solupred', 'oral', 'orale', 'voie', 'chaque',
-  'ainsi', 'environ', 'corticotherapie', 'corticoide', 'corticoides', 'cortisone', 'traitement', 'par', 'apres', 'a', 'jusque', 'dose', 'debut', 'debuter', 'commencer',
+  'ainsi', 'environ', 'schema', 'protocole', 'posologie', 'corticotherapie', 'corticoide', 'corticoides', 'cortisone', 'traitement', 'par', 'apres', 'a', 'jusque', 'dose', 'debut', 'debuter', 'commencer',
 ]);
 
 interface Regle {
@@ -71,7 +73,14 @@ interface Regle {
 /** Règles essayées dans l'ordre à chaque position. */
 const REGLES: Regle[] = [
   { re: re('\\n'), jeton: () => ({ type: 'sep' }) },
-  { re: re('->|=>|→|>'), jeton: () => ({ type: 'jusqua' }) },
+  {
+    re: re(`(?:d[eu][ ]+)?j[ ]*(\\d+)[ ]*(?:-|a|au)[ ]*j[ ]*(\\d+)${FIN_MOT}`),
+    jeton: (m) => {
+      const n = Number(m[2]) - Number(m[1]) + 1;
+      return n > 0 ? { type: 'duree', valeur: n } : { type: 'inconnu' };
+    },
+  },
+  { re: re('->|=>|→|>'), jeton: () => ({ type: 'jusqua', fleche: true }) },
   {
     re: re(`(?:un|1)[ ]*(?:jours?|j)[ ]*(?:\\/|sur)[ ]*(?:deux|2)(?![a-z0-9])`),
     jeton: () => ({ type: 'unJourSurDeux' }),
@@ -108,7 +117,7 @@ const REGLES: Regle[] = [
   { re: re(`jusqu[ ]*'?[ ]*(?:a|au)${FIN_MOT}|jusqu'`), jeton: () => ({ type: 'jusqua' }) },
   {
     re: re(
-      `(?:baisser|diminuer|reduire|decroitre|descendre|baisse|diminution|reduction|decroissance|degression|moins|enlever|retirer|oter)` +
+      `(?:baiss(?:er|e|ez|ons|ant)|diminu(?:er|e|ez|ons|tion|ant)|redui(?:re|t|sez|sons|sant)|reduction|decroi(?:tre|t|ssance)|degression|degressi(?:f|ve|vement)|descend(?:re|ez|ant)?|enlev(?:er|ez)|enleve|retir(?:er|ez|e)|ot(?:er|ez)|moins)` +
         `(?:[ ]+de)?${FIN_MOT}|(?:par[ ]+)?paliers?[ ]+de${FIN_MOT}`,
     ),
     jeton: () => ({ type: 'pas' }),
@@ -197,7 +206,7 @@ export function decouper(s: string, joursParMois: number): Jeton[] {
 function lireJeton(s: string, i: number, joursParMois: number): { fin: number; jeton: Omit<Jeton, 'span'> | null } {
   // Les règles fixes passent d'abord, sauf les nombres qui doivent être lus
   // avant « a » ou les mots inconnus.
-  for (const regle of REGLES.slice(0, 4)) {
+  for (const regle of REGLES.slice(0, 5)) {
     const lu = essayer(regle, s, i);
     if (lu) return lu;
   }
@@ -211,7 +220,7 @@ function lireJeton(s: string, i: number, joursParMois: number): { fin: number; j
     while (s[j] === ' ') j++;
     if (lireNombre(s, j)) return { fin: i + 1, jeton: { type: 'moins' } };
   }
-  for (const regle of REGLES.slice(4)) {
+  for (const regle of REGLES.slice(5)) {
     const lu = essayer(regle, s, i);
     if (lu) return lu;
   }

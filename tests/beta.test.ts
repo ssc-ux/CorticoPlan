@@ -70,6 +70,27 @@ const SEPARATEURS = [' puis ', ', puis ', ', ', ' ; ', '\n', '. Puis ', ' ensuit
 
 interface Genere { texte: string; attendu: Palier[] }
 
+/** Mots longs du vocabulaire, sur lesquels on simule des fautes de frappe. */
+const MUTABLES = new Set(['pendant', 'semaines', 'semaine', 'baisser', 'diminuer', 'decroissance', 'prednisone', 'cortancyl',
+  'milligrammes', 'reduction', 'diminution', 'degression', 'retirer', 'enlever', 'quinzaine', 'atteindre', 'poursuivre', 'maintenir']);
+const VOISINES: Record<string, string> = { a: 'zqs', e: 'zrd', i: 'uok', o: 'ipl', u: 'yij', n: 'bhm', s: 'qdz', r: 'etf', t: 'ryg', m: 'nl', d: 'sfe', c: 'xv' };
+
+/** Une faute : lettres inversées, oubliée, doublée ou touche voisine. */
+function fauteDeFrappe(mot: string, h: ReturnType<typeof hasard>): string {
+  const i = 1 + Math.floor(h.suivant() * (mot.length - 2));
+  switch (h.choisir(['inversion', 'oubli', 'double', 'voisine'] as const)) {
+    case 'inversion': return mot.slice(0, i) + mot[i + 1] + mot[i] + mot.slice(i + 2);
+    case 'oubli': return mot.slice(0, i) + mot.slice(i + 1);
+    case 'double': return mot.slice(0, i) + mot[i] + mot.slice(i);
+    default: {
+      const v = VOISINES[mot[i]!];
+      return v ? mot.slice(0, i) + h.choisir(v.split('')) + mot.slice(i + 1) : mot;
+    }
+  }
+}
+
+const sansAccent = (m: string) => m.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
 /** Construit un schéma au hasard, son écriture libre et les paliers attendus. */
 function generer(h: ReturnType<typeof hasard>): Genere {
   const morceaux: string[] = [];
@@ -154,6 +175,15 @@ function generer(h: ReturnType<typeof hasard>): Genere {
   // Assemblage avec séparateurs, préfixe et casse aléatoires.
   let texte = morceaux.map((m, i) => (i === 0 ? m : h.choisir(SEPARATEURS) + m)).join('');
   texte = h.choisir(['', 'Prednisone ', 'prednisone ', 'Cortancyl ', 'PREDNISONE ', 'Prednisone : ', 'Cortancyl® ', 'Corticothérapie par prednisone ']) + texte;
+  // Fautes de frappe sur 30 % des phrases (le moteur doit les corriger seul).
+  if (h.pile(0.3)) {
+    texte = texte.replace(/[A-Za-zÀ-ÿ]+/g, (m) => {
+      const n = sansAccent(m);
+      if (!MUTABLES.has(n) || !h.pile(0.5)) return m;
+      const f = fauteDeFrappe(n, h);
+      return MUTABLES.has(f) ? m : f; // ne pas fabriquer un autre mot connu
+    });
+  }
   if (h.pile(0.2)) texte = texte.toUpperCase();
   if (h.pile(0.2)) texte = texte.replace(/ /g, '  ');
   if (h.pile(0.2)) texte += h.choisir(['.', ' le matin', ', le matin.', '\n']);
@@ -166,8 +196,13 @@ describe('bêta-test génératif', () => {
   it(`${5000 * tours} formulations libres redonnent les paliers attendus`, () => {
     const h = hasard(20261002);
     const echecs: string[] = [];
-    for (let i = 0; i < 5000 * tours; i++) {
+    // Phrases toutes différentes : un doublon est régénéré, pas compté.
+    const vues = new Set<string>();
+    const cible = 5000 * tours;
+    for (let essais = 0; vues.size < cible && essais < cible * 3; essais++) {
       const { texte, attendu } = generer(h);
+      if (vues.has(texte)) continue;
+      vues.add(texte);
       const r = analyser(texte, { joursParMois: 28 });
       // Aller-retour : le texte canonique (après édition du tableau) redonne les mêmes paliers.
       const retour = analyser(versTexte(r.paliers), { joursParMois: 28 });
@@ -177,6 +212,8 @@ describe('bêta-test génératif', () => {
       }
     }
     expect(echecs, echecs.join('\n\n')).toEqual([]);
+    expect(vues.size, 'nombre de phrases différentes testées').toBe(cible);
+    console.log(`${vues.size} phrases différentes testées, toutes comprises correctement.`);
   });
 
   it(`${10000 * tours} saisies aléatoires ne font jamais planter l’analyseur`, () => {
