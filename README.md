@@ -46,7 +46,7 @@ Le site se met à jour tout seul en 1 à 2 minutes si les tests passent.
 
 - **Schémas proposés** : `src/data/schemas.json` — copier un bloc existant, modifier
   `pathologie`, `nom`, `texte` (écrit comme dans le champ libre), `statut` et `source`.
-  16 schémas sont proposés (Horton, PPR, vascularites à ANCA, sarcoïdose, PTI), tous marqués
+  55 schémas sont proposés (PNDS HAS, essais, KDIGO 2024, tableaux CORTICOMED), tous marqués
   **« À vérifier »** : après vérification dans la source, passer `"valide": false` à `true`.
 - **Seuils d'alerte** : `src/config/alerts.json` — remplacer chaque `"TODO"` par un nombre
   (sans guillemets) et indiquer la source. Une alerte avec `TODO` reste désactivée.

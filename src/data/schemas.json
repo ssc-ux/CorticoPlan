@@ -451,38 +451,6 @@
     },
     {
       "pathologie": "Pseudopolyarthrite rhizomélique",
-      "nom": "Départ 15 mg, 10 mg à S8 puis -1 mg toutes les 4 semaines",
-      "texte": "15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
-      "mgKg": false,
-      "statut": "compatible recommandations SFR 2024 — paliers construits par CorticoPlan",
-      "verification": "Résumé PubMed + extrait",
-      "valide": false,
-      "source": {
-        "document": "Recommandations SFR pour la PPR (Wendling et al., Joint Bone Spine 2024) : 12,5-25 mg, 10 mg en 4-8 semaines, puis -1 mg toutes les 4 semaines",
-        "annee": 2024,
-        "version": "2024",
-        "url": "https://doi.org/10.1016/j.jbspin.2024.105730",
-        "page": "Recommandations sur la décroissance"
-      }
-    },
-    {
-      "pathologie": "Pseudopolyarthrite rhizomélique",
-      "nom": "Départ 20 mg, 10 mg à S6 puis -1 mg toutes les 4 semaines",
-      "texte": "20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
-      "mgKg": false,
-      "statut": "compatible recommandations SFR 2024 — paliers construits par CorticoPlan",
-      "verification": "Résumé PubMed + extrait",
-      "valide": false,
-      "source": {
-        "document": "Recommandations SFR pour la PPR (Wendling et al., Joint Bone Spine 2024) : 12,5-25 mg, 10 mg en 4-8 semaines, puis -1 mg toutes les 4 semaines",
-        "annee": 2024,
-        "version": "2024",
-        "url": "https://doi.org/10.1016/j.jbspin.2024.105730",
-        "page": "Recommandations sur la décroissance"
-      }
-    },
-    {
-      "pathologie": "Pseudopolyarthrite rhizomélique",
       "nom": "Essai PMR MODE : 15 mg puis -2,5 mg toutes les 4 semaines (arrêt à S24)",
       "texte": "15 mg 4 sem puis -2,5 mg toutes les 4 semaines jusqu'à l'arrêt",
       "mgKg": false,
@@ -591,6 +559,326 @@
         "version": "Protocole v7.0 (ClinicalTrials.gov NCT03725202)",
         "url": "https://cdn.clinicaltrials.gov/large-docs/02/NCT03725202/Prot_000.pdf",
         "page": "Annexe E, p. 69"
+      }
+    },
+    {
+      "pathologie": "Pseudopolyarthrite rhizomélique",
+      "nom": "Départ 25 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "texte": "25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible recommandations SFR 2024 (tableau CORTICOMED)",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "CORTICOMED, calculateur PPR (d'après la recommandation SFR pour la prise en charge de la PPR, juillet 2024 : 0,2-0,3 mg/kg/j soit 12,5-25 mg ; 10 mg entre 4 et 8 semaines, puis -1 mg/mois jusqu'à l'arrêt)",
+        "annee": 2024,
+        "version": "corticomed.fr (consulté le 3 octobre 2026)",
+        "url": "https://www.corticomed.fr/ppr/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Pseudopolyarthrite rhizomélique",
+      "nom": "Départ 20 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "texte": "20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible recommandations SFR 2024 (tableau CORTICOMED)",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "CORTICOMED, calculateur PPR (d'après la recommandation SFR pour la prise en charge de la PPR, juillet 2024 : 0,2-0,3 mg/kg/j soit 12,5-25 mg ; 10 mg entre 4 et 8 semaines, puis -1 mg/mois jusqu'à l'arrêt)",
+        "annee": 2024,
+        "version": "corticomed.fr (consulté le 3 octobre 2026)",
+        "url": "https://www.corticomed.fr/ppr/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Pseudopolyarthrite rhizomélique",
+      "nom": "Départ 17,5 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "texte": "17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible recommandations SFR 2024 (tableau CORTICOMED)",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "CORTICOMED, calculateur PPR (d'après la recommandation SFR pour la prise en charge de la PPR, juillet 2024 : 0,2-0,3 mg/kg/j soit 12,5-25 mg ; 10 mg entre 4 et 8 semaines, puis -1 mg/mois jusqu'à l'arrêt)",
+        "annee": 2024,
+        "version": "corticomed.fr (consulté le 3 octobre 2026)",
+        "url": "https://www.corticomed.fr/ppr/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Pseudopolyarthrite rhizomélique",
+      "nom": "Départ 15 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "texte": "15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible recommandations SFR 2024 (tableau CORTICOMED)",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "CORTICOMED, calculateur PPR (d'après la recommandation SFR pour la prise en charge de la PPR, juillet 2024 : 0,2-0,3 mg/kg/j soit 12,5-25 mg ; 10 mg entre 4 et 8 semaines, puis -1 mg/mois jusqu'à l'arrêt)",
+        "annee": 2024,
+        "version": "corticomed.fr (consulté le 3 octobre 2026)",
+        "url": "https://www.corticomed.fr/ppr/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Pseudopolyarthrite rhizomélique",
+      "nom": "Départ 12,5 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "texte": "12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 8 mg 2 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
+      "mgKg": false,
+      "statut": "compatible recommandations SFR 2024 (tableau CORTICOMED)",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "CORTICOMED, calculateur PPR (d'après la recommandation SFR pour la prise en charge de la PPR, juillet 2024 : 0,2-0,3 mg/kg/j soit 12,5-25 mg ; 10 mg entre 4 et 8 semaines, puis -1 mg/mois jusqu'à l'arrêt)",
+        "annee": 2024,
+        "version": "corticomed.fr (consulté le 3 octobre 2026)",
+        "url": "https://www.corticomed.fr/ppr/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Dose standard (PEXIVAS), < 50 kg — 5 mg jusqu'à M12",
+      "texte": "50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu ; identique au tableau CORTICOMED",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai PEXIVAS (Walsh et al., Trials 2013), tableau 1, bras « dose standard » — repris par CORTICOMED",
+        "annee": 2013,
+        "version": "Protocole publié",
+        "url": "https://doi.org/10.1186/1745-6215-14-73",
+        "page": "Tableau 1"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Dose standard (PEXIVAS), 50 à 75 kg — 5 mg jusqu'à M12",
+      "texte": "60 mg 2 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu ; identique au tableau CORTICOMED",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai PEXIVAS (Walsh et al., Trials 2013), tableau 1, bras « dose standard » — repris par CORTICOMED",
+        "annee": 2013,
+        "version": "Protocole publié",
+        "url": "https://doi.org/10.1186/1745-6215-14-73",
+        "page": "Tableau 1"
+      }
+    },
+    {
+      "pathologie": "Vascularite à ANCA (GPA, PAM)",
+      "nom": "Dose standard (PEXIVAS), > 75 kg — 5 mg jusqu'à M12",
+      "texte": "75 mg 2 sem puis 60 mg 2 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 4 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu d'un essai",
+      "verification": "Texte intégral du protocole lu ; identique au tableau CORTICOMED",
+      "valide": false,
+      "source": {
+        "document": "Protocole de l'essai PEXIVAS (Walsh et al., Trials 2013), tableau 1, bras « dose standard » — repris par CORTICOMED",
+        "annee": 2013,
+        "version": "Protocole publié",
+        "url": "https://doi.org/10.1186/1745-6215-14-73",
+        "page": "Tableau 1"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, forte dose, 50 kg",
+      "texte": "40 mg 2 sem puis 30 mg 4 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 50 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, forte dose, 60 kg",
+      "texte": "47,5 mg 2 sem puis 35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 60 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, forte dose, 70 kg",
+      "texte": "55 mg 2 sem puis 42,5 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 70 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, forte dose, 80 kg",
+      "texte": "65 mg 2 sem puis 47,5 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 80 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, dose modérée, 50 kg",
+      "texte": "30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 50 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, dose modérée, 60 kg",
+      "texte": "35 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 60 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, dose modérée, 70 kg",
+      "texte": "42,5 mg 2 sem puis 35 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 70 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, dose modérée, 80 kg",
+      "texte": "47,5 mg 2 sem puis 40 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 80 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, dose réduite, 50 kg",
+      "texte": "25 mg 2 sem puis 15 mg 4 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 50 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 2,5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, dose réduite, 60 kg",
+      "texte": "30 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 60 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 2,5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, dose réduite, 70 kg",
+      "texte": "35 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 70 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 2,5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
+      }
+    },
+    {
+      "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
+      "nom": "KDIGO 2024, dose réduite, 80 kg",
+      "texte": "40 mg 2 sem puis 25 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg",
+      "mgKg": false,
+      "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 80 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 2,5 mg à adapter",
+      "verification": "Tableau du calculateur CORTICOMED lu dans le code du site",
+      "valide": false,
+      "source": {
+        "document": "KDIGO 2024, néphrite lupique — trois schémas de prednisone proposés « à titre d'exemple » (repris par CORTICOMED) ; après bolus optionnels de méthylprednisolone",
+        "annee": 2024,
+        "version": "KDIGO 2024 Clinical Practice Guideline for Lupus Nephritis",
+        "url": "https://www.corticomed.fr/kdigo/",
+        "page": "Tableau du calculateur"
       }
     }
   ]
