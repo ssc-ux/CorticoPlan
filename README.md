@@ -1,5 +1,7 @@
 # CorticoPlan
 
+Créé par **Quentin Astouati**.
+
 Rédiger un schéma de décroissance de **prednisone** en quelques secondes :
 tableau daté, texte d'ordonnance à copier, calendrier patient à imprimer.
 

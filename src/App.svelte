@@ -31,6 +31,26 @@
   let debut = $state(partage?.debut && estDateValide(partage.debut) ? partage.debut : aujourdhui());
   let onglet = $state<'ecrire' | 'schemas' | 'comparer'>('ecrire');
   let joursParMois = $state(28);
+
+  // Thème : clair par défaut ; « sombre » ou « comme l'appareil » au choix (mémorisé sur cet appareil).
+  const lireTheme = () => {
+    try {
+      return localStorage.getItem('theme') ?? 'clair';
+    } catch {
+      return 'clair';
+    }
+  };
+  let theme = $state(lireTheme());
+  $effect(() => {
+    const racine = document.documentElement;
+    if (theme === 'auto') delete racine.dataset.theme;
+    else racine.dataset.theme = theme === 'sombre' ? 'dark' : 'light';
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {
+      /* stockage indisponible : réglage non mémorisé */
+    }
+  });
   let schemaChoisi = $state<Schema | null>(null);
   let maladie = $state<string | null>(null); // tuile ouverte dans l'onglet Schémas
   let compares = $state<{ cle: number; teinte: number }[]>([]); // schémas cochés dans « Comparer »
@@ -69,6 +89,15 @@
     return () => window.removeEventListener('hashchange', charger);
   });
 
+  /** Logo : retour à la page d'accueil (champ vidé, adresse sans lien partagé). */
+  function allerAccueil(e: MouseEvent) {
+    e.preventDefault();
+    texte = '';
+    onglet = 'ecrire';
+    history.replaceState(null, '', location.pathname);
+    window.scrollTo({ top: 0 });
+  }
+
   function choisir(s: Schema) {
     texte = s.texte;
     schemaChoisi = s;
@@ -99,7 +128,9 @@
 
 <div class="ecran wrap" class:accueil>
   <header class="top">
-    <h1><img src="./icon.svg" alt="" width="22" height="22" /> CorticoPlan</h1>
+    <h1>
+      <a href="./" class="maison" onclick={allerAccueil}><img src="./icon.svg" alt="" width="22" height="22" /> CorticoPlan</a>
+    </h1>
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected={onglet === 'ecrire'} onclick={() => (onglet = 'ecrire')}>Écrire</button>
       <button role="tab" aria-selected={onglet === 'schemas'} onclick={() => (onglet = 'schemas')}>
@@ -126,7 +157,7 @@
   {:else}
     <main>
       {#if accueil}
-        <p class="logo"><img src="./icon.svg" alt="" width="52" height="52" /> CorticoPlan</p>
+        <p class="logo"><img src="./icon.svg" alt="" width="52" height="52" /> <span>CorticoPlan</span></p>
       {/if}
       <p class="accroche">Écrivez le schéma comme dans un courrier : l'ordonnance se rédige toute seule.</p>
       <Saisie bind:texte {accueil} />
@@ -190,9 +221,18 @@
       Aide à la rédaction : ne remplace pas le jugement médical ; le schéma reste sous la responsabilité du
       prescripteur. Aucune donnée n'est enregistrée ni envoyée. Ne saisissez jamais de nom de patient.
     </p>
+    <p class="createur">Créé par <strong>Quentin Astouati</strong></p>
     <details>
       <summary>Réglages</summary>
       <label>1 mois = <input type="number" min="28" max="31" bind:value={joursParMois} /> jours</label>
+      <label
+        >Affichage
+        <select bind:value={theme}>
+          <option value="clair">clair</option>
+          <option value="sombre">sombre</option>
+          <option value="auto">comme l'appareil</option>
+        </select></label
+      >
     </details>
   </footer>
 </div>
@@ -223,6 +263,13 @@
     margin: 0 0 6px;
     font: 600 1.3rem/1.2 'Plus Jakarta Sans', system-ui, sans-serif;
     letter-spacing: -0.01em;
+  }
+  .maison {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: inherit;
+    text-decoration: none;
   }
   h1 img {
     border-radius: 5px;
@@ -279,6 +326,16 @@
   .accueil .tabs button[aria-selected='true'] {
     display: none;
   }
+  .accueil::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60% 45% at 20% 18%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+      radial-gradient(55% 40% at 85% 30%, color-mix(in srgb, var(--pnds) 13%, transparent), transparent 70%),
+      radial-gradient(50% 40% at 50% 95%, color-mix(in srgb, var(--s2) 9%, transparent), transparent 70%);
+  }
   .accueil main {
     display: flex;
     flex-direction: column;
@@ -295,6 +352,12 @@
     margin: 0 0 18px;
     font: 600 clamp(2.2rem, 9vw, 3.4rem) / 1 'Plus Jakarta Sans', system-ui, sans-serif;
     letter-spacing: -0.03em;
+  }
+  .logo span {
+    background: linear-gradient(90deg, var(--accent), var(--pnds));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
   .logo img {
     width: clamp(40px, 10vw, 52px);
@@ -395,6 +458,23 @@
     margin-top: 2rem;
     font-size: 0.85rem;
     color: var(--muted);
+  }
+  .createur {
+    margin: 0.4rem 0 0.6rem;
+  }
+  footer details label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  footer select {
+    min-height: 34px;
+    padding: 0.2rem 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--card);
+    color: var(--fg);
   }
   footer input {
     width: 4.5rem;

@@ -67,8 +67,8 @@
     {/each}
   {:else}
     <div class="tuiles">
-      {#each PATHOLOGIES as p}
-        <button type="button" class="tuile" onclick={() => (pathologie = p)}>
+      {#each PATHOLOGIES as p, i}
+        <button type="button" class="tuile" style={`--t: var(--s${(i % 8) + 1})`} onclick={() => (pathologie = p)}>
           <span class="nom">{p}</span>
           <span class="n"
             >{nombre(p)} schéma{nombre(p) > 1 ? 's' : ''}{#if pndsDe(p)}<span class="pn"> · {pndsDe(p)} PNDS</span>{/if}</span
@@ -108,21 +108,25 @@
     gap: 8px;
     min-height: 92px;
     padding: 12px 14px;
-    border: 1px solid var(--line);
+    border: 1px solid color-mix(in srgb, var(--t) 30%, var(--line));
+    border-top: 4px solid var(--t);
     border-radius: 12px;
-    background: var(--card);
+    background: color-mix(in srgb, var(--t) 9%, var(--card));
     color: var(--fg);
     text-align: left;
     cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
   }
   .tuile:hover,
   .tuile:focus-visible {
-    border-color: var(--accent);
-    background: var(--c1s);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--t) 25%, transparent);
   }
   .tuile .nom {
+    font-size: 0.95rem;
     font-weight: 600;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
     hyphens: auto;
     line-height: 1.3;
   }
