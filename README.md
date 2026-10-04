@@ -47,7 +47,7 @@ Le site se met à jour tout seul en 1 à 2 minutes si les tests passent.
 
 - **Schémas proposés** : `src/data/schemas.json` — copier un bloc existant, modifier
   `pathologie`, `nom`, `texte` (écrit comme dans le champ libre), `statut` et `source`.
-  86 schémas sont proposés (PNDS HAS, recommandations KDIGO/ACR/EULAR/SFR et
+  90 schémas sont proposés (PNDS HAS, recommandations KDIGO, ACR, EULAR (dont EULAR/PReS 2024 pour la maladie de Still), SFR et
   protocoles d'essais publiés sur ClinicalTrials.gov : ADVOCATE, AURORA, BLISS-LN, MANDARA, PEXIVAS,
   SELECT-GCA), chacun avec sa source (document, page,
   lien), tous marqués
