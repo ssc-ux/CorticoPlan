@@ -303,6 +303,33 @@
     margin: 8px 0 10px;
     color: var(--muted);
   }
+  /* Grand écran : graphique à gauche, liste à cocher à droite, tableau dessous. */
+  @media (min-width: 1100px) {
+    .carte {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 0 24px;
+      align-items: start;
+    }
+    .carte > figure,
+    .carte > .vide {
+      grid-column: 1;
+      grid-row: 1;
+      position: sticky;
+      top: 70px;
+    }
+    .carte > .choix {
+      grid-column: 2;
+      grid-row: 1;
+      margin-top: 0;
+      max-height: 72vh;
+      overflow-y: auto;
+    }
+    .carte > .defile,
+    .carte > .note {
+      grid-column: 1 / -1;
+    }
+  }
   .retour {
     margin-top: 12px;
     padding: 6px 0;

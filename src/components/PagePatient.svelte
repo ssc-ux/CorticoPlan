@@ -7,20 +7,19 @@
   import { versIcs } from '../lib/agenda';
   import { aujourdhui, dateFr, ecartJours } from '../lib/dates';
   import { formatDose } from '../lib/format';
-  import { analyser } from '../lib/parser';
   import { calendrier } from '../lib/schedule';
+  import type { Palier } from '../lib/types';
 
-  let { texte, debut }: { texte: string; debut: string } = $props();
+  let { paliers, debut }: { paliers: Palier[]; debut: string } = $props();
 
-  const resultat = $derived(analyser(texte));
-  const lignes = $derived(resultat.ok ? calendrier(resultat.paliers, debut) : []);
+  const lignes = $derived(calendrier(paliers, debut));
   const jour = aujourdhui();
   const actuelle = $derived(lignes.find((l) => l.debut <= jour && (l.fin === null || jour <= l.fin)));
   const prochaine = $derived(lignes.find((l) => l.debut > jour));
   let heure = $state('08:00');
 
   function agenda() {
-    const ics = versIcs(resultat.paliers, debut, heure);
+    const ics = versIcs(paliers, debut, heure);
     const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
     const a = Object.assign(document.createElement('a'), { href: url, download: 'prednisone.ics' });
     document.body.append(a);

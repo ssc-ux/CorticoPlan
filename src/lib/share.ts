@@ -2,6 +2,8 @@
  * Partage par lien : le schéma est encodé dans l'adresse après « # ».
  * Ce qui suit « # » n'est jamais envoyé au serveur (ni journalisé).
  */
+import type { Palier } from './types';
+
 export interface Partage {
   texte: string;
   debut?: string;
@@ -36,4 +38,29 @@ export function decoderPartage(hash: string, cle: 's' | 'a' = 's'): Partage | nu
   } catch {
     return null;
   }
+}
+
+/**
+ * Format compact du QR code patient (moins de caractères = QR moins dense,
+ * plus facile à scanner) : « 20261004~40*28_30*14_20/0*14_5* ».
+ * Chaque palier : dose (ou « a/b » un jour sur deux) « * » jours (vide = à poursuivre).
+ */
+export function encoderPaliers(paliers: Palier[], debut: string): string {
+  const p = paliers.map((x) => `${typeof x.dose === 'number' ? x.dose : x.dose.join('/')}*${x.jours ?? ''}`).join('_');
+  return `p=${debut.replaceAll('-', '')}~${p}`;
+}
+
+export function decoderPaliers(hash: string): { paliers: Palier[]; debut: string } | null {
+  const m = /(?:^#?|&)p=(\d{8})~([\d.*_/]+)/.exec(hash);
+  if (!m) return null;
+  const debut = `${m[1]!.slice(0, 4)}-${m[1]!.slice(4, 6)}-${m[1]!.slice(6)}`;
+  const paliers: Palier[] = [];
+  for (const morceau of m[2]!.split('_').slice(0, 200)) {
+    const [d, j] = morceau.split('*');
+    const doses = (d ?? '').split('/').map(Number);
+    const jours = j ? Number(j) : null;
+    if (doses.some((x) => !Number.isFinite(x) || x < 0 || x > 1000) || (jours !== null && !(jours > 0 && jours < 5000))) return null;
+    paliers.push({ dose: doses.length === 2 ? [doses[0]!, doses[1]!] : doses[0]!, jours });
+  }
+  return paliers.length ? { paliers, debut } : null;
 }

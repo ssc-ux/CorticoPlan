@@ -23,11 +23,17 @@
   import { calendrier } from './lib/schedule';
   import { SCHEMAS, type Schema } from './lib/schemas';
   import { EXEMPLES } from './lib/exemples';
-  import { decoderPartage, encoderPartage } from './lib/share';
+  import { decoderPaliers, decoderPartage, encoderPaliers, encoderPartage } from './lib/share';
   import type { Palier } from './lib/types';
 
-  // Page patient ouverte par le QR code du calendrier (#a=…).
-  const patient = decoderPartage(location.hash, 'a');
+  // Page patient ouverte par le QR code du calendrier (#p=… compact ; #a=… ancien format).
+  const patient = (() => {
+    const p = decoderPaliers(location.hash);
+    if (p) return p;
+    const a = decoderPartage(location.hash, 'a');
+    const r = a && analyser(a.texte);
+    return a && r?.ok ? { paliers: r.paliers, debut: a.debut && estDateValide(a.debut) ? a.debut : aujourdhui() } : null;
+  })();
   // Schéma reçu par un lien partagé (#s=…), sinon page vide.
   const partage = decoderPartage(location.hash);
   let texte = $state(partage?.texte ?? '');
@@ -67,7 +73,7 @@
   const texteOrdonnance = $derived(ordonnance(lignes));
   const listeAlertes = $derived(alertes(lignes));
   /** Lien du QR code imprimé : page patient (dose du jour, rappels agenda). */
-  const lienPatient = $derived(`${location.origin}${location.pathname}#${encoderPartage({ texte, debut }, 'a')}`);
+  const lienPatient = $derived(`${location.origin}${location.pathname}#${encoderPaliers(resultat.paliers, debut)}`);
 
   // Indication du schéma choisi : effacée avec le texte, « modifié » si le texte change.
   $effect(() => {
@@ -133,9 +139,9 @@
 </script>
 
 {#if patient}
-  <PagePatient texte={patient.texte} debut={patient.debut && estDateValide(patient.debut) ? patient.debut : aujourdhui()} />
+  <PagePatient paliers={patient.paliers} debut={patient.debut} />
 {:else}
-<div class="ecran wrap" class:accueil>
+<div class="ecran wrap" class:accueil class:large={!accueil && (onglet !== 'ecrire' || pret)}>
   <header class="top">
     <h1>
       <a href="./" class="maison" onclick={allerAccueil}><img src="./icon.svg" alt="" width="22" height="22" /> CorticoPlan</a>
@@ -164,7 +170,8 @@
       }}
     />
   {:else}
-    <main>
+    <main class:deux={pret}>
+      <div class="col gauche">
       {#if accueil}
         <p class="logo"><img src="./icon.svg" alt="" width="52" height="52" /> <span>CorticoPlan</span></p>
       {/if}
@@ -197,12 +204,7 @@
       <Resultat {texte} {resultat} onappliquer={(t) => (texte = t)} />
 
       {#if pret}
-        <section class="carte">
-          <h2>Ordonnance</h2>
-          <Ordonnance texte={texteOrdonnance} />
-        </section>
-
-        <section class="carte">
+        <section class="carte o-tableau">
           <h2>Tableau <span class="aide">· touchez une ligne pour la modifier</span></h2>
           <Tableau {lignes} onchange={modifier} />
           {#if listeAlertes.length}
@@ -211,15 +213,24 @@
             </ul>
           {/if}
         </section>
+      {/if}
+      </div>
 
-        <section class="carte">
-          <h2>Courbe</h2>
-          <Courbe paliers={resultat.paliers} {debut} />
-        </section>
-
-        <div class="actions">
-          <button type="button" class="lien-action" onclick={() => window.print()}>Imprimer le calendrier patient</button>
-          <button type="button" class="lien-action" onclick={partager}>{lienCopie ? '✓ Lien copié' : 'Partager ce schéma'}</button>
+      {#if pret}
+        <!-- Grand écran : colonne de droite qui reste visible ; téléphone : ordonnance juste sous le champ. -->
+        <div class="col droite">
+          <section class="carte o-ordonnance">
+            <h2>Ordonnance</h2>
+            <Ordonnance texte={texteOrdonnance} />
+          </section>
+          <div class="actions o-actions">
+            <button type="button" class="lien-action" onclick={() => window.print()}>Imprimer le calendrier patient</button>
+            <button type="button" class="lien-action" onclick={partager}>{lienCopie ? '✓ Lien copié' : 'Partager ce schéma'}</button>
+          </div>
+          <section class="carte o-courbe">
+            <h2>Courbe</h2>
+            <Courbe paliers={resultat.paliers} {debut} />
+          </section>
         </div>
       {/if}
     </main>
@@ -256,6 +267,62 @@
     max-width: 780px;
     margin: 0 auto;
     padding: 0 16px 48px;
+  }
+  /* Téléphone : une seule colonne, l'ordonnance juste sous le champ. */
+  main.deux {
+    display: flex;
+    flex-direction: column;
+  }
+  main.deux .col {
+    display: contents;
+  }
+  .o-ordonnance {
+    order: 1;
+  }
+  .o-actions {
+    order: 2;
+  }
+  .o-tableau {
+    order: 3;
+  }
+  .o-courbe {
+    order: 4;
+  }
+  /* Grand écran : plus large, deux colonnes ; à droite ordonnance + courbe restent visibles. */
+  @media (min-width: 1100px) {
+    .wrap.large {
+      max-width: 1240px;
+    }
+    main.deux {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0 28px;
+      align-items: start;
+    }
+    main.deux .col {
+      display: block;
+    }
+    main.deux .droite {
+      position: sticky;
+      top: 64px;
+      max-height: calc(100vh - 72px);
+      overflow-y: auto;
+      padding-top: 12px;
+    }
+  }
+  @media (min-width: 760px) {
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding-top: 6px;
+    }
+    .top h1 {
+      margin: 0;
+    }
+    .accueil .tabs {
+      margin-left: auto;
+    }
   }
   .top {
     position: sticky;

@@ -70,12 +70,13 @@
 
     <!-- Tant qu'il reste une erreur ou une question, un déroulé partiel serait trompeur : on ne l'affiche pas. -->
     {#if resultat.reformulation.length && !erreurs.length}
-      <div class="bloc compris">
-        <p class="titre">Compris</p>
+      <!-- Au-delà de 3 paliers, le détail est replié (il est aussi dans le tableau et l'ordonnance). -->
+      <details class="bloc compris" open={resultat.reformulation.length <= 3}>
+        <summary class="titre">✓ Compris{resultat.reformulation.length > 3 ? ` : ${resultat.reformulation.length} paliers (afficher le détail)` : ''}</summary>
         <ol>
           {#each resultat.reformulation as ligne}<li>{ligne}</li>{/each}
         </ol>
-      </div>
+      </details>
     {/if}
 
     {#each avertissements as a}
@@ -146,6 +147,17 @@
   }
   .compris {
     background: var(--accent-doux);
+  }
+  .compris summary {
+    margin: 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  .compris summary::-webkit-details-marker {
+    display: none;
+  }
+  .compris[open] summary {
+    margin-bottom: 0.3rem;
   }
   ol,
   ul {

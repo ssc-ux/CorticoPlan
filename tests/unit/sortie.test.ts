@@ -102,3 +102,14 @@ describe('exemples du champ de saisie', () => {
     }
   });
 });
+
+describe('QR code patient (format compact)', () => {
+  it('aller-retour', async () => {
+    const { encoderPaliers, decoderPaliers } = await import('../../src/lib/share');
+    const paliers = analyser('40 mg 3 sem puis 17,5 mg 2 sem puis 20 mg 1 j/2 pendant 14 j puis 5 mg').paliers;
+    const h = encoderPaliers(paliers, '2026-10-04');
+    expect(h).toBe('p=20261004~40*21_17.5*14_20/0*14_5*');
+    expect(decoderPaliers('#' + h)).toEqual({ paliers, debut: '2026-10-04' });
+    expect(decoderPaliers('#p=20261004~abc')).toBeNull();
+  });
+});
