@@ -6,7 +6,7 @@
   import { onDestroy } from 'svelte';
   import { EXEMPLES } from '../lib/exemples';
 
-  let { texte = $bindable() }: { texte: string } = $props();
+  let { texte = $bindable(), accueil = false }: { texte: string; accueil?: boolean } = $props();
 
   let focus = $state(false);
   let index = $state(0);
@@ -25,7 +25,7 @@
   const afficherExemple = $derived(texte.length === 0 && !focus);
 </script>
 
-<div class="champ">
+<div class="champ" class:accueil>
   <label for="saisie" class="visuellement-cache">Schéma de décroissance, écrit comme dans un courrier</label>
   <textarea
     id="saisie"
@@ -65,6 +65,21 @@
     outline: 2px solid var(--accent);
     outline-offset: -1px;
   }
+  /* Accueil : champ arrondi et ombré, comme une barre de recherche. */
+  .accueil textarea {
+    min-height: 6rem;
+    padding: 0.9rem 2.8rem 0.9rem 1.25rem;
+    border-radius: 24px;
+    box-shadow: 0 1px 6px rgb(32 33 36 / 0.12);
+    transition: box-shadow 0.2s;
+  }
+  .accueil textarea:hover,
+  .accueil textarea:focus {
+    box-shadow: 0 2px 10px rgb(32 33 36 / 0.22);
+  }
+  .accueil .exemple {
+    inset: 0.9rem 2.8rem auto 1.25rem;
+  }
   .exemple {
     position: absolute;
     inset: 0.85rem 2.6rem auto 0.9rem;
@@ -97,7 +112,22 @@
     color: var(--texte);
   }
   @media (prefers-reduced-motion: reduce) {
-    .exemple {
+    /* Accueil : champ arrondi et ombré, comme une barre de recherche. */
+  .accueil textarea {
+    min-height: 6rem;
+    padding: 0.9rem 2.8rem 0.9rem 1.25rem;
+    border-radius: 24px;
+    box-shadow: 0 1px 6px rgb(32 33 36 / 0.12);
+    transition: box-shadow 0.2s;
+  }
+  .accueil textarea:hover,
+  .accueil textarea:focus {
+    box-shadow: 0 2px 10px rgb(32 33 36 / 0.22);
+  }
+  .accueil .exemple {
+    inset: 0.9rem 2.8rem auto 1.25rem;
+  }
+  .exemple {
       transition: none;
     }
   }

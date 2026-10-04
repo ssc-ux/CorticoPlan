@@ -21,6 +21,7 @@
   import { ordonnance } from './lib/prescription';
   import { calendrier } from './lib/schedule';
   import { SCHEMAS, type Schema } from './lib/schemas';
+  import { EXEMPLES } from './lib/exemples';
   import { decoderPartage, encoderPartage } from './lib/share';
   import type { Palier } from './lib/types';
 
@@ -51,6 +52,8 @@
     const n = schemaChoisi?.statut.split(' — ').slice(1).join(' — ') ?? '';
     return n && n[0]!.toUpperCase() + n.slice(1);
   });
+  /** Page d'accueil épurée (style moteur de recherche) tant que le champ est vide. */
+  const accueil = $derived(onglet === 'ecrire' && !texte.trim());
   const schemaModifie = $derived(schemaChoisi !== null && texte !== schemaChoisi.texte);
 
   // Lien partagé ouvert alors que le site est déjà affiché : on le charge aussi.
@@ -94,7 +97,7 @@
   }
 </script>
 
-<div class="ecran wrap">
+<div class="ecran wrap" class:accueil>
   <header class="top">
     <h1><img src="./icon.svg" alt="" width="22" height="22" /> CorticoPlan</h1>
     <div class="tabs" role="tablist">
@@ -122,9 +125,16 @@
     />
   {:else}
     <main>
+      {#if accueil}
+        <p class="logo"><img src="./icon.svg" alt="" width="52" height="52" /> CorticoPlan</p>
+      {/if}
       <p class="accroche">Écrivez le schéma comme dans un courrier : l'ordonnance se rédige toute seule.</p>
-      <Saisie bind:texte />
-      {#if !texte}
+      <Saisie bind:texte {accueil} />
+      {#if accueil}
+        <div class="boutons">
+          <button type="button" onclick={() => (texte = EXEMPLES[Math.floor(Math.random() * EXEMPLES.length)]!)}>Essayer un exemple</button>
+          <button type="button" onclick={() => (onglet = 'schemas')}>Parcourir les schémas</button>
+        </div>
         <p class="discret dictee">🎙 Astuce : dictez le schéma avec la dictée vocale de votre téléphone, collez-le ici, et c'est prêt.</p>
       {/if}
       {#if schemaChoisi}
@@ -137,10 +147,12 @@
         </p>
       {/if}
 
-      <label class="date">
-        Début le
-        <input type="date" bind:value={debut} required />
-      </label>
+      {#if !accueil}
+        <label class="date">
+          Début le
+          <input type="date" bind:value={debut} required />
+        </label>
+      {/if}
 
       <Resultat {texte} {resultat} onappliquer={(t) => (texte = t)} />
 
@@ -247,6 +259,79 @@
   .source {
     margin: 0.4rem 0 0;
     line-height: 1.45;
+  }
+  /* Accueil : logo au centre, champ arrondi, onglets discrets en haut à droite. */
+  .accueil .top {
+    position: static;
+    border-bottom: 0;
+    background: none;
+  }
+  .accueil .top h1 {
+    display: none;
+  }
+  .accueil .tabs {
+    justify-content: flex-end;
+    gap: 16px;
+  }
+  .accueil .tabs button {
+    font-size: 0.9rem;
+  }
+  .accueil .tabs button[aria-selected='true'] {
+    display: none;
+  }
+  .accueil main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 68vh;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 0 18px;
+    font: 600 clamp(2.2rem, 9vw, 3.4rem) / 1 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.03em;
+  }
+  .logo img {
+    width: clamp(40px, 10vw, 52px);
+    height: auto;
+    border-radius: 12px;
+  }
+  .accueil .accroche {
+    margin: 0 0 16px;
+    text-align: center;
+  }
+  .boutons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .boutons button {
+    min-height: 40px;
+    padding: 0 18px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--fg);
+    font-size: 0.92rem;
+    cursor: pointer;
+  }
+  .boutons button:hover {
+    border-color: var(--line);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+  }
+  .accueil .dictee {
+    margin-top: 18px;
+    text-align: center;
+  }
+  .accueil footer {
+    text-align: center;
   }
   .dictee {
     margin: 0.4rem 0 0;
