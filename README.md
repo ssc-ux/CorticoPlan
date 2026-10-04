@@ -47,9 +47,9 @@ Le site se met à jour tout seul en 1 à 2 minutes si les tests passent.
 
 - **Schémas proposés** : `src/data/schemas.json` — copier un bloc existant, modifier
   `pathologie`, `nom`, `texte` (écrit comme dans le champ libre), `statut` et `source`.
-  106 schémas sont proposés (PNDS HAS, recommandations KDIGO/ACR/EULAR, tableaux CORTICOMED et
-  protocoles d'essais publiés sur ClinicalTrials.gov : ADVOCATE, AURORA, BLISS-LN, MANDARA, MITIGATE,
-  RITAZAREM, SAPHYR, SELECT-GCA, TitAIN, mavrilimumab-ACG), chacun avec sa source (document, page,
+  88 schémas sont proposés (PNDS HAS, recommandations KDIGO/ACR/EULAR, tableaux CORTICOMED et
+  protocoles d'essais publiés sur ClinicalTrials.gov : ADVOCATE, AURORA, BLISS-LN, MANDARA, PEXIVAS,
+  SELECT-GCA), chacun avec sa source (document, page,
   lien), tous marqués
   **« À vérifier »** : après vérification dans la source, passer `"valide": false` à `true`.
 - **Seuils d'alerte** : `src/config/alerts.json` — remplacer chaque `"TODO"` par un nombre
