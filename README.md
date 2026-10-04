@@ -42,6 +42,14 @@ Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
 diminution a lieu dès le premier jour du bloc. Non pris en charge (signalé) :
 doses en mg/kg, en comprimés, fourchettes (« 3-4 semaines »), alternance entre deux doses.
 
+### Pour le patient
+
+Le calendrier imprimé (une case à cocher par jour) surligne les **jours de changement de dose** et
+résume les étapes en haut de page. Son **QR code** ouvre sur le téléphone du patient une page avec la
+dose du jour et le prochain changement, et un bouton « Ajouter à mon agenda » : **un rappel le jour de
+chaque changement de dose** (et le jour de l'arrêt), à l'heure choisie. Le schéma est dans le QR code
+lui-même (après « # ») : rien n'est envoyé ni enregistré, aucun nom n'y figure.
+
 ### Comparer des schémas
 
 Onglet **Comparer** : toucher la tuile d'une maladie affiche tous ses schémas sur un même

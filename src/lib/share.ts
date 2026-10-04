@@ -20,13 +20,14 @@ function depuisBase64Url(s: string): string {
   return new TextDecoder().decode(Uint8Array.from(binaire, (c) => c.charCodeAt(0)));
 }
 
-export function encoderPartage(p: Partage): string {
-  return 's=' + versBase64Url(JSON.stringify({ t: p.texte, d: p.debut }));
+/** « s » : lien de partage entre médecins ; « a » : page patient (agenda), ouverte par le QR code. */
+export function encoderPartage(p: Partage, cle: 's' | 'a' = 's'): string {
+  return cle + '=' + versBase64Url(JSON.stringify({ t: p.texte, d: p.debut }));
 }
 
-/** Lit « #s=… » ; renvoie `null` si absent ou illisible. */
-export function decoderPartage(hash: string): Partage | null {
-  const m = /(?:^#?|&)s=([A-Za-z0-9_-]+)/.exec(hash);
+/** Lit « #s=… » (ou « #a=… ») ; renvoie `null` si absent ou illisible. */
+export function decoderPartage(hash: string, cle: 's' | 'a' = 's'): Partage | null {
+  const m = new RegExp(`(?:^#?|&)${cle}=([A-Za-z0-9_-]+)`).exec(hash);
   if (!m) return null;
   try {
     const o = JSON.parse(depuisBase64Url(m[1]!));

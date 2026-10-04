@@ -8,6 +8,7 @@
    */
   import CalendrierPatient from './components/CalendrierPatient.svelte';
   import ChoixSchema from './components/ChoixSchema.svelte';
+  import PagePatient from './components/PagePatient.svelte';
   import Comparateur from './components/Comparateur.svelte';
   import Courbe from './components/Courbe.svelte';
   import Ordonnance from './components/Ordonnance.svelte';
@@ -25,6 +26,8 @@
   import { decoderPartage, encoderPartage } from './lib/share';
   import type { Palier } from './lib/types';
 
+  // Page patient ouverte par le QR code du calendrier (#a=…).
+  const patient = decoderPartage(location.hash, 'a');
   // Schéma reçu par un lien partagé (#s=…), sinon page vide.
   const partage = decoderPartage(location.hash);
   let texte = $state(partage?.texte ?? '');
@@ -63,6 +66,8 @@
   const lignes = $derived(pret ? calendrier(resultat.paliers, debut) : []);
   const texteOrdonnance = $derived(ordonnance(lignes));
   const listeAlertes = $derived(alertes(lignes));
+  /** Lien du QR code imprimé : page patient (dose du jour, rappels agenda). */
+  const lienPatient = $derived(`${location.origin}${location.pathname}#${encoderPartage({ texte, debut }, 'a')}`);
 
   // Indication du schéma choisi : effacée avec le texte, « modifié » si le texte change.
   $effect(() => {
@@ -127,6 +132,9 @@
   }
 </script>
 
+{#if patient}
+  <PagePatient texte={patient.texte} debut={patient.debut && estDateValide(patient.debut) ? patient.debut : aujourdhui()} />
+{:else}
 <div class="ecran wrap" class:accueil>
   <header class="top">
     <h1>
@@ -239,7 +247,8 @@
 </div>
 
 {#if pret}
-  <CalendrierPatient paliers={resultat.paliers} {debut} ordonnance={texteOrdonnance} />
+  <CalendrierPatient paliers={resultat.paliers} {debut} ordonnance={texteOrdonnance} lienPatient={lienPatient} />
+{/if}
 {/if}
 
 <style>

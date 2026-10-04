@@ -2,35 +2,43 @@
   /**
    * Calendrier patient imprimable (1 page A4) : une case à cocher par jour.
    * N'apparaît qu'à l'impression. Aucune donnée n'est enregistrée : le nom
-   * s'écrit à la main sur le papier.
+   * s'écrit à la main sur le papier. Les jours de changement de dose sont
+   * surlignés ; le QR code ouvre la page patient (rappels dans l'agenda).
    */
+  import { renderSVG } from 'uqr';
   import { ajouterJours, dateCourte, dateFr, jourSemaine } from '../lib/dates';
   import { nombreFr } from '../lib/parser/normalize';
-  import { doseDuJour } from '../lib/schedule';
+  import { formatDose } from '../lib/format';
+  import { calendrier, doseDuJour } from '../lib/schedule';
   import type { Palier } from '../lib/types';
 
-  let { paliers, debut, ordonnance }: { paliers: Palier[]; debut: string; ordonnance: string } = $props();
+  let { paliers, debut, ordonnance, lienPatient }: { paliers: Palier[]; debut: string; ordonnance: string; lienPatient: string } =
+    $props();
 
-  const SEMAINES_MAX = 26; // au-delà, la page A4 déborde
+  const SEMAINES_MAX = 22; // au-delà, la page A4 déborde
+  const qr = $derived(renderSVG(lienPatient, { border: 1 }));
+  const etapes = $derived(calendrier(paliers, debut));
   const JOURS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
   interface Case {
     date: string;
     dose: number | null; // null = hors traitement
     arret?: boolean;
+    /** Premier jour d'une nouvelle dose (surligné). */
+    change?: boolean;
   }
 
   const calcul = $derived.by(() => {
     const parJour: Case[] = [];
     let jour = debut;
-    for (const p of paliers) {
+    for (const [i, p] of paliers.entries()) {
       if (p.dose === 0) {
         parJour.push({ date: jour, dose: null, arret: true });
         break;
       }
       const n = p.jours ?? 28; // « à poursuivre » : 4 semaines affichées
       for (let k = 0; k < n; k++) {
-        parJour.push({ date: jour, dose: doseDuJour(p.dose, k) });
+        parJour.push({ date: jour, dose: doseDuJour(p.dose, k), change: i > 0 && k === 0 });
         jour = ajouterJours(jour, 1);
       }
     }
@@ -46,16 +54,29 @@
 </script>
 
 <section class="impression">
-  <h1>Mon traitement par prednisone</h1>
-  <p class="consigne">À prendre <strong>le matin</strong>, en une prise. Cochez la case chaque jour après la prise.</p>
-  <p class="nom">Nom : ______________________________ &nbsp; Début : {dateFr(debut)}</p>
+  <div class="entete">
+    <div>
+      <h1>Mon traitement par prednisone</h1>
+      <p class="consigne">À prendre <strong>le matin</strong>, en une prise. Cochez la case chaque jour après la prise.</p>
+      <p class="nom">Nom : ______________________________ &nbsp; Début : {dateFr(debut)}</p>
+      <p class="etapes">
+        {#each etapes as e, i}{#if i}<span class="fleche"> → </span>{/if}<span class="etape"
+            ><b>{dateCourte(e.debut)}</b> {e.dose === 0 ? 'arrêt' : formatDose(e.dose).replace('/j', '')}</span
+          >{/each}
+      </p>
+    </div>
+    <figure class="qr">
+      {@html qr}
+      <figcaption>Scannez avec le téléphone : dose du jour et rappel dans l'agenda à chaque changement</figcaption>
+    </figure>
+  </div>
   <table>
     <thead><tr>{#each JOURS as j}<th>{j}</th>{/each}</tr></thead>
     <tbody>
       {#each calcul.semaines as semaine}
         <tr>
           {#each semaine as c}
-            <td class:vide={!c}>
+            <td class:vide={!c} class:change={c?.change || c?.arret}>
               {#if c}
                 <span class="haut">
                   <span class="date">{dateCourte(c.date)}</span>
@@ -67,6 +88,7 @@
                   <span class="dose sans">pas de prise</span>
                 {:else}
                   <span class="dose">{nombreFr(c.dose!)} mg</span>
+                  {#if c.change}<span class="nouveau">nouvelle dose</span>{/if}
                 {/if}
               {/if}
             </td>
@@ -82,6 +104,49 @@
 </section>
 
 <style>
+  .entete {
+    display: flex;
+    justify-content: space-between;
+    gap: 4mm;
+  }
+  .qr {
+    flex: none;
+    width: 30mm;
+    margin: 0;
+    text-align: center;
+  }
+  .qr :global(svg) {
+    width: 26mm;
+    height: 26mm;
+  }
+  .qr figcaption {
+    font-size: 6.5pt;
+    line-height: 1.2;
+  }
+  .etapes {
+    margin: 0 0 2mm;
+    font-size: 8.5pt;
+    line-height: 1.5;
+  }
+  .etape {
+    white-space: nowrap;
+  }
+  .fleche {
+    color: #888;
+  }
+  /* Jour de changement de dose : bien visible, même imprimé en noir et blanc. */
+  td.change {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #fff1b8;
+    border: 0.8mm solid #000;
+  }
+  .nouveau {
+    display: block;
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
   .impression h1 {
     font-size: 16pt;
     margin: 0 0 2mm;
