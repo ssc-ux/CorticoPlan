@@ -30,6 +30,7 @@
   let onglet = $state<'ecrire' | 'schemas'>('ecrire');
   let joursParMois = $state(28);
   let schemaChoisi = $state<Schema | null>(null);
+  let maladie = $state<string | null>(null); // tuile ouverte dans l'onglet Schémas
   let lienCopie = $state(false);
 
   const resultat = $derived(analyser(texte, { joursParMois }));
@@ -103,7 +104,7 @@
   </header>
 
   {#if onglet === 'schemas'}
-    <ChoixSchema onchoix={choisir} />
+    <ChoixSchema onchoix={choisir} bind:pathologie={maladie} />
   {:else}
     <main>
       <p class="accroche">Écrivez le schéma comme dans un courrier : l'ordonnance se rédige toute seule.</p>
