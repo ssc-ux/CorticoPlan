@@ -113,7 +113,7 @@
         <p class="discret dictee">🎙 Astuce : dictez le schéma avec la dictée vocale de votre téléphone, collez-le ici, et c'est prêt.</p>
       {/if}
       {#if schemaChoisi}
-        <p class="discret source">
+        <p class="discret source" class:pnds={/PNDS/.test(schemaChoisi.statut + schemaChoisi.source.document) && !schemaChoisi.statut.startsWith("issu d'un essai")}>
           {schemaModifie ? 'Modifié à partir de' : 'Schéma'} : {schemaChoisi.nom} —
           <strong>{schemaChoisi.valide ? 'vérifié' : 'à vérifier'}</strong><br />
           Source : <a href={schemaChoisi.source.url} target="_blank" rel="noopener">{schemaChoisi.source.document}</a>{schemaChoisi.source.page ? `, ${schemaChoisi.source.page}` : ''}
@@ -239,6 +239,12 @@
   }
   .source a {
     color: var(--accent);
+  }
+  .source.pnds {
+    padding: 8px 10px;
+    border-left: 4px solid var(--pnds);
+    border-radius: 6px;
+    background: var(--pnds-fond);
   }
   .date {
     display: flex;

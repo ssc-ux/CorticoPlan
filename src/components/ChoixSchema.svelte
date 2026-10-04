@@ -14,6 +14,7 @@
   const estPnds = (s: Schema) => !estEssai(s) && /PNDS/.test(s.statut + s.source.document);
   const rang = (s: Schema) => (estPnds(s) ? 0 : estEssai(s) ? 2 : 1);
   const nombre = (p: string) => SCHEMAS.filter((s) => s.pathologie === p).length;
+  const pndsDe = (p: string) => SCHEMAS.filter((s) => s.pathologie === p && estPnds(s)).length;
 
   const trouves = $derived(
     recherche.trim()
@@ -27,7 +28,7 @@
     const liste = SCHEMAS.filter((s) => s.pathologie === pathologie);
     return [
       // Les PNDS toujours en tête de liste.
-      { titre: 'PNDS (HAS)', schemas: liste.filter(estPnds) },
+      { titre: 'PNDS (HAS)', schemas: liste.filter(estPnds), pnds: true },
       { titre: 'Recommandations', schemas: liste.filter((s) => !estEssai(s) && !estPnds(s)) },
       { titre: 'Essais cliniques', schemas: liste.filter(estEssai) },
     ].filter((g) => g.schemas.length);
@@ -35,8 +36,10 @@
 </script>
 
 {#snippet carte(s: Schema, avecMaladie: boolean)}
-  <div class="card">
-    <button type="button" class="t" onclick={() => onchoix(s)}>{s.nom}</button>
+  <div class="card" class:pnds={estPnds(s)}>
+    <button type="button" class="t" onclick={() => onchoix(s)}
+      >{#if estPnds(s)}<span class="badge">PNDS</span>{/if}{s.nom}</button
+    >
     <span class="m">
       {#if avecMaladie}<span>{s.pathologie}</span>{/if}
       <span class:av={!s.valide}>{s.valide ? '✓ vérifié' : 'à vérifier'}</span>
@@ -59,7 +62,7 @@
     <button type="button" class="retour" onclick={() => (pathologie = null)}>← Toutes les maladies</button>
     <h2 class="maladie">{pathologie}</h2>
     {#each groupes as g}
-      <h3>{g.titre} <span class="n">{g.schemas.length}</span></h3>
+      <h3 class:pnds={g.pnds}>{g.titre} <span class="n">{g.schemas.length}</span></h3>
       {#each g.schemas as s}{@render carte(s, false)}{/each}
     {/each}
   {:else}
@@ -67,7 +70,9 @@
       {#each PATHOLOGIES as p}
         <button type="button" class="tuile" onclick={() => (pathologie = p)}>
           <span class="nom">{p}</span>
-          <span class="n">{nombre(p)} schéma{nombre(p) > 1 ? 's' : ''}</span>
+          <span class="n"
+            >{nombre(p)} schéma{nombre(p) > 1 ? 's' : ''}{#if pndsDe(p)}<span class="pn"> · {pndsDe(p)} PNDS</span>{/if}</span
+          >
         </button>
       {/each}
     </div>
@@ -126,6 +131,10 @@
     font-size: 0.82rem;
     font-weight: 500;
   }
+  .pn {
+    color: var(--pnds);
+    font-weight: 700;
+  }
   .retour {
     margin-top: 12px;
     padding: 6px 0;
@@ -149,6 +158,29 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+  }
+  /* Schémas du PNDS mis en avant en vert. */
+  .card.pnds {
+    margin: 6px 0;
+    padding: 12px 12px 12px 14px;
+    border: 0;
+    border-left: 4px solid var(--pnds);
+    border-radius: 8px;
+    background: var(--pnds-fond);
+  }
+  h3.pnds {
+    color: var(--pnds);
+  }
+  .badge {
+    display: inline-block;
+    margin-right: 6px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--pnds);
+    color: var(--card);
+    font-size: 0.72rem;
+    font-weight: 700;
+    vertical-align: 2px;
   }
   .bar {
     color: var(--muted);

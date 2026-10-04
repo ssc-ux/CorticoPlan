@@ -21,6 +21,8 @@
   --erreur-fond: #fdecea;
   --attention: #a0570a;
   --attention-fond: #fcece3;
+  --pnds: #17794a; /* schémas du PNDS (HAS) */
+  --pnds-fond: #e6f4ec;
   --surligne: #ffd8d4;
   --courbe: #1f5fbf;
   --rayon: 8px;
@@ -43,6 +45,10 @@
     --erreur-fond: #3a1d1b;
     --attention: #eaa452;
     --attention-fond: #35231a;
+  --pnds: #5cc68e;
+  --pnds-fond: #15291f;
+    --pnds: #5cc68e;
+    --pnds-fond: #15291f;
     --surligne: #6b2b26;
     --courbe: #7aa7ff;
     color-scheme: dark;
