@@ -49,17 +49,17 @@
       choisis = l;
     }
   }
-  /** Tuile : tous les schémas de la maladie sur le graphique. */
+  /** Tuile : les schémas du PNDS cochés d'office ; les autres (essais, recommandations) s'ajoutent en les cochant. */
   function ouvrir(p: string) {
     const l: { cle: number; teinte: number }[] = [];
-    for (const s of schemasDe(p)) cocher(l, SCHEMAS.indexOf(s));
+    for (const s of schemasDe(p).filter(estPnds)) cocher(l, SCHEMAS.indexOf(s));
     maladies = [p];
     choisis = l;
   }
   function ajouter(p: string) {
     if (!p) return;
     const l = [...choisis];
-    for (const s of schemasDe(p)) if (!coche(SCHEMAS.indexOf(s))) cocher(l, SCHEMAS.indexOf(s));
+    for (const s of schemasDe(p).filter(estPnds)) if (!coche(SCHEMAS.indexOf(s))) cocher(l, SCHEMAS.indexOf(s));
     maladies = [...maladies, p];
     choisis = l;
   }
@@ -153,7 +153,7 @@
 
 <div class="comparer">
   {#if !maladies.length}
-    <p class="intro">Touchez une maladie : tous ses schémas s'affichent sur un même graphique, puis décochez ceux qui ne vous intéressent pas.</p>
+    <p class="intro">Touchez une maladie : ses schémas du PNDS s'affichent sur un même graphique ; cochez les schémas d'essais ou de recommandations pour les ajouter.</p>
     <Tuiles onchoix={ouvrir} action="comparer" />
   {:else}
     <button type="button" class="retour" onclick={fermer}>← Toutes les maladies</button>
@@ -161,7 +161,9 @@
 
     <section class="carte">
       {#if !series.length}
-        <p class="vide">Cochez au moins un schéma ci-dessous pour afficher sa courbe.</p>
+        <p class="vide">
+          {maladies.some((m) => schemasDe(m).some(estPnds)) ? 'Cochez au moins un schéma ci-dessous pour afficher sa courbe.' : 'Pas de schéma du PNDS pour cette maladie : cochez ci-dessous les schémas à afficher.'}
+        </p>
       {:else}
       <figure bind:clientWidth={largeur}>
         <svg
@@ -227,7 +229,8 @@
         {/if}
         {#each maladies as m}
           {#if maladies.length > 1}<h3>{court(m)}</h3>{/if}
-          {#each schemasDe(m) as sc}
+          {#each schemasDe(m) as sc, k}
+            {#if k > 0 && estPnds(schemasDe(m)[k - 1]!) && !estPnds(sc)}<p class="separe">Essais et recommandations : cochez pour ajouter</p>{/if}
             {@const i = SCHEMAS.indexOf(sc)}
             <label class="ligne" class:pnds={estPnds(sc)}>
               <input type="checkbox" checked={coche(i)} onchange={() => basculer(i)} />
@@ -238,7 +241,7 @@
         {/each}
         {#if autres.length}
           <label class="ajout"
-            >+ Ajouter les schémas d'une autre maladie
+            >+ Ajouter une autre maladie
             <select onchange={(e) => { ajouter(e.currentTarget.value); e.currentTarget.value = ''; }}>
               <option value="">choisir…</option>
               {#each autres as p}<option value={p}>{p}</option>{/each}
@@ -334,6 +337,12 @@
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+  }
+  .separe {
+    margin: 12px 6px 2px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 600;
   }
   .sans-trait {
     flex: none;
