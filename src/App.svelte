@@ -54,6 +54,7 @@
   let schemaChoisi = $state<Schema | null>(null);
   let maladie = $state<string | null>(null); // tuile ouverte dans l'onglet Schémas
   let compares = $state<{ cle: number; teinte: number }[]>([]); // schémas cochés dans « Comparer »
+  let maladiesComparees = $state<string[]>([]);
   let lienCopie = $state(false);
 
   const resultat = $derived(analyser(texte, { joursParMois }));
@@ -145,7 +146,7 @@
   {:else if onglet === 'comparer'}
     <Comparateur
       texteSaisi={texte}
-      bind:maladie
+      bind:maladies={maladiesComparees}
       bind:choisis={compares}
       onutiliser={(s, t) => {
         texte = t;

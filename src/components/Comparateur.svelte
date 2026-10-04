@@ -8,61 +8,69 @@
   import { analyser } from '../lib/parser';
   import { doseMoyenne } from '../lib/schedule';
   import { nombreFr } from '../lib/parser/normalize';
-  import { PATHOLOGIES, SCHEMAS, type Schema } from '../lib/schemas';
+  import { court, estPnds, PATHOLOGIES, SCHEMAS, schemasDe, type Schema } from '../lib/schemas';
+  import Tuiles from './Tuiles.svelte';
   import type { Palier } from '../lib/types';
 
   let {
     texteSaisi,
-    maladie = $bindable(null),
+    maladies = $bindable([]),
     choisis = $bindable([]),
     onutiliser,
   }: {
     texteSaisi: string;
-    maladie?: string | null;
-    /** Schémas cochés (gardés par App quand on change d'onglet). Clé -1 = onglet « Écrire ». */
+    /** Maladies affichées (vide : on montre les tuiles). Gardées par App quand on change d'onglet. */
+    maladies?: string[];
+    /** Schémas cochés. Clé = indice dans SCHEMAS, -1 = schéma de l'onglet « Écrire ». */
     choisis?: { cle: number; teinte: number }[];
     onutiliser: (s: Schema | null, texte: string) => void;
   } = $props();
 
   const NB_COULEURS = 8;
-  const TIRETS = ['', '7 4', '2 3', '10 3 2 3']; // au-delà de 8 schémas : même couleurs, traits différents
-
-  let ouverte = $state<string | null>(maladie ?? PATHOLOGIES[0] ?? null);
-  $effect(() => {
-    maladie = ouverte;
-  });
-
-  const estEssai = (s: Schema) => s.statut.startsWith("issu d'un essai");
-  const estPnds = (s: Schema) => !estEssai(s) && /PNDS/.test(s.statut + s.source.document);
-  const rang = (s: Schema) => (estPnds(s) ? 0 : estEssai(s) ? 2 : 1);
-  const court = (p: string) =>
-    p
-      .replace(/^Artérite à cellules géantes.*/, 'Horton')
-      .split(/[(:]/)[0]!
-      .replace('Anémie hémolytique auto-immune', 'AHAI')
-      .replace('Purpura thrombopénique immunologique', 'PTI')
-      .replace(/^Granulomatose éosinophilique.*/, 'GEPA')
-      .trim();
+  const TIRETS = ['', '7 4', '2 3', '10 3 2 3']; // au-delà de 8 schémas : mêmes couleurs, traits différents
 
   const saisie = $derived(analyser(texteSaisi));
   const saisieOk = $derived(texteSaisi.trim() !== '' && saisie.ok && saisie.paliers.length > 0);
-  const liste = $derived(
-    SCHEMAS.map((s, i) => ({ s, i }))
-      .filter(({ s }) => s.pathologie === ouverte)
-      .sort((a, b) => rang(a.s) - rang(b.s)),
-  );
+  const autres = $derived(PATHOLOGIES.filter((p) => !maladies.includes(p)));
 
   const coche = (cle: number) => choisis.some((c) => c.cle === cle);
-  function basculer(cle: number) {
-    if (coche(cle)) {
-      choisis = choisis.filter((c) => c.cle !== cle);
-      return;
-    }
-    // La couleur suit le schéma : on prend la première teinte libre, les autres ne changent pas.
+  const teinteDe = (cle: number) => choisis.find((c) => c.cle === cle)?.teinte ?? 0;
+  /** La couleur suit le schéma : première teinte libre ; les autres ne changent pas. */
+  function cocher(liste: { cle: number; teinte: number }[], cle: number) {
     let teinte = 0;
-    while (choisis.some((c) => c.teinte === teinte)) teinte++;
-    choisis = [...choisis, { cle, teinte }];
+    while (liste.some((c) => c.teinte === teinte)) teinte++;
+    liste.push({ cle, teinte });
   }
+  function basculer(cle: number) {
+    if (coche(cle)) choisis = choisis.filter((c) => c.cle !== cle);
+    else {
+      const l = [...choisis];
+      cocher(l, cle);
+      choisis = l;
+    }
+  }
+  /** Tuile : tous les schémas de la maladie sur le graphique. */
+  function ouvrir(p: string) {
+    const l: { cle: number; teinte: number }[] = [];
+    for (const s of schemasDe(p)) cocher(l, SCHEMAS.indexOf(s));
+    maladies = [p];
+    choisis = l;
+  }
+  function ajouter(p: string) {
+    if (!p) return;
+    const l = [...choisis];
+    for (const s of schemasDe(p)) if (!coche(SCHEMAS.indexOf(s))) cocher(l, SCHEMAS.indexOf(s));
+    maladies = [...maladies, p];
+    choisis = l;
+  }
+  function fermer() {
+    maladies = [];
+    choisis = [];
+  }
+  const style = (teinte: number) => ({
+    couleur: `var(--s${(teinte % NB_COULEURS) + 1})`,
+    tirets: TIRETS[Math.floor(teinte / NB_COULEURS) % TIRETS.length]!,
+  });
 
   interface Serie {
     cle: number;
@@ -85,8 +93,7 @@
           cle,
           nom: schema ? schema.nom : 'Mon schéma (onglet Écrire)',
           sous: schema ? court(schema.pathologie) : '',
-          couleur: `var(--s${(teinte % NB_COULEURS) + 1})`,
-          tirets: TIRETS[Math.floor(teinte / NB_COULEURS) % TIRETS.length]!,
+          ...style(teinte),
           paliers: r.paliers,
           schema,
           texte,
@@ -137,53 +144,25 @@
   const mg = (v: number) => `${nombreFr(v)} mg`;
 </script>
 
+{#snippet trait(teinte: number, l: number)}
+  {@const st = style(teinte)}
+  <svg width={l + 2} height="10" aria-hidden="true"
+    ><line x1="1" x2={l + 1} y1="5" y2="5" stroke={st.couleur} stroke-width="3" stroke-dasharray={st.tirets} stroke-linecap="round" /></svg
+  >
+{/snippet}
+
 <div class="comparer">
-  <p class="intro">Cochez des schémas, d'une ou de plusieurs maladies : leurs courbes se superposent.</p>
+  {#if !maladies.length}
+    <p class="intro">Touchez une maladie : tous ses schémas s'affichent sur un même graphique, puis décochez ceux qui ne vous intéressent pas.</p>
+    <Tuiles onchoix={ouvrir} action="comparer" />
+  {:else}
+    <button type="button" class="retour" onclick={fermer}>← Toutes les maladies</button>
+    <h2 class="titre">{maladies.map(court).join(' + ')}</h2>
 
-  {#if saisieOk}
-    <label class="ligne saisie">
-      <input type="checkbox" checked={coche(-1)} onchange={() => basculer(-1)} />
-      <span>Mon schéma (onglet Écrire)</span>
-    </label>
-  {/if}
-
-  <div class="cats" role="group" aria-label="Maladie">
-    {#each PATHOLOGIES as p}
-      {@const n = choisis.filter((c) => c.cle >= 0 && SCHEMAS[c.cle]!.pathologie === p).length}
-      <button type="button" aria-pressed={ouverte === p} title={p} onclick={() => (ouverte = p)}
-        >{court(p)}{#if n}<span class="nb">{n}</span>{/if}</button
-      >
-    {/each}
-  </div>
-
-  <div class="choix">
-    {#each liste as { s, i }}
-      <label class="ligne" class:pnds={estPnds(s)}>
-        <input type="checkbox" checked={coche(i)} onchange={() => basculer(i)} />
-        <span>{#if estPnds(s)}<span class="badge">PNDS</span>{/if}{s.nom}</span>
-      </label>
-    {/each}
-  </div>
-
-  {#if series.length}
     <section class="carte">
-      <h2>
-        Comparaison <span class="aide">· {series.length} schéma{series.length > 1 ? 's' : ''}</span>
-        <button type="button" class="vider" onclick={() => (choisis = [])}>Tout décocher</button>
-      </h2>
-
-      <ul class="legende">
-        {#each series as s}
-          <li>
-            <svg width="26" height="10" aria-hidden="true"
-              ><line x1="1" x2="25" y1="5" y2="5" stroke={s.couleur} stroke-width="3" stroke-dasharray={s.tirets} stroke-linecap="round" /></svg
-            >
-            <span class="nom">{s.nom}{#if s.sous}<span class="discret"> · {s.sous}</span>{/if}</span>
-            <button type="button" class="retirer" aria-label={`Retirer ${s.nom}`} onclick={() => basculer(s.cle)}>×</button>
-          </li>
-        {/each}
-      </ul>
-
+      {#if !series.length}
+        <p class="vide">Cochez au moins un schéma ci-dessous pour afficher sa courbe.</p>
+      {:else}
       <figure bind:clientWidth={largeur}>
         <svg
           viewBox={`0 0 ${W} ${H}`}
@@ -232,6 +211,43 @@
         </figcaption>
       </figure>
 
+      {/if}
+
+      <div class="choix">
+        <div class="entete">
+          <span>{choisis.length} schéma{choisis.length > 1 ? 's' : ''} affiché{choisis.length > 1 ? 's' : ''}</span>
+          {#if choisis.length}<button type="button" class="vider" onclick={() => (choisis = [])}>Tout décocher</button>{/if}
+        </div>
+        {#if saisieOk}
+          <label class="ligne saisie">
+            <input type="checkbox" checked={coche(-1)} onchange={() => basculer(-1)} />
+            {#if coche(-1)}{@render trait(teinteDe(-1), 24)}{/if}
+            <span>Mon schéma (onglet Écrire)</span>
+          </label>
+        {/if}
+        {#each maladies as m}
+          {#if maladies.length > 1}<h3>{court(m)}</h3>{/if}
+          {#each schemasDe(m) as sc}
+            {@const i = SCHEMAS.indexOf(sc)}
+            <label class="ligne" class:pnds={estPnds(sc)}>
+              <input type="checkbox" checked={coche(i)} onchange={() => basculer(i)} />
+              {#if coche(i)}{@render trait(teinteDe(i), 24)}{:else}<span class="sans-trait"></span>{/if}
+              <span>{#if estPnds(sc)}<span class="badge">PNDS</span>{/if}{sc.nom}</span>
+            </label>
+          {/each}
+        {/each}
+        {#if autres.length}
+          <label class="ajout"
+            >+ Ajouter les schémas d'une autre maladie
+            <select onchange={(e) => { ajouter(e.currentTarget.value); e.currentTarget.value = ''; }}>
+              <option value="">choisir…</option>
+              {#each autres as p}<option value={p}>{p}</option>{/each}
+            </select></label
+          >
+        {/if}
+      </div>
+
+      {#if series.length}
       <div class="defile">
         <table>
           <thead>
@@ -271,6 +287,7 @@
       <p class="discret note">
         Arrêt : semaine où la dose passe à 0. Dose cumulée : jusqu'à l'arrêt, ou jusqu'au début de la dernière dose « à poursuivre ».
       </p>
+      {/if}
     </section>
   {/if}
 </div>
@@ -283,46 +300,72 @@
     margin: 8px 0 10px;
     color: var(--muted);
   }
-  .cats {
-    display: flex;
-    gap: 6px;
-    margin: 8px -16px 6px;
-    padding: 0 16px 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .cats::-webkit-scrollbar {
-    display: none;
-  }
-  .cats button {
-    flex: none;
-    white-space: nowrap;
+  .retour {
+    margin-top: 12px;
+    padding: 6px 0;
     border: 0;
     background: none;
-    color: var(--muted);
-    padding: 5px 12px;
-    border-radius: 999px;
+    color: var(--accent);
+    font-weight: 600;
     cursor: pointer;
   }
-  .cats button[aria-pressed='true'] {
-    color: var(--accent);
-    background: var(--c1s);
-    font-weight: 600;
+  .titre {
+    margin: 4px 0 10px;
+    color: var(--fg);
+    font-size: 1.2rem;
+    text-transform: none;
+    letter-spacing: 0;
   }
-  .nb {
-    margin-left: 5px;
-    padding: 0 6px;
-    border-radius: 999px;
-    background: var(--accent);
-    color: var(--card);
-    font-size: 0.72rem;
-    font-weight: 700;
+  .vide {
+    margin: 0 0 12px;
+    color: var(--muted);
+  }
+  .entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 6px 4px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  h3 {
+    margin: 12px 6px 2px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .sans-trait {
+    flex: none;
+    width: 26px;
+  }
+  .ligne svg {
+    flex: none;
+    margin-top: 6px;
+  }
+  .ajout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 6px;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .ajout select {
+    width: 100%;
+    min-width: 0;
+    min-height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--card);
+    color: var(--fg);
   }
   .choix {
     display: grid;
     gap: 2px;
-    max-height: 340px;
-    overflow-y: auto;
+    margin-top: 12px;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
@@ -365,11 +408,6 @@
     align-items: baseline;
     gap: 6px;
   }
-  .aide {
-    text-transform: none;
-    letter-spacing: 0;
-    font-weight: 400;
-  }
   .vider {
     margin-left: auto;
     border: 0;
@@ -379,39 +417,6 @@
     text-transform: none;
     letter-spacing: 0;
     cursor: pointer;
-  }
-  .legende {
-    display: grid;
-    gap: 4px;
-    margin: 0 0 10px;
-    padding: 0;
-    list-style: none;
-    font-size: 0.88rem;
-  }
-  .legende li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .legende svg {
-    flex: none;
-  }
-  .legende .nom {
-    flex: 1;
-  }
-  .retirer {
-    flex: none;
-    width: 32px;
-    height: 32px;
-    border: 0;
-    border-radius: 50%;
-    background: none;
-    color: var(--muted);
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
-  .retirer:hover {
-    background: var(--c1s);
   }
   figure {
     margin: 0;

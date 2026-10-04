@@ -4,17 +4,13 @@
    * schémas (recommandations/PNDS puis essais). La recherche parcourt tout.
    * Toucher un schéma remplit le champ de texte.
    */
-  import { PATHOLOGIES, SCHEMAS, type Schema } from '../lib/schemas';
+  import { estEssai, estPnds, rang, SCHEMAS, type Schema } from '../lib/schemas';
+  import Tuiles from './Tuiles.svelte';
 
   let { onchoix, pathologie = $bindable(null) }: { onchoix: (s: Schema) => void; pathologie?: string | null } = $props();
   let recherche = $state('');
 
   const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-  const estEssai = (s: Schema) => s.statut.startsWith("issu d'un essai");
-  const estPnds = (s: Schema) => !estEssai(s) && /PNDS/.test(s.statut + s.source.document);
-  const rang = (s: Schema) => (estPnds(s) ? 0 : estEssai(s) ? 2 : 1);
-  const nombre = (p: string) => SCHEMAS.filter((s) => s.pathologie === p).length;
-  const pndsDe = (p: string) => SCHEMAS.filter((s) => s.pathologie === p && estPnds(s)).length;
 
   const trouves = $derived(
     recherche.trim()
@@ -66,16 +62,7 @@
       {#each g.schemas as s}{@render carte(s, false)}{/each}
     {/each}
   {:else}
-    <div class="tuiles">
-      {#each PATHOLOGIES as p, i}
-        <button type="button" class="tuile" style={`--t: var(--s${(i % 8) + 1})`} onclick={() => (pathologie = p)}>
-          <span class="nom">{p}</span>
-          <span class="n"
-            >{nombre(p)} schéma{nombre(p) > 1 ? 's' : ''}{#if pndsDe(p)}<span class="pn"> · {pndsDe(p)} PNDS</span>{/if}</span
-          >
-        </button>
-      {/each}
-    </div>
+    <Tuiles onchoix={(p) => (pathologie = p)} />
   {/if}
 </div>
 
@@ -95,49 +82,10 @@
     outline: 2px solid var(--accent);
     outline-offset: -1px;
   }
-  .tuiles {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-    margin-top: 16px;
-  }
-  .tuile {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 8px;
-    min-height: 92px;
-    padding: 12px 14px;
-    border: 1px solid color-mix(in srgb, var(--t) 30%, var(--line));
-    border-top: 4px solid var(--t);
-    border-radius: 12px;
-    background: color-mix(in srgb, var(--t) 9%, var(--card));
-    color: var(--fg);
-    text-align: left;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .tuile:hover,
-  .tuile:focus-visible {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--t) 25%, transparent);
-  }
-  .tuile .nom {
-    font-size: 0.95rem;
-    font-weight: 600;
-    overflow-wrap: break-word;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-    line-height: 1.3;
-  }
   .n {
     color: var(--accent);
     font-size: 0.82rem;
     font-weight: 500;
-  }
-  .pn {
-    color: var(--pnds);
-    font-weight: 700;
   }
   .retour {
     margin-top: 12px;

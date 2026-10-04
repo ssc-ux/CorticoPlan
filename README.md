@@ -44,10 +44,10 @@ doses en mg/kg, en comprimés, fourchettes (« 3-4 semaines »), alternance entr
 
 ### Comparer des schémas
 
-Onglet **Comparer** : cocher autant de schémas que voulu (d'une ou de plusieurs maladies, et le
-schéma écrit dans « Écrire ») ; leurs courbes se superposent sur un même graphique. Un tableau
-indique pour chacun la dose de départ, la semaine où l'on passe à 7,5 mg puis à 5 mg, l'arrêt et la
-dose cumulée. « Utiliser » reprend le schéma dans « Écrire ».
+Onglet **Comparer** : toucher la tuile d'une maladie affiche tous ses schémas sur un même
+graphique ; décocher ceux qui n'intéressent pas. On peut ajouter les schémas d'une autre maladie
+et le schéma écrit dans « Écrire ». Un tableau indique pour chacun la dose de départ, la semaine
+où l'on passe à 7,5 mg puis à 5 mg, l'arrêt et la dose cumulée ; « Utiliser » reprend le schéma.
 
 ## Modifier le contenu (sans programmer)
 
