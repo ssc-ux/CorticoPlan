@@ -40,6 +40,13 @@ Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
 diminution a lieu dès le premier jour du bloc. Non pris en charge (signalé) :
 doses en mg/kg, en comprimés, fourchettes (« 3-4 semaines »), alternance entre deux doses.
 
+### Comparer des schémas
+
+Onglet **Comparer** : cocher autant de schémas que voulu (d'une ou de plusieurs maladies, et le
+schéma écrit dans « Écrire ») ; leurs courbes se superposent sur un même graphique. Un tableau
+indique pour chacun la dose de départ, la semaine où l'on passe à 7,5 mg puis à 5 mg, l'arrêt et la
+dose cumulée. « Utiliser » reprend le schéma dans « Écrire ».
+
 ## Modifier le contenu (sans programmer)
 
 Depuis github.com, ouvrir le fichier, cliquer sur le crayon ✏️, modifier, puis « Commit changes ».

@@ -25,6 +25,7 @@
   --pnds-fond: #e6f4ec;
   --surligne: #ffd8d4;
   --courbe: #1f5fbf;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948; /* comparateur (palette validée daltonisme) */
   --rayon: 8px;
   color-scheme: light;
 }
@@ -51,6 +52,8 @@
     --pnds-fond: #15291f;
     --surligne: #6b2b26;
     --courbe: #7aa7ff;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
     color-scheme: dark;
   }
 }

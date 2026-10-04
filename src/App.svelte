@@ -8,6 +8,7 @@
    */
   import CalendrierPatient from './components/CalendrierPatient.svelte';
   import ChoixSchema from './components/ChoixSchema.svelte';
+  import Comparateur from './components/Comparateur.svelte';
   import Courbe from './components/Courbe.svelte';
   import Ordonnance from './components/Ordonnance.svelte';
   import Resultat from './components/Resultat.svelte';
@@ -27,10 +28,11 @@
   const partage = decoderPartage(location.hash);
   let texte = $state(partage?.texte ?? '');
   let debut = $state(partage?.debut && estDateValide(partage.debut) ? partage.debut : aujourdhui());
-  let onglet = $state<'ecrire' | 'schemas'>('ecrire');
+  let onglet = $state<'ecrire' | 'schemas' | 'comparer'>('ecrire');
   let joursParMois = $state(28);
   let schemaChoisi = $state<Schema | null>(null);
   let maladie = $state<string | null>(null); // tuile ouverte dans l'onglet Schémas
+  let compares = $state<{ cle: number; teinte: number }[]>([]); // schémas cochés dans « Comparer »
   let lienCopie = $state(false);
 
   const resultat = $derived(analyser(texte, { joursParMois }));
@@ -100,11 +102,24 @@
       <button role="tab" aria-selected={onglet === 'schemas'} onclick={() => (onglet = 'schemas')}>
         Schémas <span class="n">{SCHEMAS.length}</span>
       </button>
+      <button role="tab" aria-selected={onglet === 'comparer'} onclick={() => (onglet = 'comparer')}>Comparer</button>
     </div>
   </header>
 
   {#if onglet === 'schemas'}
     <ChoixSchema onchoix={choisir} bind:pathologie={maladie} />
+  {:else if onglet === 'comparer'}
+    <Comparateur
+      texteSaisi={texte}
+      bind:maladie
+      bind:choisis={compares}
+      onutiliser={(s, t) => {
+        texte = t;
+        schemaChoisi = s;
+        onglet = 'ecrire';
+        window.scrollTo({ top: 0 });
+      }}
+    />
   {:else}
     <main>
       <p class="accroche">Écrivez le schéma comme dans un courrier : l'ordonnance se rédige toute seule.</p>
