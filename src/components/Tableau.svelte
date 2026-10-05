@@ -5,7 +5,8 @@
    * réécrit le texte.
    */
   import { tick } from 'svelte';
-  import { dateFr } from '../lib/dates';
+  import { dateCourte, dateFr } from '../lib/dates';
+  import { formatDuree } from '../lib/format';
   import { nombreFr } from '../lib/parser/normalize';
   import type { Ligne } from '../lib/schedule';
   import type { Palier } from '../lib/types';
@@ -76,16 +77,18 @@
 
 <table>
   <thead>
-    <tr><th scope="col">Du</th><th scope="col">Au</th><th scope="col">Dose</th></tr>
+    <tr><th scope="col">Dose</th><th scope="col">Période</th><th scope="col">Durée</th></tr>
   </thead>
   <tbody>
     {#each lignes as l, i (i)}
       <tr class:arret={l.dose === 0} class:active={edition === i} onclick={() => ouvrir(i)}>
-        <td>{dateFr(l.debut)}</td>
-        <td>{l.dose === 0 ? '—' : l.fin === null ? 'à poursuivre' : dateFr(l.fin)}</td>
         <td class="dose">
           <button type="button" class="lien" aria-label={`Modifier la ligne ${i + 1}`}>{libelleDose(l)}</button>
         </td>
+        <td class="periode">
+          {#if l.dose === 0}à partir du {dateFr(l.debut)}{:else if l.fin === null}dès le {dateFr(l.debut)}{:else}{dateCourte(l.debut)} → {dateFr(l.fin)}{/if}
+        </td>
+        <td class="duree">{l.dose === 0 ? '' : l.jours === null ? 'à poursuivre' : formatDuree(l.jours)}</td>
       </tr>
       {#if edition === i}
         <tr class="editeur">
@@ -127,8 +130,16 @@
     padding: 0 0.5rem 0.4rem;
   }
   td {
-    padding: 0.7rem 0.5rem;
+    padding: 0.45rem 0.5rem;
     border-top: 1px solid var(--bord);
+  }
+  .periode,
+  .duree {
+    color: var(--texte-2);
+    font-size: 0.9rem;
+  }
+  .duree {
+    white-space: nowrap;
   }
   tbody tr:not(.editeur) {
     cursor: pointer;

@@ -53,13 +53,15 @@
 
   {#if recherche.trim()}
     <p class="bar">{trouves.length} schéma{trouves.length > 1 ? 's' : ''} trouvé{trouves.length > 1 ? 's' : ''}</p>
-    {#each trouves as s}{@render carte(s, true)}{:else}<p class="vide">Aucun schéma ne correspond.</p>{/each}
+    <div class="liste">
+      {#each trouves as s}{@render carte(s, true)}{:else}<p class="vide">Aucun schéma ne correspond.</p>{/each}
+    </div>
   {:else if pathologie}
     <button type="button" class="retour" onclick={() => (pathologie = null)}>← Toutes les maladies</button>
     <h2 class="maladie">{pathologie}</h2>
     {#each groupes as g}
       <h3 class:pnds={g.pnds}>{g.titre} <span class="n">{g.schemas.length}</span></h3>
-      {#each g.schemas as s}{@render carte(s, false)}{/each}
+      <div class="liste">{#each g.schemas as s}{@render carte(s, false)}{/each}</div>
     {/each}
   {:else}
     <Tuiles onchoix={(p) => (pathologie = p)} />
@@ -138,6 +140,18 @@
     color: var(--muted);
     font-size: 0.85rem;
     margin: 10px 0 0;
+  }
+  /* Grand écran : schémas sur deux colonnes. */
+  @media (min-width: 900px) {
+    .liste {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 24px;
+      align-items: start;
+    }
+    .liste .vide {
+      grid-column: 1 / -1;
+    }
   }
   .card {
     position: relative;
