@@ -79,14 +79,14 @@
           "dose": 0
         }
       ],
-      "citation": "Tableau 4 : arrêt à 3 mois (l'objectif à 6 semaines, en mg/kg, n'est pas repris)",
-      "verification": "Repères lus dans le texte du PNDS (repris des schémas de CorticoPlan)",
+      "citation": "« objectif de dose de 0,1 mg/kg/j à 6 semaines et d'arrêt à 3 mois » (seul l'arrêt à 3 mois est repris : l'objectif en mg/kg dépend du poids)",
+      "verification": "Texte intégral du PNDS lu",
       "valide": false,
       "source": {
         "document": "PNDS Maladie de Still de l'adulte (HAS)",
         "annee": 2018,
-        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2018-04/pnds_-_maladie_de_still_de_ladulte.pdf",
-        "page": "p. 23, tableau 4"
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2018-08/pnds_still_de_ladulte_vfinale_2.pdf",
+        "page": "p. 6, 23 (tableau 4), 25 et 27"
       }
     },
     {
@@ -97,14 +97,14 @@
           "dose": 20
         }
       ],
-      "citation": "Atteintes graves : 15 à 20 mg/j à 3 mois (l'objectif à 6 mois, en mg/kg, n'est pas repris)",
-      "verification": "Repères lus dans le texte du PNDS (repris des schémas de CorticoPlan)",
+      "citation": "« décroissance progressive (15 à 20 mg/j à 3 mois et ≤ 0,1 mg/kg/j à 6 mois) » — atteintes neurologiques (seul le repère à 3 mois est repris : celui à 6 mois est en mg/kg)",
+      "verification": "Texte intégral du PNDS lu",
       "valide": false,
       "source": {
         "document": "PNDS Maladie de Behçet (HAS)",
         "annee": 2019,
-        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2019-12/pnds_behcet.pdf",
-        "page": "p. 35-37"
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2020-01/pnds_behcet_vf_171219.pdf",
+        "page": "p. 35-36"
       }
     }
   ]
