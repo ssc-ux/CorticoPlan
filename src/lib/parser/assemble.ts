@@ -14,14 +14,30 @@
  *   (dès le début du bloc) ;
  * - le schéma se termine sur la dernière dose écrite, maintenue (« à
  *   poursuivre »), sauf arrêt explicite.
+ * - un objectif daté (« 10 mg à M3 », « arrêt à 12 mois ») est compté depuis
+ *   J1 ; « objectif 10 mg en 6 semaines » compte depuis la fin de l'étape
+ *   précédente. Les paliers intermédiaires sont calculés (voir `objectif`).
  * Toute interprétation non évidente est signalée, jamais faite en silence.
  */
+import { formatDuree } from '../format';
 import type { Dose, Palier, Probleme, Span } from '../types';
 import { nombreFr } from './normalize';
 import type { Jeton } from './lexer';
 
 type Bloc =
-  | { type: 'dose'; dose: Dose; jours: number | null; span: Span }
+  | { type: 'dose'; dose: Dose; jours: number | null; span: Span; /** « jusqu'à M12 » : fin comptée depuis J1. */ jusqua?: number }
+  | {
+      type: 'objectif';
+      cible: number;
+      depart: number | null;
+      /** Pas imposé (« par paliers de 2,5 mg ») ; sinon échelle usuelle. */
+      pas: number | null;
+      /** Échéance comptée depuis J1 (« à 3 mois », « M3 ») … */
+      echeance: number | null;
+      /** … ou depuis la fin de l'étape précédente (« objectif 10 mg en 6 semaines »). */
+      dans: number | null;
+      span: Span;
+    }
   | {
       type: 'decroissance';
       depart: number | null;
@@ -88,6 +104,9 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
   let unJourSurDeux = false;
   let arret = false;
   let sevrageSeul = false;
+  let objectif = false;
+  let echeance: number | null = null; // « à 3 mois », « M3 »
+  let jusquaEcheance: number | null = null; // « jusqu'à M12 »
   let incompris = false;
   let attentePas = false; // « baisser toutes les 2 sem de 5 mg » : le pas vient après
   let pasDiffere = false; // pas donné par un mot (« baisser de… ») plutôt que par « - »
@@ -154,6 +173,10 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
         } else if (s1?.type === 'arret' || s1?.type === 'sevrage') {
           borne = 0;
           k++;
+        } else if (s1?.type === 'echeance' || s1?.type === 'duree') {
+          if (jusquaEcheance !== null) incompris = true;
+          jusquaEcheance = s1.valeur!;
+          k++;
         } else incompris = true;
         break;
       case 'a':
@@ -166,7 +189,19 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
         } else if (s1?.type === 'arret' || s1?.type === 'sevrage') {
           borneFaible = 0;
           k++;
+        } else if (s1?.type === 'echeance' || s1?.type === 'duree') {
+          // « 10 mg à 3 mois », « arrêt à M12 » : échéance d'un objectif.
+          if (echeance !== null) incompris = true;
+          echeance = s1.valeur!;
+          k++;
         }
+        break;
+      case 'echeance':
+        if (echeance !== null) incompris = true;
+        echeance = t.valeur!;
+        break;
+      case 'objectif':
+        objectif = true;
         break;
       case 'sevrage':
         sevrageSeul = true;
@@ -235,7 +270,7 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
   if (doses.length > 1 && doses.every((d) => d === doses[0])) doses.splice(1);
   // « Décroissance : 20 mg pendant 2 semaines » : mot de baisse servant de titre
   // (ni rythme ni borne) → le nombre pris pour un pas est en fait la dose.
-  if (pasDiffere && rythme === null && borne === null && borneFaible === null && duree !== null) {
+  if (pasDiffere && !objectif && rythme === null && borne === null && borneFaible === null && duree !== null) {
     doses.unshift(pas!);
     pas = null;
     motPasSansValeur = false;
@@ -253,10 +288,35 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
     });
     if (!autreDose) return null;
   }
-  if (sevrageSeul && borne === null && borneFaible === null) {
+  if (sevrageSeul && borne === null && borneFaible === null && echeance === null) {
     return echec('pas-manquant', 'Sevrage : précisez la baisse (ex. « -1 mg toutes les 4 semaines jusqu’au sevrage »).');
   }
   if (incompris) return echec('segment-incompris', 'Segment non compris : reformulez-le.');
+
+  // Objectif daté : « 10 mg à 3 mois », « objectif 5 mg en 6 semaines », « arrêt à M12 ».
+  const delai = objectif && echeance === null ? duree : null;
+  if (echeance !== null || delai !== null) {
+    if (rythme !== null) return echec('segment-incompris', 'Objectif daté et rythme de baisse dans le même segment : gardez l’un ou l’autre.');
+    if (echeance !== null && duree !== null) return echec('segment-incompris', 'Objectif : une durée et une échéance à la fois.');
+    if (paire || unJourSurDeux || alternance) return echec('segment-incompris', 'Objectif : indiquez une dose quotidienne.');
+    if (pas !== null && pas <= 0) return echec('pas-manquant', 'Le pas de baisse doit être positif.');
+    const cible = borne ?? borneFaible ?? (arret || sevrageSeul ? 0 : doses.pop() ?? null);
+    if (cible === null) return echec('segment-incompris', 'Objectif sans dose : précisez la dose à atteindre (ex. « 10 mg à 3 mois »).');
+    if (doses.length > 1) return echec('dose-ambigue', 'Trop de doses dans cet objectif.');
+    return { type: 'objectif', cible, depart: doses[0] ?? null, pas, echeance, dans: delai, span };
+  }
+  if (objectif) {
+    problemes.push({
+      code: 'echeance-manquante', niveau: 'erreur', span,
+      message: 'Objectif sans échéance : à quel moment l’atteindre ?',
+      suggestions: [1, 3, 6].map((m) => ({ libelle: `à ${m} mois`, position: span[1], insertion: ` à ${m} mois` })),
+    });
+    return null;
+  }
+  // « jusqu'à M12 » ne s'applique qu'à une dose fixe.
+  if (jusquaEcheance !== null && (doses.length !== 1 || pas !== null || motPasSansValeur || rythme !== null || arret)) {
+    return echec('segment-incompris', '« Jusqu’à » une date : réservé à une dose fixe (ex. « 5 mg jusqu’à M12 »).');
+  }
   // Verbe sous-entendu après une première baisse : « puis de 2,5 mg toutes les
   // 2 semaines jusqu'à 10 mg » → la dose unique est le pas.
   if (
@@ -298,9 +358,11 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
 
   if (doses.length === 1) {
     const d = doses[0]!;
-    if (unJourSurDeux) return { type: 'dose', dose: [d, 0], jours: duree, span };
+    if (jusquaEcheance !== null && duree !== null) return echec('segment-incompris', 'Durée et « jusqu’à » à la fois : gardez l’un ou l’autre.');
+    const fin = jusquaEcheance !== null ? { jusqua: jusquaEcheance } : {};
+    if (unJourSurDeux) return { type: 'dose', dose: [d, 0], jours: duree, span, ...fin };
     if (alternance) return echec('alternance-incomplete', 'Alternance : précisez « un jour sur deux » (ex. « 20 mg un jour sur deux »).');
-    return { type: 'dose', dose: d, jours: duree, span };
+    return { type: 'dose', dose: d, jours: duree, span, ...fin };
   }
 
   if (doses.length > 1) return echec('dose-ambigue', 'Plusieurs doses dans ce segment : séparez-les par « puis ».');
@@ -318,18 +380,61 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
 function premiereDose(bloc: Bloc | undefined): number | null {
   if (!bloc) return null;
   if (bloc.type === 'dose') return typeof bloc.dose === 'number' ? bloc.dose : null;
-  if (bloc.type === 'decroissance') return bloc.depart;
+  if (bloc.type === 'decroissance' || bloc.type === 'objectif') return bloc.depart;
   return 0;
+}
+
+/**
+ * Échelle usuelle : -5 mg au-dessus de 20 mg, -2,5 mg jusqu'à 10 mg, puis -1 mg
+ * (pas multipliés par `facteur` quand le temps manque).
+ */
+function doseSuivante(d: number, pas: number | null, facteur = 1): number {
+  if (pas !== null) return arrondi(d - pas);
+  const sous = (unite: number) => arrondi(Math.ceil(d / unite - 1e-9) * unite - unite);
+  return d > 20 ? sous(5 * facteur) : d > 10 ? sous(2.5 * facteur) : sous(facteur);
+}
+
+/** Répartit `jours` sur `n` paliers en semaines entières ; le surplus va aux derniers (doses basses, baisse plus lente). */
+function repartir(jours: number, n: number): number[] {
+  const unite = jours >= 7 * n ? 7 : 1;
+  const total = Math.floor(jours / unite);
+  const base = Math.floor(total / n);
+  const plus = total % n;
+  const durees = Array.from({ length: n }, (_, i) => (base + (i >= n - plus ? 1 : 0)) * unite);
+  durees[n - 1]! += jours - total * unite;
+  return durees;
 }
 
 /** Déroule les blocs en paliers. */
 function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
   const paliers: Palier[] = [];
   let courante: number | null = null;
+  /** Dose atteinte par un objectif, dont la durée dépend de l'étape suivante. */
+  let atteinte: { palier: Palier; span: Span } | null = null;
+  /** Jours écoulés depuis J1 (un palier sans durée ne compte pas). */
+  const ecoule = () => paliers.reduce((s, p) => s + (p.jours ?? 0), 0);
 
   blocs.forEach((bloc, i) => {
     const dernier = i === blocs.length - 1;
     const suivant = blocs[i + 1];
+
+    if (atteinte && bloc.type !== 'objectif') {
+      const { palier, span } = atteinte;
+      atteinte = null;
+      if (bloc.type === 'decroissance' && bloc.depart === null) {
+        palier.jours = bloc.rythme;
+        problemes.push({ code: 'duree-deduite', niveau: 'info', span,
+          message: `${formatDoseCourte(palier.dose)} gardés ${bloc.rythme} jours après l’objectif (rythme de la baisse suivante).` });
+      } else if (palier.dose !== 0) {
+        problemes.push({ code: 'duree-manquante', niveau: 'erreur', span,
+          message: `Combien de temps garder ${formatDoseCourte(palier.dose)} une fois l’objectif atteint ? Ajoutez un objectif daté ou une durée.` });
+      }
+    }
+
+    if (bloc.type === 'objectif') {
+      objectif(bloc);
+      return;
+    }
 
     if (bloc.type === 'arret') {
       paliers.push({ dose: 0, jours: null });
@@ -339,8 +444,18 @@ function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
 
     if (bloc.type === 'dose') {
       let jours = bloc.jours;
+      if (bloc.jusqua !== undefined) {
+        jours = bloc.jusqua - ecoule();
+        if (jours <= 0) {
+          problemes.push({ code: 'echeance-depassee', niveau: 'erreur', span: bloc.span,
+            message: `« Jusqu’à J${bloc.jusqua + 1} » tombe avant la fin des étapes précédentes (J${ecoule() + 1}).` });
+          return;
+        }
+      }
       if (jours === null && !dernier) {
-        if (suivant?.type === 'decroissance' && suivant.depart === null) {
+        if (suivant?.type === 'objectif') {
+          // « 40 mg puis 20 mg à M1 » : la durée de 40 mg est calculée par l'objectif.
+        } else if (suivant?.type === 'decroissance' && suivant.depart === null) {
           // « 20 mg puis −5 mg/sem » : 20 mg dure une période de la baisse.
           jours = suivant.rythme;
           problemes.push({
@@ -441,6 +556,71 @@ function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
     }
     courante = borne;
   });
+
+  /**
+   * Objectif daté : de la dose courante à la cible, en suivant l'échelle
+   * usuelle (ou le pas écrit), paliers répartis en semaines entières pour que
+   * la cible commence au plus tard à l'échéance. Une dose écrite sans durée
+   * juste avant (« 40 mg puis 20 mg à M1 ») occupe le premier palier.
+   */
+  function objectif(bloc: Extract<Bloc, { type: 'objectif' }>) {
+    const { cible, span } = bloc;
+    const erreur = (code: Probleme['code'], message: string) => problemes.push({ code, niveau: 'erreur', message, span });
+    let ouvert = paliers[paliers.length - 1];
+    if (ouvert && (ouvert.jours !== null || typeof ouvert.dose !== 'number' || ouvert.dose === 0)) ouvert = undefined;
+    if (bloc.depart !== null) {
+      if (ouvert && ouvert.dose !== bloc.depart) return erreur('dose-ambigue', `Dose de départ (${nombreFr(bloc.depart)} mg) différente de la dose précédente.`);
+      if (!ouvert) {
+        ouvert = { dose: bloc.depart, jours: null };
+        paliers.push(ouvert);
+      }
+    }
+    const depart = ouvert ? (ouvert.dose as number) : courante;
+    if (depart === null) return erreur('segment-incompris', 'Objectif sans dose de départ : écrivez d’abord la dose initiale (ex. « 40 mg puis 20 mg à 1 mois »).');
+    if (cible > depart) return erreur('borne-incoherente', `L’objectif (${nombreFr(cible)} mg) est au-dessus de la dose actuelle (${nombreFr(depart)} mg).`);
+    const debut = ecoule();
+    const jours = bloc.echeance !== null ? bloc.echeance - debut : bloc.dans!;
+    if (jours <= 0) {
+      return erreur('echeance-depassee', `L’objectif de ${nombreFr(cible)} mg (J${bloc.echeance! + 1}) tombe avant la fin des étapes précédentes (J${debut + 1}).`);
+    }
+
+    // Doses intermédiaires selon l'échelle, la cible exclue.
+    const echelle = (facteur: number) => {
+      const n: number[] = [];
+      for (let d = doseSuivante(depart, bloc.pas, facteur); d > cible + 1e-9; d = doseSuivante(d, bloc.pas, facteur)) n.push(d);
+      return n;
+    };
+    let niveaux = echelle(1);
+    const nPas = bloc.pas !== null ? (depart - cible) / bloc.pas : 0;
+    if (Math.abs(nPas - Math.round(nPas)) > 1e-9) {
+      problemes.push({ code: 'borne-inatteignable', niveau: 'avertissement', span,
+        message: `Le pas de ${nombreFr(bloc.pas!)} mg ne tombe pas juste sur ${nombreFr(cible)} mg : dernière baisse plus petite.` });
+    }
+    // Au moins une semaine par palier : sinon on saute des doses.
+    const place = Math.max(Math.floor(jours / 7), 1) - (ouvert ? 1 : 0);
+    if (niveaux.length > Math.max(place, 0)) {
+      // Pas plus grands (×2, ×3…) plutôt que des doses sautées au hasard.
+      let facteur = 1;
+      while (bloc.pas === null && niveaux.length > place && facteur < 10) niveaux = echelle(++facteur);
+      if (niveaux.length > place) niveaux = place > 0 ? niveaux.filter((_, k) => (k + 1) % Math.ceil(niveaux.length / place) === 0).slice(0, place) : [];
+      problemes.push({ code: 'objectif-rapide', niveau: 'avertissement', span,
+        message: `Objectif rapide (${nombreFr(depart)} → ${nombreFr(cible)} mg en ${formatDuree(jours)}) : baisses plus fortes que d’habitude pour garder au moins 1 semaine par palier.` });
+    }
+    const etapes: Palier[] = [...(ouvert ? [ouvert] : []), ...niveaux.map((d) => ({ dose: d, jours: 0 }))];
+    if (etapes.length > 0) {
+      repartir(jours, etapes.length).forEach((j, k) => (etapes[k]!.jours = j));
+      paliers.push(...etapes.slice(ouvert ? 1 : 0));
+    }
+    const atteint = debut + (etapes.length > 0 ? jours : 0);
+    problemes.push({ code: 'objectif-calcule', niveau: 'info', span,
+      message: cible === 0
+        ? `Arrêt à J${atteint + 1}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(jours)}` : ''}.`
+        : `Objectif ${nombreFr(cible)} mg atteint à J${atteint + 1}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(jours)}` : ' (dès la fin de l’étape précédente)'}.` });
+    const palier: Palier = { dose: cible, jours: null };
+    paliers.push(palier);
+    courante = cible;
+    atteinte = cible === 0 ? null : { palier, span };
+  }
 
   return paliers;
 }

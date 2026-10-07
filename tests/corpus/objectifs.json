@@ -1,0 +1,326 @@
+[
+  {
+    "id": "objectif-a-n-mois",
+    "entree": "40 mg 1 mois puis 15 mg à 3 mois",
+    "paliers": [
+      {
+        "dose": 40,
+        "jours": 28
+      },
+      {
+        "dose": 35,
+        "jours": 7
+      },
+      {
+        "dose": 30,
+        "jours": 7
+      },
+      {
+        "dose": 25,
+        "jours": 14
+      },
+      {
+        "dose": 20,
+        "jours": 14
+      },
+      {
+        "dose": 17.5,
+        "jours": 14
+      },
+      {
+        "dose": 15,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "objectifs-enchaines",
+    "entree": "20 mg 1 mois puis objectif 10 mg à 3 mois puis 5 mg à 6 mois puis arrêt à 12 mois",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 28
+      },
+      {
+        "dose": 17.5,
+        "jours": 14
+      },
+      {
+        "dose": 15,
+        "jours": 21
+      },
+      {
+        "dose": 12.5,
+        "jours": 21
+      },
+      {
+        "dose": 10,
+        "jours": 14
+      },
+      {
+        "dose": 9,
+        "jours": 14
+      },
+      {
+        "dose": 8,
+        "jours": 14
+      },
+      {
+        "dose": 7,
+        "jours": 21
+      },
+      {
+        "dose": 6,
+        "jours": 21
+      },
+      {
+        "dose": 5,
+        "jours": 28
+      },
+      {
+        "dose": 4,
+        "jours": 35
+      },
+      {
+        "dose": 3,
+        "jours": 35
+      },
+      {
+        "dose": 2,
+        "jours": 35
+      },
+      {
+        "dose": 1,
+        "jours": 35
+      },
+      {
+        "dose": 0,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "objectif-notation-m",
+    "entree": "60 mg puis 30 mg à M1 puis 15 mg à M3 puis 5 mg à M6",
+    "paliers": [
+      {
+        "dose": 60,
+        "jours": 7
+      },
+      {
+        "dose": 50,
+        "jours": 7
+      },
+      {
+        "dose": 40,
+        "jours": 14
+      },
+      {
+        "dose": 30,
+        "jours": 14
+      },
+      {
+        "dose": 25,
+        "jours": 14
+      },
+      {
+        "dose": 20,
+        "jours": 14
+      },
+      {
+        "dose": 17.5,
+        "jours": 14
+      },
+      {
+        "dose": 15,
+        "jours": 7
+      },
+      {
+        "dose": 12.5,
+        "jours": 7
+      },
+      {
+        "dose": 10,
+        "jours": 14
+      },
+      {
+        "dose": 9,
+        "jours": 14
+      },
+      {
+        "dose": 8,
+        "jours": 14
+      },
+      {
+        "dose": 7,
+        "jours": 14
+      },
+      {
+        "dose": 6,
+        "jours": 14
+      },
+      {
+        "dose": 5,
+        "jours": null
+      }
+    ],
+    "problemes": [
+      "objectif-rapide"
+    ]
+  },
+  {
+    "id": "objectif-relatif-pas-impose",
+    "entree": "40 mg 3 sem puis objectif 10 mg en 6 semaines par paliers de 5 mg",
+    "paliers": [
+      {
+        "dose": 40,
+        "jours": 21
+      },
+      {
+        "dose": 35,
+        "jours": 7
+      },
+      {
+        "dose": 30,
+        "jours": 7
+      },
+      {
+        "dose": 25,
+        "jours": 7
+      },
+      {
+        "dose": 20,
+        "jours": 7
+      },
+      {
+        "dose": 15,
+        "jours": 14
+      },
+      {
+        "dose": 10,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "objectif-puis-baisse-reguliere",
+    "entree": "30 mg 1 mois puis 10 mg à M3 puis -1 mg par mois jusqu'à l'arrêt",
+    "paliers": [
+      {
+        "dose": 30,
+        "jours": 28
+      },
+      {
+        "dose": 25,
+        "jours": 7
+      },
+      {
+        "dose": 20,
+        "jours": 7
+      },
+      {
+        "dose": 17.5,
+        "jours": 14
+      },
+      {
+        "dose": 15,
+        "jours": 14
+      },
+      {
+        "dose": 12.5,
+        "jours": 14
+      },
+      {
+        "dose": 10,
+        "jours": 28
+      },
+      {
+        "dose": 9,
+        "jours": 28
+      },
+      {
+        "dose": 8,
+        "jours": 28
+      },
+      {
+        "dose": 7,
+        "jours": 28
+      },
+      {
+        "dose": 6,
+        "jours": 28
+      },
+      {
+        "dose": 5,
+        "jours": 28
+      },
+      {
+        "dose": 4,
+        "jours": 28
+      },
+      {
+        "dose": 3,
+        "jours": 28
+      },
+      {
+        "dose": 2,
+        "jours": 28
+      },
+      {
+        "dose": 1,
+        "jours": 28
+      },
+      {
+        "dose": 0,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "dose-jusqua-mois",
+    "entree": "15 mg 1 mois puis 5 mg jusqu'à M12 puis arrêt",
+    "paliers": [
+      {
+        "dose": 15,
+        "jours": 28
+      },
+      {
+        "dose": 5,
+        "jours": 308
+      },
+      {
+        "dose": 0,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "objectif-depasse",
+    "entree": "20 mg 3 mois puis 10 mg à 2 mois",
+    "paliers": null,
+    "problemes": [
+      "echeance-depassee"
+    ]
+  },
+  {
+    "id": "objectif-sans-echeance",
+    "entree": "20 mg 1 mois puis objectif 10 mg",
+    "paliers": null,
+    "problemes": [
+      "echeance-manquante"
+    ]
+  },
+  {
+    "id": "objectif-puis-dose-sans-duree",
+    "entree": "10 mg 1 mois puis 5 mg à M3 puis 2 mg 1 mois",
+    "paliers": null,
+    "problemes": [
+      "duree-manquante"
+    ]
+  }
+]

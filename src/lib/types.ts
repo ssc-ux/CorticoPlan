@@ -45,7 +45,11 @@ export type CodeProbleme =
   | 'dose-remonte'
   | 'dose-non-realisable'
   | 'paliers-apres-arret'
-  | 'convention-mois';
+  | 'convention-mois'
+  | 'echeance-manquante'
+  | 'echeance-depassee'
+  | 'objectif-rapide'
+  | 'objectif-calcule';
 
 export interface Probleme {
   code: CodeProbleme;

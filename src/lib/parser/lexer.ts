@@ -27,6 +27,8 @@ export type TypeJeton =
   | 'unJourSurDeux' // 1 j/2, un jour sur deux
   | 'arret' // arrêt, stop
   | 'sevrage' // « jusqu'au sevrage » = arrêt ; seul, il manque le rythme
+  | 'objectif' // objectif, cible : dose à atteindre à une échéance
+  | 'echeance' // M3, S6, J90 : moment compté depuis J1 (valeur = jours écoulés)
   | 'sep' // puis, virgule, point-virgule, point, retour à la ligne
   | 'inconnu';
 
@@ -117,6 +119,7 @@ const REGLES: Regle[] = [
   { re: re(`hebdomadaire(?:ment)?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 7 }) },
   { re: re(`(?:par|chaque|toutes[ ]+les)[ ]+quinzaines?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 14 }) },
   { re: re(`au[ ]+long[ ]+cours${FIN_MOT}|a[ ]+vie${FIN_MOT}|sans[ ]+limitation[ ]+de[ ]+duree${FIN_MOT}`), jeton: () => null },
+  { re: re(`(?:objectifs?|obj|cibles?|viser|visee)${FIN_MOT}`), jeton: () => ({ type: 'objectif' }) },
   { re: re(`(?:le[ ]+)?sevrage${FIN_MOT}`), jeton: () => ({ type: 'sevrage' }) },
   { re: re(`(?:\\/|par|chaque|tous[ ]+les)[ ]*mois${FIN_MOT}|mensuel(?:le|lement)?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 1, mois: true }) },
   { re: re(`jusqu[ ]*'?[ ]*(?:a|au)${FIN_MOT}|jusqu'`), jeton: () => ({ type: 'jusqua' }) },
@@ -137,6 +140,15 @@ const REGLES: Regle[] = [
     jeton: () => ({ type: 'sep' }),
   },
   { re: re('\\/'), jeton: () => ({ type: 'slash' }) },
+  // « M3 », « S6 », « J90 » : échéance comptée depuis le début (M3 = après 3 mois).
+  {
+    re: re(`([mjs])[ ]?(\\d+)(?![a-z0-9])`),
+    jeton: (m) => {
+      const n = Number(m[2]);
+      if (m[1] === 'm') return { type: 'echeance', valeur: n, mois: true };
+      return { type: 'echeance', valeur: m[1] === 's' ? n * 7 : Math.max(0, n - 1) };
+    },
+  },
   { re: re(`et${FIN_MOT}`), jeton: () => ({ type: 'et' }) },
   { re: re(`a(?![a-z'])`), jeton: () => ({ type: 'a' }) },
   { re: re('[:×*+()®™"«»\\[\\]]'), jeton: () => null },
@@ -208,6 +220,7 @@ export function decouper(s: string, joursParMois: number): Jeton[] {
       const jeton: Jeton = { ...lu.jeton, span: [i, lu.fin] };
       // « par mois », « mensuel » : la règle ne connaît pas la convention.
       if (jeton.type === 'rythme' && jeton.mois && jeton.valeur === 1) jeton.valeur = joursParMois;
+      if (jeton.type === 'echeance' && jeton.mois) jeton.valeur = jeton.valeur! * joursParMois;
       jetons.push(jeton);
     }
     i = lu.fin;
