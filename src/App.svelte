@@ -31,7 +31,7 @@
     const p = decoderPaliers(location.hash);
     if (p) return p;
     const a = decoderPartage(location.hash, 'a');
-    const r = a && analyser(a.texte);
+    const r = a && analyser(a.texte, { debut: a.debut });
     return a && r?.ok ? { paliers: r.paliers, debut: a.debut && estDateValide(a.debut) ? a.debut : aujourdhui() } : null;
   })();
   // Schéma reçu par un lien partagé (#s=…), sinon page vide.
@@ -66,7 +66,7 @@
   let maladiesComparees = $state<string[]>([]);
   let lienCopie = $state(false);
 
-  const resultat = $derived(analyser(texte, { joursParMois }));
+  const resultat = $derived(analyser(texte, { joursParMois, debut }));
   const dateOk = $derived(estDateValide(debut));
   const pret = $derived(resultat.ok && resultat.paliers.length > 0 && dateOk);
   const lignes = $derived(pret ? calendrier(resultat.paliers, debut) : []);
@@ -160,6 +160,7 @@
   {:else if onglet === 'comparer'}
     <Comparateur
       texteSaisi={texte}
+      options={{ joursParMois, debut }}
       bind:maladies={maladiesComparees}
       bind:choisis={compares}
       onutiliser={(s, t) => {

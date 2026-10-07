@@ -63,6 +63,17 @@ export interface Probleme {
 export interface Options {
   /** Nombre de jours comptés pour « 1 mois » (4 semaines par défaut). */
   joursParMois: number;
+  /**
+   * Date de début (AAAA-MM-JJ). Si connue, les échéances en mois (« à 6 mois »,
+   * « M6 ») tombent à la date anniversaire ; sinon 1 mois = `joursParMois`.
+   */
+  debut?: string;
+}
+
+/** Objectif daté : dose maximale (mg/j) visée au jour `jour` (0 = J1). */
+export interface Objectif {
+  jour: number;
+  dose: number;
 }
 
 export interface ResultatAnalyse {
@@ -70,6 +81,8 @@ export interface ResultatAnalyse {
   problemes: Probleme[];
   /** Reformulation lisible, une ligne par palier. */
   reformulation: string[];
+  /** Objectifs datés écrits dans le texte (pour les repérer sur une courbe). */
+  objectifs: Objectif[];
   /** Vrai si aucune erreur : le schéma est utilisable. */
   ok: boolean;
 }

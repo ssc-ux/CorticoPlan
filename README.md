@@ -36,14 +36,14 @@ ajouté à l'écran d'accueil du téléphone.
 | Borne | `jusqu'à 10`, `→ 10`, `-> 10`, `de 20 à 10`, `jusqu'à l'arrêt` |
 | Un jour sur deux | `20 mg 1 j/2`, `20 mg un jour sur deux` |
 | Dictée vocale | texte dicté au téléphone puis collé : `vingt milligrammes`, `deux virgule cinq`, `à la ligne`, `point` |
-| Objectif daté | `10 mg à 3 mois`, `5 mg à M6`, `arrêt à 12 mois`, `objectif 10 mg en 6 semaines`, `5 mg jusqu'à M12` (M = mois, S = semaine, J = jour, comptés depuis J1) |
+| Objectif daté | `10 mg à 3 mois`, `≤ 5 mg à M6`, `5 mg au plus à 6 mois`, `moins de 5 mg à 6 mois`, `arrêt à 12 mois`, `objectif 10 mg en 6 semaines`, `5 mg jusqu'à M12` (M = mois, S = semaine, J = jour, comptés depuis J1 ; « à 6 mois » tombe à la **date anniversaire** de la date de début) |
 | Fin | `arrêt` ; sinon la dernière dose est **maintenue** (« à poursuivre », « jusqu'à réévaluation » acceptés) |
 
 Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
 diminution a lieu dès le premier jour du bloc. Pour un **objectif daté**, les paliers
 intermédiaires sont calculés : −5 mg au-dessus de 20 mg, −2,5 mg jusqu'à 10 mg, puis −1 mg
 (ou le pas écrit : « par paliers de 2,5 mg »), en semaines entières, les doses basses gardées
-plus longtemps ; la dose visée commence au plus tard à l'échéance. Non pris en charge (signalé) :
+plus longtemps ; la dose visée commence au plus tard à l'échéance (jusqu'à 6 jours avant, pour garder des semaines entières). Dans **Comparer**, les objectifs écrits sont marqués ▼ sur le graphique et le tableau indique pour chaque schéma combien il en tient. Non pris en charge (signalé) :
 doses en mg/kg, en comprimés, fourchettes (« 3-4 semaines »), alternance entre deux doses.
 
 ### Pour le patient

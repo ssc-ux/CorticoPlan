@@ -322,5 +322,101 @@
     "problemes": [
       "duree-manquante"
     ]
+  },
+  {
+    "id": "objectif-inferieur-ou-egal",
+    "entree": "40 mg 1 mois puis ≤ 15 mg à M3",
+    "paliers": [
+      {
+        "dose": 40,
+        "jours": 28
+      },
+      {
+        "dose": 35,
+        "jours": 7
+      },
+      {
+        "dose": 30,
+        "jours": 7
+      },
+      {
+        "dose": 25,
+        "jours": 14
+      },
+      {
+        "dose": 20,
+        "jours": 14
+      },
+      {
+        "dose": 17.5,
+        "jours": 14
+      },
+      {
+        "dose": 15,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "objectif-au-plus",
+    "entree": "30 mg 2 sem puis 10 mg au plus à 2 mois",
+    "paliers": null,
+    "problemes": []
+  },
+  {
+    "id": "objectif-moins-de",
+    "entree": "20 mg 1 mois puis moins de 5 mg/jr à 6 mois",
+    "paliers": [
+      {
+        "dose": 20,
+        "jours": 28
+      },
+      {
+        "dose": 17.5,
+        "jours": 14
+      },
+      {
+        "dose": 15,
+        "jours": 14
+      },
+      {
+        "dose": 12.5,
+        "jours": 14
+      },
+      {
+        "dose": 10,
+        "jours": 14
+      },
+      {
+        "dose": 9,
+        "jours": 21
+      },
+      {
+        "dose": 8,
+        "jours": 21
+      },
+      {
+        "dose": 7,
+        "jours": 21
+      },
+      {
+        "dose": 6,
+        "jours": 21
+      },
+      {
+        "dose": 5,
+        "jours": null
+      }
+    ],
+    "problemes": []
+  },
+  {
+    "id": "objectif-sans-depart",
+    "entree": "objectif 5 mg/jr à 6 mois",
+    "paliers": [],
+    "problemes": [
+      "segment-incompris"
+    ]
   }
 ]

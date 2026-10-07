@@ -38,6 +38,10 @@ export interface Jeton {
   valeur?: number;
   /** Vrai si la durée ou le rythme est exprimé en mois. */
   mois?: boolean;
+  /** Durée ou échéance en mois : nombre de mois écrit (« 6 mois » → 6). */
+  nbMois?: number;
+  /** Marqué par l'assembleur : mois compté au calendrier (date anniversaire). */
+  calendaire?: boolean;
   /** Jeton « jusqu'à » écrit avec une flèche (peut aussi vouloir dire « puis »). */
   fleche?: boolean;
 }
@@ -110,16 +114,23 @@ const REGLES: Regle[] = [
     jeton: () => ({ type: 'mgkg' }),
   },
   {
-    re: re(`(?:mg|milligrammes?)(?:[ ]*\\/[ ]*(?:jours?|j|24[ ]*h))?${FIN_MOT}`),
+    re: re(`(?:mg|milligrammes?)(?:[ ]*\\/[ ]*(?:jours?|jrs?|j|24[ ]*h))?${FIN_MOT}`),
     jeton: () => ({ type: 'mg' }),
   },
   // « /j », « par jour », « chaque jour », « tous les jours » : simple précision.
-  { re: re(`(?:\\/|par|chaque|tous[ ]+les)[ ]*(?:jours?|j)${FIN_MOT}`), jeton: () => null },
+  { re: re(`(?:\\/|par|chaque|tous[ ]+les)[ ]*(?:jours?|jrs?|j)${FIN_MOT}`), jeton: () => null },
   { re: re(`(?:\\/|par|chaque|toutes[ ]+les)[ ]*(?:semaines?|sem|s)${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 7 }) },
   { re: re(`hebdomadaire(?:ment)?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 7 }) },
   { re: re(`(?:par|chaque|toutes[ ]+les)[ ]+quinzaines?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 14 }) },
   { re: re(`au[ ]+long[ ]+cours${FIN_MOT}|a[ ]+vie${FIN_MOT}|sans[ ]+limitation[ ]+de[ ]+duree${FIN_MOT}`), jeton: () => null },
   { re: re(`(?:objectifs?|obj|cibles?|viser|visee)${FIN_MOT}`), jeton: () => ({ type: 'objectif' }) },
+  // « ≤ 5 mg à M6 », « au plus 5 mg », « moins de 5 mg à 6 mois » : objectif (dose maximale).
+  {
+    re: re(
+      `≤|<=?|au[ ]+(?:plus|maximum)${FIN_MOT}|plus(?=[ ]*\\d)|max(?:imum)?${FIN_MOT}|moins[ ]+de(?=[ ]*\\d)|pas[ ]+plus[ ]+de${FIN_MOT}|inferieure?s?[ ]+(?:ou[ ]+egale?s?[ ]+)?a${FIN_MOT}`,
+    ),
+    jeton: () => ({ type: 'objectif' }),
+  },
   { re: re(`(?:le[ ]+)?sevrage${FIN_MOT}`), jeton: () => ({ type: 'sevrage' }) },
   { re: re(`(?:\\/|par|chaque|tous[ ]+les)[ ]*mois${FIN_MOT}|mensuel(?:le|lement)?${FIN_MOT}`), jeton: () => ({ type: 'rythme', valeur: 1, mois: true }) },
   { re: re(`jusqu[ ]*'?[ ]*(?:a|au)${FIN_MOT}|jusqu'`), jeton: () => ({ type: 'jusqua' }) },
@@ -145,7 +156,7 @@ const REGLES: Regle[] = [
     re: re(`([mjs])[ ]?(\\d+)(?![a-z0-9])`),
     jeton: (m) => {
       const n = Number(m[2]);
-      if (m[1] === 'm') return { type: 'echeance', valeur: n, mois: true };
+      if (m[1] === 'm') return { type: 'echeance', valeur: n, mois: true, nbMois: n };
       return { type: 'echeance', valeur: m[1] === 's' ? n * 7 : Math.max(0, n - 1) };
     },
   },
@@ -172,7 +183,7 @@ function lireUnite(s: string, pos: number, valeur: number, joursParMois: number)
   }
   if (m[1]) return { fin, jeton: { type: 'duree' as const, valeur } };
   if (m[2]) return { fin, jeton: { type: 'duree' as const, valeur: valeur * 7 } };
-  if (m[3]) return { fin, jeton: { type: 'duree' as const, valeur: valeur * joursParMois, mois: true } };
+  if (m[3]) return { fin, jeton: { type: 'duree' as const, valeur: valeur * joursParMois, mois: true, nbMois: valeur } };
   return { fin, jeton: { type: 'cp' as const, valeur } };
 }
 

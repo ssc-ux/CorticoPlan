@@ -7,8 +7,9 @@
  * (qui sont des textes pré-remplis) : un seul moteur.
  */
 import { OPTIONS_PAR_DEFAUT } from '../config';
+import { ajouterJours, ajouterMois, dateFr, ecartJours, estDateValide } from '../dates';
 import { reformuler } from '../format';
-import type { Options, Probleme, ResultatAnalyse, Span } from '../types';
+import type { Objectif, Options, Probleme, ResultatAnalyse, Span } from '../types';
 import { assembler } from './assemble';
 import { verifier } from './checks';
 import { corriger } from './correct';
@@ -42,15 +43,25 @@ export function analyser(texte: string, options: Partial<Options> = {}): Resulta
       problemes.push({ code: 'fourchette', niveau: 'erreur', message: `Fourchette « ${extrait} » : choisissez une valeur.`, span: t.span });
     }
   }
-  if (jetons.some((t) => t.mois)) {
-    problemes.push({ code: 'convention-mois', niveau: 'info', message: `« 1 mois » est compté ${opts.joursParMois} jours (réglable).` });
+  // Échéances en mois (« à 6 mois ») : date anniversaire si la date de début est connue.
+  const debut = opts.debut && estDateValide(opts.debut) ? opts.debut : null;
+  const objectifs: Objectif[] = [];
+  const temps = {
+    moisEnJours: (n: number) =>
+      debut ? ecartJours(debut, ajouterMois(debut, Math.floor(n))) + Math.round((n % 1) * opts.joursParMois) : Math.round(n * opts.joursParMois),
+    date: debut ? (j: number) => dateFr(ajouterJours(debut, j)) : undefined,
+    objectifs,
+  };
+  const paliers = verifier(assembler(jetons, problemes, temps), problemes);
+  if (jetons.some((t) => t.mois && !t.calendaire)) {
+    const anniversaire = jetons.some((t) => t.calendaire) ? ' ; les échéances (« à 6 mois », « M6 ») tombent à la date anniversaire' : '';
+    problemes.push({ code: 'convention-mois', niveau: 'info', message: `« 1 mois » est compté ${opts.joursParMois} jours (réglable)${anniversaire}.` });
   }
-
-  const paliers = verifier(assembler(jetons, problemes), problemes);
   return {
     paliers,
     problemes,
     reformulation: reformuler(paliers),
+    objectifs,
     ok: !problemes.some((p) => p.niveau === 'erreur'),
   };
 }

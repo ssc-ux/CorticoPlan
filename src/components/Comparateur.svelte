@@ -10,15 +10,18 @@
   import { nombreFr } from '../lib/parser/normalize';
   import { court, estPnds, PATHOLOGIES, SCHEMAS, schemasDe, type Schema } from '../lib/schemas';
   import Tuiles from './Tuiles.svelte';
-  import type { Palier } from '../lib/types';
+  import type { Options, Palier } from '../lib/types';
 
   let {
     texteSaisi,
+    options = {},
     maladies = $bindable([]),
     choisis = $bindable([]),
     onutiliser,
   }: {
     texteSaisi: string;
+    /** Réglages de l'onglet « Écrire » (durée d'un mois, date de début pour les échéances). */
+    options?: Partial<Options>;
     /** Maladies affichées (vide : on montre les tuiles). Gardées par App quand on change d'onglet. */
     maladies?: string[];
     /** Schémas cochés. Clé = indice dans SCHEMAS, -1 = schéma de l'onglet « Écrire ». */
@@ -29,7 +32,7 @@
   const NB_COULEURS = 8;
   const TIRETS = ['', '7 4', '2 3', '10 3 2 3']; // au-delà de 8 schémas : mêmes couleurs, traits différents
 
-  const saisie = $derived(analyser(texteSaisi));
+  const saisie = $derived(analyser(texteSaisi, options));
   const saisieOk = $derived(texteSaisi.trim() !== '' && saisie.ok && saisie.paliers.length > 0);
   const autres = $derived(PATHOLOGIES.filter((p) => !maladies.includes(p)));
 
@@ -101,7 +104,10 @@
       })
       .filter((s): s is Serie => s !== null),
   );
-  const tableau = $derived(series.map((s) => ({ ...s, r: reperes(s.paliers) })));
+  /** Objectifs datés du schéma écrit : repérés sur le graphique, et vérifiés pour chaque schéma. */
+  const objectifs = $derived(saisieOk ? saisie.objectifs : []);
+  const tenus = (paliers: Palier[]) => objectifs.filter((o) => doseLe(paliers, o.jour) <= o.dose + 1e-9).length;
+  const tableau = $derived(series.map((s) => ({ ...s, r: reperes(s.paliers), tenus: tenus(s.paliers) })));
 
   // Graphique : semaines en abscisse, mg/j en ordonnée.
   let largeur = $state(640);
@@ -109,7 +115,7 @@
   const H = $derived(Math.round(Math.min(320, Math.max(220, W * 0.5))));
   const M = { g: 40, d: 14, h: 12, b: 30 };
   const nbJours = $derived.by(() => {
-    const fin = Math.max(28, ...tableau.map((t) => t.r.arret ?? t.r.duree + 28));
+    const fin = Math.max(28, ...tableau.map((t) => t.r.arret ?? t.r.duree + 28), ...objectifs.map((o) => o.jour + 14));
     return Math.ceil(fin / 28) * 28; // multiple de 4 semaines
   });
   const doseMax = $derived(Math.max(5, ...tableau.flatMap((t) => t.paliers.map((p) => doseMoyenne(p.dose)))));
@@ -183,6 +189,13 @@
           {#each series as s}
             <path d={chemin(s.paliers)} class="ligne-serie" stroke={s.couleur} stroke-dasharray={s.tirets} />
           {/each}
+          {#each objectifs as o}
+            <g class="objectif">
+              <title>Objectif : ≤ {mg(o.dose)} à {semaine(o.jour)} (jour {o.jour + 1})</title>
+              <line x1={x(o.jour)} x2={x(o.jour)} y1={y(o.dose)} y2={H - M.b} />
+              <path d={`M${x(o.jour) - 6},${y(o.dose) - 7}h12l-6,7z`} />
+            </g>
+          {/each}
           {#if survol !== null}
             <line x1={x(survol + 0.5)} x2={x(survol + 0.5)} y1={M.h} y2={H - M.b} class="repere" />
             {#each series as s}
@@ -208,7 +221,8 @@
               {/each}
             </ul>
           {:else}
-            <span class="discret">Dose quotidienne (mg/j) par semaine. Survolez ou touchez le graphique pour comparer un jour précis.</span>
+            <span class="discret">Dose quotidienne (mg/j) par semaine. Survolez ou touchez le graphique pour comparer un jour précis.{#if objectifs.length}{" "}
+                ▼ : objectifs datés de l'onglet Écrire (dose maximale à cette date).{/if}</span>
           {/if}
         </figcaption>
       </figure>
@@ -261,6 +275,7 @@
               <th>≤ 5 mg</th>
               <th>Arrêt</th>
               <th>Dose cumulée</th>
+              {#if objectifs.length}<th>Objectifs tenus</th>{/if}
               <th></th>
             </tr>
           </thead>
@@ -281,6 +296,9 @@
                   {nombreFr(Math.round(t.r.cumul))} mg
                   {#if t.r.arret === null}<span class="discret">en {Math.round(t.r.duree / 7)} sem</span>{/if}
                 </td>
+                {#if objectifs.length}
+                  <td class:tenu={t.tenus === objectifs.length}>{t.tenus}/{objectifs.length}{t.tenus === objectifs.length ? ' ✓' : ''}</td>
+                {/if}
                 <td><button type="button" class="utiliser" onclick={() => onutiliser(t.schema, t.texte)}>Utiliser</button></td>
               </tr>
             {/each}
@@ -298,6 +316,19 @@
 <style>
   .comparer {
     padding-top: 14px;
+  }
+  .objectif line {
+    stroke: var(--fg);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+    opacity: 0.5;
+  }
+  .objectif path {
+    fill: var(--fg);
+  }
+  .tenu {
+    color: var(--pnds);
+    font-weight: 600;
   }
   .intro {
     margin: 8px 0 10px;

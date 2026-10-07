@@ -52,3 +52,17 @@ describe('robustesse', () => {
     expect(analyser('20 mg 1 mois puis 10 mg', { joursParMois: 30 }).paliers[0]).toEqual({ dose: 20, jours: 30 });
   });
 });
+
+describe('objectifs datés : date anniversaire', () => {
+  it('« à 6 mois » tombe le même jour 6 mois plus tard ; paliers en semaines entières, jamais en retard', () => {
+    const r = analyser('20 mg 1 mois puis 5 mg à 6 mois', { debut: '2026-10-07' });
+    expect(r.objectifs).toEqual([{ jour: 182, dose: 5 }]); // 07/04/2027
+    const avant5 = r.paliers.slice(0, -1).reduce((s, p) => s + p.jours!, 0);
+    expect(avant5).toBeLessThanOrEqual(182);
+    expect(r.paliers.slice(1, -1).every((p) => p.jours! % 7 === 0)).toBe(true);
+    expect(r.problemes.find((p) => p.code === 'objectif-calcule')?.message).toContain('07/04/2027');
+  });
+  it('31 janvier + 1 mois = fin février', () => {
+    expect(analyser('20 mg puis 10 mg à M1', { debut: '2027-01-31' }).objectifs).toEqual([{ jour: 28, dose: 10 }]);
+  });
+});

@@ -23,6 +23,13 @@ export function ajouterJours(iso: string, jours: number): string {
   return versIso(versMs(iso) + jours * JOUR_MS);
 }
 
+/** Même jour, `n` mois plus tard (31 janvier + 1 mois → 28 ou 29 février). */
+export function ajouterMois(iso: string, n: number): string {
+  const [a, m, j] = iso.split('-').map(Number);
+  const dernier = new Date(Date.UTC(a!, m! - 1 + n + 1, 0)).getUTCDate();
+  return versIso(Date.UTC(a!, m! - 1 + n, Math.min(j!, dernier)));
+}
+
 export function ecartJours(debut: string, fin: string): number {
   return Math.round((versMs(fin) - versMs(debut)) / JOUR_MS);
 }

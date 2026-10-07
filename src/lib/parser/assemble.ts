@@ -20,7 +20,7 @@
  * Toute interprétation non évidente est signalée, jamais faite en silence.
  */
 import { formatDuree } from '../format';
-import type { Dose, Palier, Probleme, Span } from '../types';
+import type { Dose, Objectif, Palier, Probleme, Span } from '../types';
 import { nombreFr } from './normalize';
 import type { Jeton } from './lexer';
 
@@ -88,6 +88,7 @@ const IGNORES = new Set(['inconnu', 'mgkg', 'cp', 'fourchette', 'mg', 'et', 'sla
 /** Ce qui se transmet d'un segment à l'autre (dosage du comprimé déjà écrit). */
 interface Contexte {
   dosageCp: number | null;
+  temps: Temps;
 }
 
 function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | undefined, ctx: Contexte): Bloc | 'duree-seule' | null {
@@ -175,7 +176,7 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
           k++;
         } else if (s1?.type === 'echeance' || s1?.type === 'duree') {
           if (jusquaEcheance !== null) incompris = true;
-          jusquaEcheance = s1.valeur!;
+          jusquaEcheance = jours(s1, ctx.temps);
           k++;
         } else incompris = true;
         break;
@@ -192,13 +193,13 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
         } else if (s1?.type === 'echeance' || s1?.type === 'duree') {
           // « 10 mg à 3 mois », « arrêt à M12 » : échéance d'un objectif.
           if (echeance !== null) incompris = true;
-          echeance = s1.valeur!;
+          echeance = jours(s1, ctx.temps);
           k++;
         }
         break;
       case 'echeance':
         if (echeance !== null) incompris = true;
-        echeance = t.valeur!;
+        echeance = jours(t, ctx.temps);
         break;
       case 'objectif':
         objectif = true;
@@ -394,19 +395,24 @@ function doseSuivante(d: number, pas: number | null, facteur = 1): number {
   return d > 20 ? sous(5 * facteur) : d > 10 ? sous(2.5 * facteur) : sous(facteur);
 }
 
-/** Répartit `jours` sur `n` paliers en semaines entières ; le surplus va aux derniers (doses basses, baisse plus lente). */
+/**
+ * Répartit au plus `jours` sur `n` paliers, en semaines entières (les jours en
+ * trop sont laissés : la cible arrive quelques jours plus tôt, jamais plus
+ * tard) ; les semaines en plus vont aux derniers paliers (doses basses, baisse
+ * plus lente). Moins d'une semaine par palier : en jours.
+ */
 function repartir(jours: number, n: number): number[] {
   const unite = jours >= 7 * n ? 7 : 1;
   const total = Math.floor(jours / unite);
   const base = Math.floor(total / n);
   const plus = total % n;
-  const durees = Array.from({ length: n }, (_, i) => (base + (i >= n - plus ? 1 : 0)) * unite);
-  durees[n - 1]! += jours - total * unite;
-  return durees;
+  return Array.from({ length: n }, (_, i) => (base + (i >= n - plus ? 1 : 0)) * unite);
 }
 
 /** Déroule les blocs en paliers. */
-function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
+function derouler(blocs: Bloc[], problemes: Probleme[], temps: Temps): Palier[] {
+  /** « J85 », ou « le 07/01/2027 (J85) » si la date de début est connue. */
+  const quand = (j: number) => (temps.date ? `le ${temps.date(j)} (J${j + 1})` : `à J${j + 1}`);
   const paliers: Palier[] = [];
   let courante: number | null = null;
   /** Dose atteinte par un objectif, dont la durée dépend de l'étape suivante. */
@@ -448,7 +454,7 @@ function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
         jours = bloc.jusqua - ecoule();
         if (jours <= 0) {
           problemes.push({ code: 'echeance-depassee', niveau: 'erreur', span: bloc.span,
-            message: `« Jusqu’à J${bloc.jusqua + 1} » tombe avant la fin des étapes précédentes (J${ecoule() + 1}).` });
+            message: `« Jusqu’à » ${quand(bloc.jusqua)} : tombe avant la fin des étapes précédentes (J${ecoule() + 1}).` });
           return;
         }
       }
@@ -576,12 +582,19 @@ function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
       }
     }
     const depart = ouvert ? (ouvert.dose as number) : courante;
-    if (depart === null) return erreur('segment-incompris', 'Objectif sans dose de départ : écrivez d’abord la dose initiale (ex. « 40 mg puis 20 mg à 1 mois »).');
+    if (depart === null) {
+      return problemes.push({
+        code: 'segment-incompris', niveau: 'erreur', span,
+        message: 'Objectif sans dose de départ : de quelle dose part-on ?',
+        suggestions: [10, 20, 40, 60].filter((d) => d > cible).slice(-3)
+          .map((d) => ({ libelle: `${d} mg puis…`, position: span[0], insertion: `${d} mg puis ` })),
+      });
+    }
     if (cible > depart) return erreur('borne-incoherente', `L’objectif (${nombreFr(cible)} mg) est au-dessus de la dose actuelle (${nombreFr(depart)} mg).`);
     const debut = ecoule();
     const jours = bloc.echeance !== null ? bloc.echeance - debut : bloc.dans!;
     if (jours <= 0) {
-      return erreur('echeance-depassee', `L’objectif de ${nombreFr(cible)} mg (J${bloc.echeance! + 1}) tombe avant la fin des étapes précédentes (J${debut + 1}).`);
+      return erreur('echeance-depassee', `L’objectif de ${nombreFr(cible)} mg (${quand(bloc.echeance!)}) tombe avant la fin des étapes précédentes (J${debut + 1}).`);
     }
 
     // Doses intermédiaires selon l'échelle, la cible exclue.
@@ -607,17 +620,20 @@ function derouler(blocs: Bloc[], problemes: Probleme[]): Palier[] {
         message: `Objectif rapide (${nombreFr(depart)} → ${nombreFr(cible)} mg en ${formatDuree(jours)}) : baisses plus fortes que d’habitude pour garder au moins 1 semaine par palier.` });
     }
     const etapes: Palier[] = [...(ouvert ? [ouvert] : []), ...niveaux.map((d) => ({ dose: d, jours: 0 }))];
+    let duree = 0;
     if (etapes.length > 0) {
-      repartir(jours, etapes.length).forEach((j, k) => (etapes[k]!.jours = j));
+      repartir(jours, etapes.length).forEach((j, k) => ((etapes[k]!.jours = j), (duree += j)));
       paliers.push(...etapes.slice(ouvert ? 1 : 0));
     }
-    const atteint = debut + (etapes.length > 0 ? jours : 0);
+    const atteint = debut + duree;
+    const avance = debut + jours - atteint;
     problemes.push({ code: 'objectif-calcule', niveau: 'info', span,
       message: cible === 0
-        ? `Arrêt à J${atteint + 1}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(jours)}` : ''}.`
-        : `Objectif ${nombreFr(cible)} mg atteint à J${atteint + 1}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(jours)}` : ' (dès la fin de l’étape précédente)'}.` });
+        ? `Arrêt ${quand(atteint)}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(duree)}` : ''}.`
+        : `Objectif ${nombreFr(cible)} mg atteint ${quand(atteint)}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(duree)}` : ' (dès la fin de l’étape précédente)'}${avance > 0 ? `, ${avance} jour(s) avant l’échéance` : ''}.` });
     const palier: Palier = { dose: cible, jours: null };
     paliers.push(palier);
+    temps.objectifs.push({ jour: debut + jours, dose: cible });
     courante = cible;
     atteinte = cible === 0 ? null : { palier, span };
   }
@@ -630,12 +646,29 @@ function formatDoseCourte(dose: Dose): string {
 }
 
 /** Point d'entrée de l'assemblage. */
-export function assembler(jetons: Jeton[], problemes: Probleme[]): Palier[] {
+/** Conversion des échéances en jours, et repères d'objectifs relevés au déroulé. */
+export interface Temps {
+  /** Nombre de mois → jours écoulés depuis J1 (mois calendaires si la date de début est connue). */
+  moisEnJours: (n: number) => number;
+  /** Jour (0 = J1) → date « 07/01/2027 », si la date de début est connue. */
+  date?: (j: number) => string;
+  /** Rempli par le déroulé : dose maximale visée à un jour donné. */
+  objectifs: Objectif[];
+}
+
+/** Échéance d'un jeton durée/échéance, en jours depuis J1. */
+function jours(t: Jeton, temps: Temps): number {
+  if (t.nbMois === undefined) return t.valeur!;
+  if (temps.date) t.calendaire = true;
+  return temps.moisEnJours(t.nbMois);
+}
+
+export function assembler(jetons: Jeton[], problemes: Probleme[], temps: Temps): Palier[] {
   const blocs: Bloc[] = [];
-  const ctx: Contexte = { dosageCp: null };
+  const ctx: Contexte = { dosageCp: null, temps };
   for (const seg of segmenter(jetons)) {
     const bloc = lireSegment(seg, problemes, blocs[blocs.length - 1], ctx);
     if (bloc && bloc !== 'duree-seule') blocs.push(bloc);
   }
-  return derouler(blocs, problemes);
+  return derouler(blocs, problemes, temps);
 }
