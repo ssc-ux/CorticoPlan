@@ -43,7 +43,7 @@ Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
 diminution a lieu dès le premier jour du bloc. Pour un **objectif daté**, les paliers
 intermédiaires sont calculés : −5 mg au-dessus de 20 mg, −2,5 mg jusqu'à 10 mg, puis −1 mg
 (ou le pas écrit : « par paliers de 2,5 mg »), en semaines entières, les doses basses gardées
-plus longtemps ; la dose visée commence au plus tard à l'échéance (jusqu'à 6 jours avant, pour garder des semaines entières). Dans **Comparer**, les objectifs écrits sont marqués ▼ sur le graphique et le tableau indique pour chaque schéma combien il en tient. Non pris en charge (signalé) :
+plus longtemps ; la dose visée commence au plus tard à l'échéance (jusqu'à 6 jours avant, pour garder des semaines entières). Non pris en charge (signalé) :
 doses en mg/kg, en comprimés, fourchettes (« 3-4 semaines »), alternance entre deux doses.
 
 ### Pour le patient
@@ -58,7 +58,9 @@ lui-même (après « # ») : rien n'est envoyé ni enregistré, aucun nom n'y fi
 
 Onglet **Comparer** : toucher la tuile d'une maladie affiche tous ses schémas sur un même
 graphique ; décocher ceux qui n'intéressent pas. On peut ajouter les schémas d'une autre maladie
-et le schéma écrit dans « Écrire ». Un tableau indique pour chacun la dose de départ, la semaine
+et le schéma écrit dans « Écrire ». Si ce schéma dépasse un **repère daté du PNDS** de la maladie affichée
+(ex. Horton : ≤ 15 mg/j à M3, ≤ 10 mg/j à M6, sevrage à M12), une alerte discrète l'indique avec
+la page du PNDS (mois calendaires, une semaine de marge). Repères dans `src/data/objectifs-pnds.json`. Un tableau indique pour chacun la dose de départ, la semaine
 où l'on passe à 7,5 mg puis à 5 mg, l'arrêt et la dose cumulée ; « Utiliser » reprend le schéma.
 
 ## Modifier le contenu (sans programmer)

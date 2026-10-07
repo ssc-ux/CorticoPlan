@@ -30,6 +30,16 @@ export function ajouterMois(iso: string, n: number): string {
   return versIso(Date.UTC(a!, m! - 1 + n, Math.min(j!, dernier)));
 }
 
+/**
+ * `n` mois en jours depuis le début : date anniversaire si la date de début
+ * est connue, sinon `joursParMois` par mois. Un demi-mois compte toujours
+ * `joursParMois / 2`.
+ */
+export function moisEnJours(n: number, joursParMois: number, debut?: string | null): number {
+  if (!debut) return Math.round(n * joursParMois);
+  return ecartJours(debut, ajouterMois(debut, Math.floor(n))) + Math.round((n % 1) * joursParMois);
+}
+
 export function ecartJours(debut: string, fin: string): number {
   return Math.round((versMs(fin) - versMs(debut)) / JOUR_MS);
 }

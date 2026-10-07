@@ -9,6 +9,7 @@
   import { doseMoyenne } from '../lib/schedule';
   import { nombreFr } from '../lib/parser/normalize';
   import { court, estPnds, PATHOLOGIES, SCHEMAS, schemasDe, type Schema } from '../lib/schemas';
+  import { ecartsPnds } from '../lib/objectifs';
   import Tuiles from './Tuiles.svelte';
   import type { Options, Palier } from '../lib/types';
 
@@ -104,10 +105,9 @@
       })
       .filter((s): s is Serie => s !== null),
   );
-  /** Objectifs datés du schéma écrit : repérés sur le graphique, et vérifiés pour chaque schéma. */
-  const objectifs = $derived(saisieOk ? saisie.objectifs : []);
-  const tenus = (paliers: Palier[]) => objectifs.filter((o) => doseLe(paliers, o.jour) <= o.dose + 1e-9).length;
-  const tableau = $derived(series.map((s) => ({ ...s, r: reperes(s.paliers), tenus: tenus(s.paliers) })));
+  const tableau = $derived(series.map((s) => ({ ...s, r: reperes(s.paliers) })));
+  /** Le schéma écrit dépasse-t-il un repère daté du PNDS des maladies affichées ? */
+  const ecarts = $derived(saisieOk ? ecartsPnds(saisie.paliers, maladies, options.debut) : []);
 
   // Graphique : semaines en abscisse, mg/j en ordonnée.
   let largeur = $state(640);
@@ -115,7 +115,7 @@
   const H = $derived(Math.round(Math.min(320, Math.max(220, W * 0.5))));
   const M = { g: 40, d: 14, h: 12, b: 30 };
   const nbJours = $derived.by(() => {
-    const fin = Math.max(28, ...tableau.map((t) => t.r.arret ?? t.r.duree + 28), ...objectifs.map((o) => o.jour + 14));
+    const fin = Math.max(28, ...tableau.map((t) => t.r.arret ?? t.r.duree + 28));
     return Math.ceil(fin / 28) * 28; // multiple de 4 semaines
   });
   const doseMax = $derived(Math.max(5, ...tableau.flatMap((t) => t.paliers.map((p) => doseMoyenne(p.dose)))));
@@ -164,6 +164,13 @@
   {:else}
     <button type="button" class="retour" onclick={fermer}>← Toutes les maladies</button>
     <h2 class="titre">{maladies.map(court).join(' + ')}</h2>
+    {#if ecarts.length}
+      <p class="ecart" role="note">
+        ⚠ Votre schéma (onglet Écrire) dépasse {ecarts.length > 1 ? 'des repères' : 'un repère'} du PNDS :
+        {#each ecarts as e, k}{k ? ' ; ' : ''}{e.repere === 0 ? `encore ${mg(e.dose)} à M${e.mois} (sevrage attendu)` : `${mg(e.dose)} à M${e.mois} (repère ≤ ${mg(e.repere)}/j)`}{/each}
+        — <a href={ecarts[0]!.source.url} target="_blank" rel="noopener">{ecarts[0]!.source.document}, {ecarts[0]!.source.page}</a>.
+      </p>
+    {/if}
 
     <section class="carte">
       {#if !series.length}
@@ -189,13 +196,7 @@
           {#each series as s}
             <path d={chemin(s.paliers)} class="ligne-serie" stroke={s.couleur} stroke-dasharray={s.tirets} />
           {/each}
-          {#each objectifs as o}
-            <g class="objectif">
-              <title>Objectif : ≤ {mg(o.dose)} à {semaine(o.jour)} (jour {o.jour + 1})</title>
-              <line x1={x(o.jour)} x2={x(o.jour)} y1={y(o.dose)} y2={H - M.b} />
-              <path d={`M${x(o.jour) - 6},${y(o.dose) - 7}h12l-6,7z`} />
-            </g>
-          {/each}
+
           {#if survol !== null}
             <line x1={x(survol + 0.5)} x2={x(survol + 0.5)} y1={M.h} y2={H - M.b} class="repere" />
             {#each series as s}
@@ -221,8 +222,7 @@
               {/each}
             </ul>
           {:else}
-            <span class="discret">Dose quotidienne (mg/j) par semaine. Survolez ou touchez le graphique pour comparer un jour précis.{#if objectifs.length}{" "}
-                ▼ : objectifs datés de l'onglet Écrire (dose maximale à cette date).{/if}</span>
+            <span class="discret">Dose quotidienne (mg/j) par semaine. Survolez ou touchez le graphique pour comparer un jour précis.</span>
           {/if}
         </figcaption>
       </figure>
@@ -275,7 +275,6 @@
               <th>≤ 5 mg</th>
               <th>Arrêt</th>
               <th>Dose cumulée</th>
-              {#if objectifs.length}<th>Objectifs tenus</th>{/if}
               <th></th>
             </tr>
           </thead>
@@ -296,9 +295,6 @@
                   {nombreFr(Math.round(t.r.cumul))} mg
                   {#if t.r.arret === null}<span class="discret">en {Math.round(t.r.duree / 7)} sem</span>{/if}
                 </td>
-                {#if objectifs.length}
-                  <td class:tenu={t.tenus === objectifs.length}>{t.tenus}/{objectifs.length}{t.tenus === objectifs.length ? ' ✓' : ''}</td>
-                {/if}
                 <td><button type="button" class="utiliser" onclick={() => onutiliser(t.schema, t.texte)}>Utiliser</button></td>
               </tr>
             {/each}
@@ -317,18 +313,13 @@
   .comparer {
     padding-top: 14px;
   }
-  .objectif line {
-    stroke: var(--fg);
-    stroke-width: 1;
-    stroke-dasharray: 2 3;
-    opacity: 0.5;
+  .ecart {
+    margin: 0 0 10px;
+    color: var(--attention);
+    font-size: 0.85rem;
   }
-  .objectif path {
-    fill: var(--fg);
-  }
-  .tenu {
-    color: var(--pnds);
-    font-weight: 600;
+  .ecart a {
+    color: inherit;
   }
   .intro {
     margin: 8px 0 10px;

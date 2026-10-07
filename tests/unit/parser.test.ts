@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { reformuler } from '../../src/lib/format';
 import { analyser } from '../../src/lib/parser';
 import { normaliser } from '../../src/lib/parser/normalize';
+import { moisEnJours } from '../../src/lib/dates';
+import { ecartsPnds, OBJECTIFS_PNDS } from '../../src/lib/objectifs';
+import { estPnds, SCHEMAS } from '../../src/lib/schemas';
 
 describe('normaliser', () => {
   it('conserve la longueur pour que les positions restent valables', () => {
@@ -56,13 +59,36 @@ describe('robustesse', () => {
 describe('objectifs datés : date anniversaire', () => {
   it('« à 6 mois » tombe le même jour 6 mois plus tard ; paliers en semaines entières, jamais en retard', () => {
     const r = analyser('20 mg 1 mois puis 5 mg à 6 mois', { debut: '2026-10-07' });
-    expect(r.objectifs).toEqual([{ jour: 182, dose: 5 }]); // 07/04/2027
     const avant5 = r.paliers.slice(0, -1).reduce((s, p) => s + p.jours!, 0);
     expect(avant5).toBeLessThanOrEqual(182);
     expect(r.paliers.slice(1, -1).every((p) => p.jours! % 7 === 0)).toBe(true);
     expect(r.problemes.find((p) => p.code === 'objectif-calcule')?.message).toContain('07/04/2027');
   });
   it('31 janvier + 1 mois = fin février', () => {
-    expect(analyser('20 mg puis 10 mg à M1', { debut: '2027-01-31' }).objectifs).toEqual([{ jour: 28, dose: 10 }]);
+    expect(moisEnJours(1, 28, '2027-01-31')).toBe(28);
+    expect(moisEnJours(1, 28, '2028-01-31')).toBe(29);
   });
+});
+
+describe('repères des PNDS (alerte de « Comparer »)', () => {
+  const horton = ['Artérite à cellules géantes (Horton)'];
+  it('signale un schéma au-dessus des repères (Horton : ≤ 15 mg à M3, ≤ 10 mg à M6, sevrage à M12)', () => {
+    const r = analyser('40 mg 1 mois puis 20 mg à M4 puis 10 mg à M8', { debut: '2026-10-07' });
+    expect(ecartsPnds(r.paliers, horton, '2026-10-07').map((e) => [e.mois, e.dose])).toEqual([[3, 25], [6, 15], [12, 10]]);
+  });
+  it('rien à signaler si les repères sont tenus', () => {
+    const r = analyser('50 mg 1 mois puis 15 mg à M3 puis 7 mg à M6 puis arrêt à M12', { debut: '2026-10-07' });
+    expect(ecartsPnds(r.paliers, horton, '2026-10-07')).toEqual([]);
+  });
+});
+
+describe('repères des PNDS : la bibliothèque les respecte', () => {
+  it.each(SCHEMAS.filter(estPnds).filter((s) => OBJECTIFS_PNDS.some((o) => o.pathologie === s.pathologie)).map((s) => [s.nom, s]))(
+    '%s',
+    (_, s) => {
+      for (const debut of ['2026-01-31', '2026-03-01', '2026-09-01']) {
+        expect(ecartsPnds(analyser(s.texte).paliers, [s.pathologie], debut)).toEqual([]);
+      }
+    },
+  );
 });

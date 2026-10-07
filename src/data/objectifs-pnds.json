@@ -1,0 +1,111 @@
+{
+  "_lisezmoi": "Repères datés des PNDS (dose maximale de prednisone à une échéance comptée depuis le début du traitement). Servent à l'alerte discrète de l'onglet Comparer. Vérifier chaque repère dans sa source puis passer \"valide\" à true.",
+  "objectifs": [
+    {
+      "pathologie": "Artérite à cellules géantes (Horton)",
+      "reperes": [
+        {
+          "mois": 3,
+          "dose": 15
+        },
+        {
+          "mois": 6,
+          "dose": 10
+        },
+        {
+          "mois": 12,
+          "dose": 0
+        }
+      ],
+      "citation": "« Quand les objectifs de baisse des corticoïdes ne sont pas atteints (≤ 15 mg/j à M3, ≤ 5 à 10 mg/j à M6, sevrage à M12) »",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Artérite à cellules géantes (HAS)",
+        "annee": 2024,
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-03/pnds_acg_vf_1.pdf",
+        "page": "p. 27, 31 et 33"
+      }
+    },
+    {
+      "pathologie": "Périartérite noueuse (PAN)",
+      "reperes": [
+        {
+          "mois": 3,
+          "dose": 20
+        },
+        {
+          "mois": 6,
+          "dose": 10
+        },
+        {
+          "mois": 12,
+          "dose": 5
+        }
+      ],
+      "citation": "« points de repère essentiels : environ 20 mg/j à 3 mois, 10 mg/j à 6 mois et 5 mg/j à un an »",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS Vascularites nécrosantes systémiques (HAS)",
+        "annee": 2019,
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2019-06/pnds_vns.pdf",
+        "page": "p. 37"
+      }
+    },
+    {
+      "pathologie": "Anémie hémolytique auto-immune chaude",
+      "reperes": [
+        {
+          "mois": 6,
+          "dose": 0
+        }
+      ],
+      "citation": "« sevrer le patient de la corticothérapie en idéalement 3 mois et jusqu'à 6 mois maximum »",
+      "verification": "Texte intégral du PNDS lu",
+      "valide": false,
+      "source": {
+        "document": "PNDS AHAI de l'adulte (HAS)",
+        "annee": 2024,
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2024-07/pnds_ahai_de_ladulte_version_2024.pdf",
+        "page": "p. 33"
+      }
+    },
+    {
+      "pathologie": "Maladie de Still de l'adulte",
+      "reperes": [
+        {
+          "mois": 3,
+          "dose": 0
+        }
+      ],
+      "citation": "Tableau 4 : arrêt à 3 mois (l'objectif à 6 semaines, en mg/kg, n'est pas repris)",
+      "verification": "Repères lus dans le texte du PNDS (repris des schémas de CorticoPlan)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Still de l'adulte (HAS)",
+        "annee": 2018,
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2018-04/pnds_-_maladie_de_still_de_ladulte.pdf",
+        "page": "p. 23, tableau 4"
+      }
+    },
+    {
+      "pathologie": "Maladie de Behçet (atteinte grave)",
+      "reperes": [
+        {
+          "mois": 3,
+          "dose": 20
+        }
+      ],
+      "citation": "Atteintes graves : 15 à 20 mg/j à 3 mois (l'objectif à 6 mois, en mg/kg, n'est pas repris)",
+      "verification": "Repères lus dans le texte du PNDS (repris des schémas de CorticoPlan)",
+      "valide": false,
+      "source": {
+        "document": "PNDS Maladie de Behçet (HAS)",
+        "annee": 2019,
+        "url": "https://www.has-sante.fr/upload/docs/application/pdf/2019-12/pnds_behcet.pdf",
+        "page": "p. 35-37"
+      }
+    }
+  ]
+}

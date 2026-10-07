@@ -20,7 +20,7 @@
  * Toute interprétation non évidente est signalée, jamais faite en silence.
  */
 import { formatDuree } from '../format';
-import type { Dose, Objectif, Palier, Probleme, Span } from '../types';
+import type { Dose, Palier, Probleme, Span } from '../types';
 import { nombreFr } from './normalize';
 import type { Jeton } from './lexer';
 
@@ -633,7 +633,6 @@ function derouler(blocs: Bloc[], problemes: Probleme[], temps: Temps): Palier[] 
         : `Objectif ${nombreFr(cible)} mg atteint ${quand(atteint)}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(duree)}` : ' (dès la fin de l’étape précédente)'}${avance > 0 ? `, ${avance} jour(s) avant l’échéance` : ''}.` });
     const palier: Palier = { dose: cible, jours: null };
     paliers.push(palier);
-    temps.objectifs.push({ jour: debut + jours, dose: cible });
     courante = cible;
     atteinte = cible === 0 ? null : { palier, span };
   }
@@ -646,14 +645,12 @@ function formatDoseCourte(dose: Dose): string {
 }
 
 /** Point d'entrée de l'assemblage. */
-/** Conversion des échéances en jours, et repères d'objectifs relevés au déroulé. */
+/** Conversion des échéances en jours. */
 export interface Temps {
   /** Nombre de mois → jours écoulés depuis J1 (mois calendaires si la date de début est connue). */
   moisEnJours: (n: number) => number;
   /** Jour (0 = J1) → date « 07/01/2027 », si la date de début est connue. */
   date?: (j: number) => string;
-  /** Rempli par le déroulé : dose maximale visée à un jour donné. */
-  objectifs: Objectif[];
 }
 
 /** Échéance d'un jeton durée/échéance, en jours depuis J1. */

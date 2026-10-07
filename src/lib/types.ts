@@ -70,19 +70,12 @@ export interface Options {
   debut?: string;
 }
 
-/** Objectif daté : dose maximale (mg/j) visée au jour `jour` (0 = J1). */
-export interface Objectif {
-  jour: number;
-  dose: number;
-}
 
 export interface ResultatAnalyse {
   paliers: Palier[];
   problemes: Probleme[];
   /** Reformulation lisible, une ligne par palier. */
   reformulation: string[];
-  /** Objectifs datés écrits dans le texte (pour les repérer sur une courbe). */
-  objectifs: Objectif[];
   /** Vrai si aucune erreur : le schéma est utilisable. */
   ok: boolean;
 }
