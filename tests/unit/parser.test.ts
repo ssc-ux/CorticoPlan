@@ -64,6 +64,13 @@ describe('objectifs datés : date anniversaire', () => {
     expect(r.paliers.slice(1, -1).every((p) => p.jours! % 7 === 0)).toBe(true);
     expect(r.problemes.find((p) => p.code === 'objectif-calcule')?.message).toContain('07/04/2027');
   });
+  it('le message rappelle d’où se compte l’objectif ; « dans » et « = » sont compris', () => {
+    const msg = (t: string) => analyser(t, { debut: '2026-01-01' }).problemes.find((p) => p.code === 'objectif-calcule')?.message;
+    expect(msg('40 mg puis 10 mg à 3 mois')).toMatch(/au plus tard le 01\/04\/2026 .*depuis le début du traitement/);
+    expect(msg('40 mg puis objectif 10 mg en 6 semaines')).toContain('depuis la fin de l’étape précédente');
+    expect(analyser('40 mg puis objectif à M3 = 10 mg').ok).toBe(true);
+    expect(analyser('40 mg puis objectif 10 mg dans 3 mois').ok).toBe(true);
+  });
   it('31 janvier + 1 mois = fin février', () => {
     expect(moisEnJours(1, 28, '2027-01-31')).toBe(28);
     expect(moisEnJours(1, 28, '2028-01-31')).toBe(29);

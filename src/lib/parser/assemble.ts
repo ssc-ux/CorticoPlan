@@ -627,10 +627,14 @@ function derouler(blocs: Bloc[], problemes: Probleme[], temps: Temps): Palier[] 
     }
     const atteint = debut + duree;
     const avance = debut + jours - atteint;
+    // Rappel du sens : « à 3 mois » se compte depuis J1, « en 6 semaines » depuis l'étape précédente.
+    const quoi = cible === 0 ? 'Arrêt' : `Objectif ${nombreFr(cible)} mg`;
+    const reference = bloc.echeance !== null
+      ? `${quoi} au plus tard ${quand(bloc.echeance)}, compté depuis le début du traitement`
+      : `${quoi} en ${formatDuree(jours)}, compté depuis la fin de l’étape précédente`;
+    const detail = etapes.length ? `${etapes.length} palier(s) calculé(s) sur ${formatDuree(duree)}` : 'dès la fin de l’étape précédente';
     problemes.push({ code: 'objectif-calcule', niveau: 'info', span,
-      message: cible === 0
-        ? `Arrêt ${quand(atteint)}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(duree)}` : ''}.`
-        : `Objectif ${nombreFr(cible)} mg atteint ${quand(atteint)}${etapes.length ? ` : ${etapes.length} palier(s) calculé(s) sur ${formatDuree(duree)}` : ' (dès la fin de l’étape précédente)'}${avance > 0 ? `, ${avance} jour(s) avant l’échéance` : ''}.` });
+      message: `${reference} : ${cible === 0 ? 'arrêt' : 'atteint'} ${quand(atteint)}, ${detail}${avance > 0 ? ` (${avance} jour(s) d’avance)` : ''}.` });
     const palier: Palier = { dose: cible, jours: null };
     paliers.push(palier);
     courante = cible;

@@ -60,7 +60,7 @@ const RE_ET_DEMI = re(`[ ]+et[ ]+demie?${FIN_MOT}`);
 /** Mots sans importance pour le sens, ignorés sans signalement. */
 const MOTS_NEUTRES = new Set([
   'prednisone', 'cortancyl', 'le', 'la', 'les', "l'", 'l', 'de', "d'", 'd', 'du',
-  'des', 'pendant', 'pdt', 'durant', 'sur', 'matin', 'matins', 'au', 'en',
+  'des', 'pendant', 'pdt', 'durant', 'sur', 'matin', 'matins', 'au', 'en', 'dans',
   'prise', 'prises', 'dose', 'doses', 'soit', 'par', 'jour', 'jours',
   'quotidien', 'quotidienne', 'partir', 'x', 'po', 'os', 'per', 'unique',
   'une', 'un', 'fois', 'maintien', 'entretien', 'atteindre', 'atteint', 'obtenir',
@@ -162,7 +162,7 @@ const REGLES: Regle[] = [
   },
   { re: re(`et${FIN_MOT}`), jeton: () => ({ type: 'et' }) },
   { re: re(`a(?![a-z'])`), jeton: () => ({ type: 'a' }) },
-  { re: re('[:×*+()®™"«»\\[\\]]'), jeton: () => null },
+  { re: re('[:=×*+()®™"«»\\[\\]]'), jeton: () => null },
 ];
 
 const RE_MOT = re("[a-z]+'?");

@@ -36,7 +36,7 @@ ajouté à l'écran d'accueil du téléphone.
 | Borne | `jusqu'à 10`, `→ 10`, `-> 10`, `de 20 à 10`, `jusqu'à l'arrêt` |
 | Un jour sur deux | `20 mg 1 j/2`, `20 mg un jour sur deux` |
 | Dictée vocale | texte dicté au téléphone puis collé : `vingt milligrammes`, `deux virgule cinq`, `à la ligne`, `point` |
-| Objectif daté | `10 mg à 3 mois`, `≤ 5 mg à M6`, `5 mg au plus à 6 mois`, `moins de 5 mg à 6 mois`, `arrêt à 12 mois`, `objectif 10 mg en 6 semaines`, `5 mg jusqu'à M12` (M = mois, S = semaine, J = jour, comptés depuis J1 ; « à 6 mois » tombe à la **date anniversaire** de la date de début) |
+| Objectif daté | `10 mg à 3 mois`, `≤ 5 mg à M6`, `5 mg au plus à 6 mois`, `moins de 5 mg à 6 mois`, `arrêt à 12 mois`, `objectif 10 mg en 6 semaines`, `objectif 10 mg dans 3 mois`, `5 mg jusqu’à M12`. **« à 6 mois » / M6 se compte depuis le premier jour** (date anniversaire de la date de début) ; **« en » / « dans » se compte depuis la fin de l’étape précédente**. Le message sous le champ rappelle la date exacte et le point de départ du calcul (M = mois, S = semaine, J = jour) |
 | Fin | `arrêt` ; sinon la dernière dose est **maintenue** (« à poursuivre », « jusqu'à réévaluation » acceptés) |
 
 Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
