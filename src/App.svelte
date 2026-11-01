@@ -23,6 +23,14 @@
   import { calendrier } from './lib/schedule';
   import { SCHEMAS, type Schema } from './lib/schemas';
   import { EXEMPLES } from './lib/exemples';
+  /** Page d'accueil : le parcours du médecin, en tuiles qui se suivent. */
+  const PARCOURS: [string, string][] = [
+    ['Écrire', '« 40 mg 1 mois puis 10 mg à 3 mois »'],
+    ['Relire', '« ✓ Compris » ; un mot non compris est surligné'],
+    ['Dater', 'Date de début → toutes les dates se calculent'],
+    ["Copier l'ordonnance", 'Un geste, puis coller dans votre logiciel'],
+    ['Remettre le calendrier', '1 page A4, une case par jour, QR code'],
+  ];
   import { decoderPaliers, decoderPartage, encoderPaliers, encoderPartage } from './lib/share';
   import type { Palier } from './lib/types';
 
@@ -184,6 +192,17 @@
           <button type="button" onclick={() => (onglet = 'schemas')}>Parcourir les schémas</button>
         </div>
         <p class="discret dictee">🎙 Astuce : dictez le schéma avec la dictée vocale de votre téléphone, collez-le ici, et c'est prêt.</p>
+        <section class="parcours" aria-labelledby="titre-parcours">
+          <h2 id="titre-parcours">Une ordonnance en 30 secondes</h2>
+          <ol>
+            {#each PARCOURS as [titre, detail], i}
+              <li class:fin={i === PARCOURS.length - 1}>
+                <span class="num">{i + 1}</span>
+                <span><strong>{titre}</strong><span>{detail}</span></span>
+              </li>
+            {/each}
+          </ol>
+        </section>
       {/if}
       {#if schemaChoisi}
         <p class="discret source" class:pnds={/PNDS/.test(schemaChoisi.statut + schemaChoisi.source.document) && !schemaChoisi.statut.startsWith("issu d'un essai")}>
@@ -473,6 +492,77 @@
   }
   .accueil footer {
     text-align: center;
+  }
+  .parcours {
+    margin: 28px auto 0;
+    width: 100%;
+    max-width: 460px;
+  }
+  .parcours h2 {
+    margin: 0 0 10px;
+    text-align: center;
+    font: 600 1.05rem/1.3 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--fg);
+  }
+  .parcours ol {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .parcours li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+    text-align: left;
+  }
+  /* Flèche entre deux tuiles. */
+  .parcours li + li::before {
+    content: '↓';
+    position: absolute;
+    top: -21px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+  .parcours .num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-doux);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .parcours strong {
+    display: block;
+    font-size: 0.95rem;
+  }
+  .parcours li span span {
+    font-size: 0.85rem;
+    color: var(--texte-2);
+  }
+  .parcours li.fin {
+    border-color: var(--pnds);
+    background: var(--pnds-fond);
+  }
+  .parcours li.fin .num {
+    background: var(--pnds);
+    color: var(--card);
   }
   .dictee {
     margin: 0.4rem 0 0;
