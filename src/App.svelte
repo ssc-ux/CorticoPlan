@@ -202,6 +202,7 @@
               </li>
             {/each}
           </ol>
+          <p class="discret dictee">📱 Astuce : le QR code imprimé sur le calendrier s'ouvre avec l'appareil photo du patient. Il y retrouve sa dose du jour, les prochains changements, et peut ajouter des rappels à son agenda. Tout reste sur son téléphone : rien n'est envoyé.</p>
         </section>
       {/if}
       {#if schemaChoisi}
