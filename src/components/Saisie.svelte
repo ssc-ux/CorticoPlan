@@ -6,7 +6,12 @@
   import { onDestroy } from 'svelte';
   import { EXEMPLES } from '../lib/exemples';
 
-  let { texte = $bindable(), accueil = false }: { texte: string; accueil?: boolean } = $props();
+  let {
+    texte = $bindable(),
+    accueil = false,
+    ouvert = false,
+    onkeydown,
+  }: { texte: string; accueil?: boolean; ouvert?: boolean; onkeydown?: (e: KeyboardEvent) => void } = $props();
 
   let focus = $state(false);
   let index = $state(0);
@@ -32,6 +37,8 @@
     bind:value={texte}
     onfocus={() => (focus = true)}
     onblur={() => (focus = false)}
+    {onkeydown}
+    aria-controls={ouvert ? 'suggestions-protocoles' : undefined}
     rows="4"
     spellcheck="false"
     autocomplete="off"

@@ -6,6 +6,10 @@ import donnees from '../data/schemas.json';
 export interface Schema {
   pathologie: string;
   nom: string;
+  /** Protocole qui regroupe des variantes (« PEXIVAS », « PNDS Lupus », « KDIGO 2024 »…). */
+  protocole: string;
+  /** Ce qui distingue ce schéma des autres du protocole : { Poids: '50 à 75 kg', Dose: 'Réduite · PNDS' }. */
+  choix?: Record<string, string>;
   texte: string;
   mgKg: boolean;
   statut: string;

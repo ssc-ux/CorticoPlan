@@ -1,9 +1,14 @@
 {
-  "_lisezmoi": "Schémas proposés dans « Choisir un schéma ». Chaque texte est lu par le même moteur que la saisie libre. Avant usage, vérifier chaque schéma dans sa source puis passer \"valide\" à true. statut : issu du PNDS | compatible PNDS | issu d'un essai. verification : ce que CorticoPlan a réellement lu.",
+  "_lisezmoi": "Schémas proposés dans « Choisir un schéma ». Chaque texte est lu par le même moteur que la saisie libre. Avant usage, vérifier chaque schéma dans sa source puis passer \"valide\" à true. statut : issu du PNDS | compatible PNDS | issu d'un essai. verification : ce que CorticoPlan a réellement lu. protocole + choix : regroupent les variantes d'un même protocole (poids, bras, dose de départ…) pour la recherche du champ principal ; chaque combinaison de choix doit être unique dans un protocole.",
   "schemas": [
     {
       "pathologie": "Vascularite à ANCA (GPA, PAM)",
       "nom": "Décroissance rapide (PEXIVAS), < 50 kg — 5 mg jusqu'à M12",
+      "protocole": "PEXIVAS",
+      "choix": {
+        "Dose": "Réduite · PNDS",
+        "Poids": "< 50 kg"
+      },
       "texte": "50 mg 1 sem, 25 mg 1 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 2 sem, 6 mg 2 sem, puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -20,6 +25,11 @@
     {
       "pathologie": "Vascularite à ANCA (GPA, PAM)",
       "nom": "Décroissance rapide (PEXIVAS), 50 à 75 kg — 5 mg jusqu'à M12",
+      "protocole": "PEXIVAS",
+      "choix": {
+        "Dose": "Réduite · PNDS",
+        "Poids": "50 à 75 kg"
+      },
       "texte": "60 mg 1 sem, 30 mg 1 sem, 25 mg 2 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 2 sem, puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -36,6 +46,11 @@
     {
       "pathologie": "Vascularite à ANCA (GPA, PAM)",
       "nom": "Décroissance rapide (PEXIVAS), > 75 kg — 5 mg jusqu'à M12",
+      "protocole": "PEXIVAS",
+      "choix": {
+        "Dose": "Réduite · PNDS",
+        "Poids": "> 75 kg"
+      },
       "texte": "75 mg 1 sem, 40 mg 1 sem, 30 mg 2 sem, 25 mg 2 sem, 20 mg 2 sem, 15 mg 2 sem, 12,5 mg 2 sem, 10 mg 2 sem, 7,5 mg 4 sem, puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -52,6 +67,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Dose modérée (cas usuels), 80 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Dose modérée (cas usuels)",
+        "Poids": "80 kg"
+      },
       "texte": "40 mg 2 sem puis 35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 8 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -68,6 +88,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Dose modérée (cas usuels), 70 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Dose modérée (cas usuels)",
+        "Poids": "70 kg"
+      },
       "texte": "35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 10 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -84,6 +109,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Dose modérée (cas usuels), 60 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Dose modérée (cas usuels)",
+        "Poids": "60 kg"
+      },
       "texte": "30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 10 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -100,6 +130,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Dose modérée (cas usuels), 50 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Dose modérée (cas usuels)",
+        "Poids": "50 kg"
+      },
       "texte": "25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 12 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -116,6 +151,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Dose modérée (cas usuels), 40 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Dose modérée (cas usuels)",
+        "Poids": "40 kg"
+      },
       "texte": "20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 14 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -132,6 +172,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Forme sévère, 80 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Forme sévère",
+        "Poids": "80 kg"
+      },
       "texte": "80 mg 2 sem puis 60 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 22,5 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 8 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -148,6 +193,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Forme sévère, 70 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Forme sévère",
+        "Poids": "70 kg"
+      },
       "texte": "70 mg 2 sem puis 50 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 10 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -164,6 +214,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Forme sévère, 60 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Forme sévère",
+        "Poids": "60 kg"
+      },
       "texte": "60 mg 2 sem puis 45 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 10 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -180,6 +235,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Forme sévère, 50 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Forme sévère",
+        "Poids": "50 kg"
+      },
       "texte": "50 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 12 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -196,6 +256,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Forme sévère, 40 kg — 5 mg de M7 à M12 puis arrêt à discuter",
+      "protocole": "PNDS Lupus",
+      "choix": {
+        "Forme": "Forme sévère",
+        "Poids": "40 kg"
+      },
       "texte": "40 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 14 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS",
@@ -212,6 +277,10 @@
     {
       "pathologie": "Anémie hémolytique auto-immune chaude",
       "nom": "1 mg/kg pour 50 kg, sevrage en 3 mois environ",
+      "protocole": "PNDS AHAI",
+      "choix": {
+        "Poids": "50 kg"
+      },
       "texte": "50 mg 3 sem puis -10 mg tous les 10 jours jusqu'à 10 mg puis 10 mg 2 sem puis 7,5 mg 1 sem puis 5 mg 1 sem puis arrêt",
       "mgKg": false,
       "statut": "issu du PNDS — dose calculée pour le poids ; durée des paliers 7,5 et 5 mg (1 sem) choisie pour un sevrage en 3 mois",
@@ -228,6 +297,10 @@
     {
       "pathologie": "Anémie hémolytique auto-immune chaude",
       "nom": "1 mg/kg pour 60 kg, sevrage en 3 mois environ",
+      "protocole": "PNDS AHAI",
+      "choix": {
+        "Poids": "60 kg"
+      },
       "texte": "60 mg 3 sem puis -10 mg tous les 10 jours jusqu'à 10 mg puis 10 mg 2 sem puis 7,5 mg 1 sem puis 5 mg 1 sem puis arrêt",
       "mgKg": false,
       "statut": "issu du PNDS — dose calculée pour le poids ; durée des paliers 7,5 et 5 mg (1 sem) choisie pour un sevrage en 3 mois",
@@ -244,6 +317,10 @@
     {
       "pathologie": "Anémie hémolytique auto-immune chaude",
       "nom": "1 mg/kg pour 70 kg, sevrage en 3 mois environ",
+      "protocole": "PNDS AHAI",
+      "choix": {
+        "Poids": "70 kg"
+      },
       "texte": "70 mg 3 sem puis -10 mg tous les 10 jours jusqu'à 10 mg puis 10 mg 2 sem puis 7,5 mg 1 sem puis 5 mg 1 sem puis arrêt",
       "mgKg": false,
       "statut": "issu du PNDS — dose calculée pour le poids ; durée des paliers 7,5 et 5 mg (1 sem) choisie pour un sevrage en 3 mois",
@@ -260,6 +337,10 @@
     {
       "pathologie": "Anémie hémolytique auto-immune chaude",
       "nom": "1 mg/kg pour 80 kg, sevrage en 3 mois environ",
+      "protocole": "PNDS AHAI",
+      "choix": {
+        "Poids": "80 kg"
+      },
       "texte": "80 mg 3 sem puis -10 mg tous les 10 jours jusqu'à 10 mg puis 10 mg 2 sem puis 7,5 mg 1 sem puis 5 mg 1 sem puis arrêt",
       "mgKg": false,
       "statut": "issu du PNDS — dose calculée pour le poids ; durée des paliers 7,5 et 5 mg (1 sem) choisie pour un sevrage en 3 mois",
@@ -276,6 +357,10 @@
     {
       "pathologie": "Purpura thrombopénique immunologique (PTI)",
       "nom": "1 mg/kg pendant 3 semaines puis arrêt — 50 kg (50 mg)",
+      "protocole": "PNDS PTI",
+      "choix": {
+        "Poids": "50 kg"
+      },
       "texte": "50 mg 3 sem puis arrêt",
       "mgKg": false,
       "statut": "issu du PNDS — dose calculée pour le poids",
@@ -292,6 +377,10 @@
     {
       "pathologie": "Purpura thrombopénique immunologique (PTI)",
       "nom": "1 mg/kg pendant 3 semaines puis arrêt — 60 kg (60 mg)",
+      "protocole": "PNDS PTI",
+      "choix": {
+        "Poids": "60 kg"
+      },
       "texte": "60 mg 3 sem puis arrêt",
       "mgKg": false,
       "statut": "issu du PNDS — dose calculée pour le poids",
@@ -308,6 +397,10 @@
     {
       "pathologie": "Purpura thrombopénique immunologique (PTI)",
       "nom": "1 mg/kg pendant 3 semaines puis arrêt — 70 kg (70 mg)",
+      "protocole": "PNDS PTI",
+      "choix": {
+        "Poids": "70 kg"
+      },
       "texte": "70 mg 3 sem puis arrêt",
       "mgKg": false,
       "statut": "issu du PNDS — dose calculée pour le poids",
@@ -324,6 +417,10 @@
     {
       "pathologie": "Purpura thrombopénique immunologique (PTI)",
       "nom": "1 mg/kg (max 80 mg) pendant 3 semaines puis arrêt — 80 kg et plus (80 mg)",
+      "protocole": "PNDS PTI",
+      "choix": {
+        "Poids": "80 kg et plus"
+      },
       "texte": "80 mg 3 sem puis arrêt",
       "mgKg": false,
       "statut": "issu du PNDS — dose calculée pour le poids",
@@ -340,6 +437,10 @@
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
       "nom": "Départ 40 mg — 15 mg à M3, 7,5 mg à M6, arrêt vers M11",
+      "protocole": "PNDS Horton",
+      "choix": {
+        "Départ": "40 mg"
+      },
       "texte": "40 mg 4 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 4 sem puis 7,5 mg 4 sem puis 5 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires construits par CorticoPlan sur les repères du PNDS",
@@ -356,6 +457,10 @@
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
       "nom": "Départ 60 mg — 15 mg à M3, 7,5 mg à M6, arrêt vers M11",
+      "protocole": "PNDS Horton",
+      "choix": {
+        "Départ": "60 mg"
+      },
       "texte": "60 mg 4 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 4 sem puis 7,5 mg 4 sem puis 5 mg 4 sem puis -1 mg toutes les 4 semaines jusqu'à l'arrêt",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires construits par CorticoPlan sur les repères du PNDS",
@@ -372,6 +477,7 @@
     {
       "pathologie": "Périartérite noueuse (PAN)",
       "nom": "60 mg (1 mg/kg plafonné) — 20 mg à M3, 10 mg à M6, 5 mg à M12",
+      "protocole": "PNDS PAN",
       "texte": "60 mg 3 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 4 sem puis 17,5 mg 4 sem puis 15 mg 4 sem puis 12,5 mg 3 sem puis 10 mg 5 sem puis -1 mg toutes les 5 semaines jusqu'à 5 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires construits par CorticoPlan sur les repères du PNDS",
@@ -388,6 +494,10 @@
     {
       "pathologie": "Maladie associée aux IgG4",
       "nom": "Départ 40 mg 4 semaines puis -5 mg toutes les 2 semaines jusqu'à 5 mg",
+      "protocole": "PNDS IgG4",
+      "choix": {
+        "Départ": "40 mg"
+      },
       "texte": "40 mg 4 sem puis -5 mg toutes les 2 semaines jusqu'à 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS (valeurs choisies dans les fourchettes : 40 mg, 4 semaines)",
@@ -404,6 +514,10 @@
     {
       "pathologie": "Maladie associée aux IgG4",
       "nom": "Départ 30 mg 2 semaines puis -5 mg toutes les 2 semaines jusqu'à 5 mg",
+      "protocole": "PNDS IgG4",
+      "choix": {
+        "Départ": "30 mg"
+      },
       "texte": "30 mg 2 sem puis -5 mg toutes les 2 semaines jusqu'à 5 mg",
       "mgKg": false,
       "statut": "issu du PNDS (valeurs choisies dans les fourchettes : 30 mg, 2 semaines)",
@@ -420,6 +534,10 @@
     {
       "pathologie": "Sarcoïdose pulmonaire",
       "nom": "Départ 20 mg, entretien 10 mg",
+      "protocole": "PNDS Sarcoïdose",
+      "choix": {
+        "Départ": "20 mg"
+      },
       "texte": "20 mg 4 sem puis -5 mg toutes les 4 semaines jusqu'à 10 mg",
       "mgKg": false,
       "statut": "issu du PNDS (valeurs choisies dans les fourchettes)",
@@ -436,6 +554,10 @@
     {
       "pathologie": "Sarcoïdose pulmonaire",
       "nom": "Départ 40 mg, entretien 10 mg",
+      "protocole": "PNDS Sarcoïdose",
+      "choix": {
+        "Départ": "40 mg"
+      },
       "texte": "40 mg 4 sem puis -10 mg toutes les 2 semaines jusqu'à 10 mg",
       "mgKg": false,
       "statut": "issu du PNDS (valeurs choisies dans les fourchettes)",
@@ -452,6 +574,11 @@
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
       "nom": "Essai SELECT-GCA : départ 60 mg, arrêt à S52 — bras placebo (corticoïdes seuls)",
+      "protocole": "SELECT-GCA",
+      "choix": {
+        "Bras": "Placebo · arrêt S52",
+        "Départ": "60 mg"
+      },
       "texte": "60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17 mg 2 sem puis 15 mg 2 sem puis 12 mg 1 sem puis 10 mg 4 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -468,6 +595,11 @@
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
       "nom": "Essai SELECT-GCA : départ 60 mg, arrêt à S26 — bras upadacitinib (à associer à un traitement d’épargne)",
+      "protocole": "SELECT-GCA",
+      "choix": {
+        "Bras": "Upadacitinib · arrêt S26",
+        "Départ": "60 mg"
+      },
       "texte": "60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 15 mg 1 sem puis 12 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -484,6 +616,11 @@
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
       "nom": "Essai SELECT-GCA : départ 50 mg, arrêt à S52 — bras placebo (corticoïdes seuls)",
+      "protocole": "SELECT-GCA",
+      "choix": {
+        "Bras": "Placebo · arrêt S52",
+        "Départ": "50 mg"
+      },
       "texte": "50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17 mg 2 sem puis 15 mg 2 sem puis 12 mg 1 sem puis 10 mg 4 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -500,6 +637,11 @@
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
       "nom": "Essai SELECT-GCA : départ 50 mg, arrêt à S26 — bras upadacitinib (à associer à un traitement d’épargne)",
+      "protocole": "SELECT-GCA",
+      "choix": {
+        "Bras": "Upadacitinib · arrêt S26",
+        "Départ": "50 mg"
+      },
       "texte": "50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 15 mg 1 sem puis 12 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -516,6 +658,11 @@
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
       "nom": "Essai SELECT-GCA : départ 40 mg, arrêt à S52 — bras placebo (corticoïdes seuls)",
+      "protocole": "SELECT-GCA",
+      "choix": {
+        "Bras": "Placebo · arrêt S52",
+        "Départ": "40 mg"
+      },
       "texte": "40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17 mg 2 sem puis 15 mg 2 sem puis 12 mg 1 sem puis 10 mg 4 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -532,6 +679,11 @@
     {
       "pathologie": "Artérite à cellules géantes (Horton)",
       "nom": "Essai SELECT-GCA : départ 40 mg, arrêt à S26 — bras upadacitinib (à associer à un traitement d’épargne)",
+      "protocole": "SELECT-GCA",
+      "choix": {
+        "Bras": "Upadacitinib · arrêt S26",
+        "Départ": "40 mg"
+      },
       "texte": "40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 15 mg 1 sem puis 12 mg 2 sem puis 10 mg 1 sem puis 9 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -548,6 +700,10 @@
     {
       "pathologie": "Pseudopolyarthrite rhizomélique",
       "nom": "Départ 25 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "protocole": "EULAR/ACR 2015",
+      "choix": {
+        "Départ": "25 mg"
+      },
       "texte": "25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/ACR 2015 et SFR 2024 — paliers intermédiaires calculés par CorticoPlan",
@@ -564,6 +720,10 @@
     {
       "pathologie": "Pseudopolyarthrite rhizomélique",
       "nom": "Départ 20 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "protocole": "EULAR/ACR 2015",
+      "choix": {
+        "Départ": "20 mg"
+      },
       "texte": "20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/ACR 2015 et SFR 2024 — paliers intermédiaires calculés par CorticoPlan",
@@ -580,6 +740,10 @@
     {
       "pathologie": "Pseudopolyarthrite rhizomélique",
       "nom": "Départ 17,5 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "protocole": "EULAR/ACR 2015",
+      "choix": {
+        "Départ": "17,5 mg"
+      },
       "texte": "17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 4 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/ACR 2015 et SFR 2024 — paliers intermédiaires calculés par CorticoPlan",
@@ -596,6 +760,10 @@
     {
       "pathologie": "Pseudopolyarthrite rhizomélique",
       "nom": "Départ 15 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "protocole": "EULAR/ACR 2015",
+      "choix": {
+        "Départ": "15 mg"
+      },
       "texte": "15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 8 mg 4 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/ACR 2015 et SFR 2024 — paliers intermédiaires calculés par CorticoPlan",
@@ -612,6 +780,10 @@
     {
       "pathologie": "Pseudopolyarthrite rhizomélique",
       "nom": "Départ 12,5 mg, 10 mg vers S8-S9 puis -1 mg par mois jusqu'à l'arrêt",
+      "protocole": "EULAR/ACR 2015",
+      "choix": {
+        "Départ": "12,5 mg"
+      },
       "texte": "12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 8 mg 2 sem puis 7 mg 4 sem puis 6 mg 4 sem puis 5 mg 4 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 4 sem puis 1 mg 4 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/ACR 2015 et SFR 2024 — paliers intermédiaires calculés par CorticoPlan",
@@ -628,6 +800,11 @@
     {
       "pathologie": "Vascularite à ANCA (GPA, PAM)",
       "nom": "Dose standard (PEXIVAS), < 50 kg — 5 mg jusqu'à M12",
+      "protocole": "PEXIVAS",
+      "choix": {
+        "Dose": "Standard · essai",
+        "Poids": "< 50 kg"
+      },
       "texte": "50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -644,6 +821,11 @@
     {
       "pathologie": "Vascularite à ANCA (GPA, PAM)",
       "nom": "Dose standard (PEXIVAS), 50 à 75 kg — 5 mg jusqu'à M12",
+      "protocole": "PEXIVAS",
+      "choix": {
+        "Dose": "Standard · essai",
+        "Poids": "50 à 75 kg"
+      },
       "texte": "60 mg 2 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 4 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -660,6 +842,11 @@
     {
       "pathologie": "Vascularite à ANCA (GPA, PAM)",
       "nom": "Dose standard (PEXIVAS), > 75 kg — 5 mg jusqu'à M12",
+      "protocole": "PEXIVAS",
+      "choix": {
+        "Dose": "Standard · essai",
+        "Poids": "> 75 kg"
+      },
       "texte": "75 mg 2 sem puis 60 mg 2 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 4 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu d'un essai",
@@ -676,6 +863,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, forte dose, 50 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Forte dose",
+        "Poids": "50 kg"
+      },
       "texte": "40 mg 2 sem puis 30 mg 4 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 50 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
@@ -692,6 +884,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, forte dose, 60 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Forte dose",
+        "Poids": "60 kg"
+      },
       "texte": "47,5 mg 2 sem puis 35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 60 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
@@ -708,6 +905,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, forte dose, 70 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Forte dose",
+        "Poids": "70 kg"
+      },
       "texte": "55 mg 2 sem puis 42,5 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 70 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
@@ -724,6 +926,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, forte dose, 80 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Forte dose",
+        "Poids": "80 kg"
+      },
       "texte": "65 mg 2 sem puis 47,5 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 80 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
@@ -740,6 +947,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, dose modérée, 50 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Dose modérée",
+        "Poids": "50 kg"
+      },
       "texte": "30 mg 2 sem puis 25 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 50 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
@@ -756,6 +968,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, dose modérée, 60 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Dose modérée",
+        "Poids": "60 kg"
+      },
       "texte": "35 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 60 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
@@ -772,6 +989,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, dose modérée, 70 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Dose modérée",
+        "Poids": "70 kg"
+      },
       "texte": "42,5 mg 2 sem puis 35 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 70 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
@@ -788,6 +1010,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, dose modérée, 80 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Dose modérée",
+        "Poids": "80 kg"
+      },
       "texte": "47,5 mg 2 sem puis 40 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 4 sem puis 5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 80 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 5 mg à adapter",
@@ -804,6 +1031,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, dose réduite, 50 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Dose réduite",
+        "Poids": "50 kg"
+      },
       "texte": "25 mg 2 sem puis 15 mg 4 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 50 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 2,5 mg à adapter",
@@ -820,6 +1052,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, dose réduite, 60 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Dose réduite",
+        "Poids": "60 kg"
+      },
       "texte": "30 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 60 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 2,5 mg à adapter",
@@ -836,6 +1073,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, dose réduite, 70 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Dose réduite",
+        "Poids": "70 kg"
+      },
       "texte": "35 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 70 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 2,5 mg à adapter",
@@ -852,6 +1094,11 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "KDIGO 2024, dose réduite, 80 kg",
+      "protocole": "KDIGO 2024",
+      "choix": {
+        "Dose": "Dose réduite",
+        "Poids": "80 kg"
+      },
       "texte": "40 mg 2 sem puis 25 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 7,5 mg 2 sem puis 5 mg 2 sem puis 2,5 mg",
       "mgKg": false,
       "statut": "issu de recommandations (KDIGO 2024) — S1-S4 : valeur basse de la fourchette mg/kg pour 80 kg, arrondie à 2,5 mg ; ensuite doses fixes ; au-delà de S24, dose < 2,5 mg à adapter",
@@ -868,6 +1115,10 @@
     {
       "pathologie": "Maladie de Still de l'adulte",
       "nom": "1 mg/kg pour 50 kg — 0,1 mg/kg à S6, arrêt à M3",
+      "protocole": "PNDS Still",
+      "choix": {
+        "Poids": "50 kg"
+      },
       "texte": "50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 20 mg 1 sem puis 12,5 mg 1 sem puis 5 mg 1 sem puis 4 mg 2 sem puis 3 mg 1 sem puis 2 mg 1 sem puis 1 mg 2 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -884,6 +1135,10 @@
     {
       "pathologie": "Maladie de Still de l'adulte",
       "nom": "1 mg/kg pour 60 kg — 0,1 mg/kg à S6, arrêt à M3",
+      "protocole": "PNDS Still",
+      "choix": {
+        "Poids": "60 kg"
+      },
       "texte": "60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 25 mg 1 sem puis 15 mg 1 sem puis 6 mg 1 sem puis 5 mg 1 sem puis 4 mg 1 sem puis 3 mg 2 sem puis 2 mg 1 sem puis 1 mg 1 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -900,6 +1155,10 @@
     {
       "pathologie": "Maladie de Still de l'adulte",
       "nom": "1 mg/kg pour 70 kg — 0,1 mg/kg à S6, arrêt à M3",
+      "protocole": "PNDS Still",
+      "choix": {
+        "Poids": "70 kg"
+      },
       "texte": "70 mg 1 sem puis 60 mg 1 sem puis 50 mg 1 sem puis 40 mg 1 sem puis 30 mg 1 sem puis 17,5 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 1 sem puis 4 mg 1 sem puis 3 mg 1 sem puis 2 mg 1 sem puis 1 mg 1 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -916,6 +1175,10 @@
     {
       "pathologie": "Maladie de Still de l'adulte",
       "nom": "1 mg/kg pour 80 kg — 0,1 mg/kg à S6, arrêt à M3",
+      "protocole": "PNDS Still",
+      "choix": {
+        "Poids": "80 kg"
+      },
       "texte": "80 mg 1 sem puis 70 mg 1 sem puis 55 mg 1 sem puis 45 mg 1 sem puis 30 mg 1 sem puis 20 mg 1 sem puis 8 mg 1 sem puis 7 mg 1 sem puis 6 mg 1 sem puis 5 mg 1 sem puis 3 mg 1 sem puis 2 mg 1 sem puis 1 mg 1 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -932,6 +1195,10 @@
     {
       "pathologie": "Maladie de Still de l'adulte",
       "nom": "EULAR/PReS 2024 : 1 mg/kg pour 50 kg — < 0,1 mg/kg à M3, arrêt à M6",
+      "protocole": "EULAR/PReS 2024",
+      "choix": {
+        "Poids": "50 kg"
+      },
       "texte": "50 mg 2 sem puis 40 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 12,5 mg 2 sem puis 8 mg 2 sem puis 4 mg 4 sem puis 3 mg 4 sem puis 2 mg 3 sem puis 1 mg 3 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/PReS 2024 — paliers calculés par CorticoPlan pour atteindre les repères (1 mg/kg au début ; < 0,1 mg/kg à M3 ; sans corticoïdes à M6), en association à un anti-IL-1 ou anti-IL-6",
@@ -948,6 +1215,10 @@
     {
       "pathologie": "Maladie de Still de l'adulte",
       "nom": "EULAR/PReS 2024 : 1 mg/kg pour 60 kg — < 0,1 mg/kg à M3, arrêt à M6",
+      "protocole": "EULAR/PReS 2024",
+      "choix": {
+        "Poids": "60 kg"
+      },
       "texte": "60 mg 2 sem puis 45 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 9 mg 2 sem puis 5 mg 3 sem puis 4 mg 3 sem puis 3 mg 3 sem puis 2 mg 3 sem puis 1 mg 2 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/PReS 2024 — paliers calculés par CorticoPlan pour atteindre les repères (1 mg/kg au début ; < 0,1 mg/kg à M3 ; sans corticoïdes à M6), en association à un anti-IL-1 ou anti-IL-6",
@@ -964,6 +1235,10 @@
     {
       "pathologie": "Maladie de Still de l'adulte",
       "nom": "EULAR/PReS 2024 : 1 mg/kg pour 70 kg — < 0,1 mg/kg à M3, arrêt à M6",
+      "protocole": "EULAR/PReS 2024",
+      "choix": {
+        "Poids": "70 kg"
+      },
       "texte": "70 mg 2 sem puis 50 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 10 mg 2 sem puis 6 mg 3 sem puis 5 mg 3 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/PReS 2024 — paliers calculés par CorticoPlan pour atteindre les repères (1 mg/kg au début ; < 0,1 mg/kg à M3 ; sans corticoïdes à M6), en association à un anti-IL-1 ou anti-IL-6",
@@ -980,6 +1255,10 @@
     {
       "pathologie": "Maladie de Still de l'adulte",
       "nom": "EULAR/PReS 2024 : 1 mg/kg pour 80 kg — < 0,1 mg/kg à M3, arrêt à M6",
+      "protocole": "EULAR/PReS 2024",
+      "choix": {
+        "Poids": "80 kg"
+      },
       "texte": "80 mg 2 sem puis 60 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 12,5 mg 2 sem puis 7 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg 2 sem puis 3 mg 2 sem puis 2 mg 2 sem puis 1 mg 2 sem puis arrêt",
       "mgKg": false,
       "statut": "compatible recommandations EULAR/PReS 2024 — paliers calculés par CorticoPlan pour atteindre les repères (1 mg/kg au début ; < 0,1 mg/kg à M3 ; sans corticoïdes à M6), en association à un anti-IL-1 ou anti-IL-6",
@@ -996,6 +1275,10 @@
     {
       "pathologie": "Maladie de Behçet (atteinte grave)",
       "nom": "1 mg/kg pour 50 kg — 15-20 mg à M3, ≤ 0,1 mg/kg à M6",
+      "protocole": "PNDS Behçet",
+      "choix": {
+        "Poids": "50 kg"
+      },
       "texte": "50 mg 3 sem puis 45 mg 2 sem puis 40 mg 2 sem puis 35 mg 2 sem puis 30 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 4 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 1 sem puis 5 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -1012,6 +1295,10 @@
     {
       "pathologie": "Maladie de Behçet (atteinte grave)",
       "nom": "1 mg/kg pour 60 kg — 15-20 mg à M3, ≤ 0,1 mg/kg à M6",
+      "protocole": "PNDS Behçet",
+      "choix": {
+        "Poids": "60 kg"
+      },
       "texte": "60 mg 3 sem puis 55 mg 2 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 7 mg 1 sem puis 6 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -1028,6 +1315,10 @@
     {
       "pathologie": "Maladie de Behçet (atteinte grave)",
       "nom": "1 mg/kg pour 70 kg — 15-20 mg à M3, ≤ 0,1 mg/kg à M6",
+      "protocole": "PNDS Behçet",
+      "choix": {
+        "Poids": "70 kg"
+      },
       "texte": "70 mg 3 sem puis 65 mg 2 sem puis 55 mg 2 sem puis 45 mg 2 sem puis 35 mg 2 sem puis 25 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 8 mg 1 sem puis 7 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -1044,6 +1335,10 @@
     {
       "pathologie": "Maladie de Behçet (atteinte grave)",
       "nom": "1 mg/kg pour 80 kg — 15-20 mg à M3, ≤ 0,1 mg/kg à M6",
+      "protocole": "PNDS Behçet",
+      "choix": {
+        "Poids": "80 kg"
+      },
       "texte": "80 mg 3 sem puis 75 mg 2 sem puis 65 mg 2 sem puis 50 mg 2 sem puis 40 mg 2 sem puis 30 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 2 sem puis 9 mg 1 sem puis 8 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -1060,6 +1355,10 @@
     {
       "pathologie": "Dermatomyosite",
       "nom": "1 mg/kg pour 50 kg, 4 semaines, puis -10 % toutes les 2 semaines jusqu'à 0,5 mg/kg",
+      "protocole": "PNDS Dermatomyosite",
+      "choix": {
+        "Poids": "50 kg"
+      },
       "texte": "50 mg 4 sem puis 45 mg 2 sem puis 40 mg 2 sem puis 35 mg 2 sem puis 32,5 mg 2 sem puis 30 mg 2 sem puis 27,5 mg 2 sem puis 25 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -1076,6 +1375,10 @@
     {
       "pathologie": "Dermatomyosite",
       "nom": "1 mg/kg pour 60 kg, 4 semaines, puis -10 % toutes les 2 semaines jusqu'à 0,5 mg/kg",
+      "protocole": "PNDS Dermatomyosite",
+      "choix": {
+        "Poids": "60 kg"
+      },
       "texte": "60 mg 4 sem puis 55 mg 2 sem puis 50 mg 2 sem puis 45 mg 2 sem puis 40 mg 2 sem puis 35 mg 2 sem puis 32,5 mg 2 sem puis 30 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -1092,6 +1395,10 @@
     {
       "pathologie": "Dermatomyosite",
       "nom": "1 mg/kg pour 70 kg, 4 semaines, puis -10 % toutes les 2 semaines jusqu'à 0,5 mg/kg",
+      "protocole": "PNDS Dermatomyosite",
+      "choix": {
+        "Poids": "70 kg"
+      },
       "texte": "70 mg 4 sem puis 62,5 mg 2 sem puis 55 mg 2 sem puis 50 mg 2 sem puis 45 mg 2 sem puis 40 mg 2 sem puis 35 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -1108,6 +1415,10 @@
     {
       "pathologie": "Dermatomyosite",
       "nom": "1 mg/kg pour 80 kg, 4 semaines, puis -10 % toutes les 2 semaines jusqu'à 0,5 mg/kg",
+      "protocole": "PNDS Dermatomyosite",
+      "choix": {
+        "Poids": "80 kg"
+      },
       "texte": "80 mg 4 sem puis 72,5 mg 2 sem puis 65 mg 2 sem puis 57,5 mg 2 sem puis 52,5 mg 2 sem puis 47,5 mg 2 sem puis 42,5 mg 2 sem puis 37,5 mg",
       "mgKg": false,
       "statut": "compatible PNDS — paliers intermédiaires calculés par CorticoPlan pour atteindre les repères",
@@ -1124,6 +1435,10 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "ACR 2024, 50 kg — départ 25 mg, ≤ 5 mg à M6",
+      "protocole": "ACR 2024",
+      "choix": {
+        "Poids": "50 kg"
+      },
       "texte": "25 mg 2 sem puis 20 mg 8 sem puis 17,5 mg 2 sem puis 15 mg 4 sem puis 12,5 mg 4 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 7 mg 2 sem puis 5 mg",
       "mgKg": false,
       "statut": "compatible recommandations ACR 2024 — paliers calculés par CorticoPlan pour atteindre les repères",
@@ -1140,6 +1455,10 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "ACR 2024, 60 kg — départ 30 mg, ≤ 5 mg à M6",
+      "protocole": "ACR 2024",
+      "choix": {
+        "Poids": "60 kg"
+      },
       "texte": "30 mg 2 sem puis 25 mg 8 sem puis 20 mg 4 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 9 mg 2 sem puis 7 mg 2 sem puis 5 mg",
       "mgKg": false,
       "statut": "compatible recommandations ACR 2024 — paliers calculés par CorticoPlan pour atteindre les repères",
@@ -1156,6 +1475,10 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "ACR 2024, 70 kg — départ 35 mg, ≤ 5 mg à M6",
+      "protocole": "ACR 2024",
+      "choix": {
+        "Poids": "70 kg"
+      },
       "texte": "35 mg 2 sem puis 30 mg 6 sem puis 25 mg 4 sem puis 20 mg 4 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 7 mg 2 sem puis 5 mg",
       "mgKg": false,
       "statut": "compatible recommandations ACR 2024 — paliers calculés par CorticoPlan pour atteindre les repères",
@@ -1172,6 +1495,10 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "ACR 2024, 80 kg — départ 40 mg, ≤ 5 mg à M6",
+      "protocole": "ACR 2024",
+      "choix": {
+        "Poids": "80 kg"
+      },
       "texte": "40 mg 2 sem puis 35 mg 6 sem puis 30 mg 2 sem puis 25 mg 4 sem puis 20 mg 4 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 5 mg",
       "mgKg": false,
       "statut": "compatible recommandations ACR 2024 — paliers calculés par CorticoPlan pour atteindre les repères",
@@ -1188,6 +1515,10 @@
     {
       "pathologie": "Vascularite à ANCA (GPA, PAM)",
       "nom": "Essai ADVOCATE : bras prednisone, adulte ≥ 55 kg, arrêt à S20",
+      "protocole": "ADVOCATE",
+      "choix": {
+        "Poids": "≥ 55 kg"
+      },
       "texte": "60 mg 1 sem puis 45 mg 1 sem puis 30 mg 1 sem puis 25 mg 3 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 4 sem puis 5 mg 6 sem puis arrêt",
       "mgKg": false,
       "statut": "issu d'un essai — bras contrôle (prednisone + cyclophosphamide ou rituximab) ; arrêt à J141",
@@ -1204,6 +1535,10 @@
     {
       "pathologie": "Vascularite à ANCA (GPA, PAM)",
       "nom": "Essai ADVOCATE : bras prednisone, adulte < 55 kg, arrêt à S20",
+      "protocole": "ADVOCATE",
+      "choix": {
+        "Poids": "< 55 kg"
+      },
       "texte": "45 mg 2 sem puis 30 mg 1 sem puis 25 mg 3 sem puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 4 sem puis 5 mg 6 sem puis arrêt",
       "mgKg": false,
       "statut": "issu d'un essai — bras contrôle (prednisone + cyclophosphamide ou rituximab) ; arrêt à J141",
@@ -1220,6 +1555,10 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Essai AURORA : prednisone orale, ≥ 45 kg (après bolus J1-J2)",
+      "protocole": "AURORA",
+      "choix": {
+        "Poids": "≥ 45 kg"
+      },
       "texte": "25 mg 11 jours puis 20 mg 2 sem puis 15 mg 2 sem puis 10 mg 2 sem puis 5 mg 8 sem puis 2,5 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — méthylprednisolone IV 500 mg J1 et J2 non incluse : la prednisone commence à J3 (date de début = J3) ; 2,5 mg dès S16, arrêt possible si indiqué",
@@ -1236,6 +1575,10 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Essai AURORA : prednisone orale, < 45 kg (après bolus J1-J2)",
+      "protocole": "AURORA",
+      "choix": {
+        "Poids": "< 45 kg"
+      },
       "texte": "20 mg 11 jours puis 15 mg 2 sem puis 10 mg 4 sem puis 5 mg 8 sem puis 2,5 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — méthylprednisolone IV 250 mg J1 et J2 non incluse : la prednisone commence à J3 (date de début = J3) ; 2,5 mg dès S16, arrêt possible si indiqué",
@@ -1252,6 +1595,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 45 à 50 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "45 à 50 mg"
+      },
       "texte": "40 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1268,6 +1615,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 40 à 44 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "40 à 44 mg"
+      },
       "texte": "35 mg 2 sem puis 30 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1284,6 +1635,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 35 à 39 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "35 à 39 mg"
+      },
       "texte": "30 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1300,6 +1655,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 30 à 34 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "30 à 34 mg"
+      },
       "texte": "25 mg 2 sem puis 20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1316,6 +1675,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 25 à 29 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "25 à 29 mg"
+      },
       "texte": "20 mg 2 sem puis 17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1332,6 +1695,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 20 à 24 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "20 à 24 mg"
+      },
       "texte": "17,5 mg 2 sem puis 15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1348,6 +1715,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 17,5 à 19,5 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "17,5 à 19,5 mg"
+      },
       "texte": "15 mg 2 sem puis 12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1364,6 +1735,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 15 à 17 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "15 à 17 mg"
+      },
       "texte": "12,5 mg 2 sem puis 10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1380,6 +1755,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 12,5 à 14,5 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "12,5 à 14,5 mg"
+      },
       "texte": "10 mg 2 sem puis 8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1396,6 +1775,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 9 à 12 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "9 à 12 mg"
+      },
       "texte": "8 mg 2 sem puis 6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1412,6 +1795,10 @@
     {
       "pathologie": "Granulomatose éosinophilique avec polyangéite (GEPA)",
       "nom": "Essai MANDARA : décroissance depuis 7,5 à 8,5 mg",
+      "protocole": "MANDARA",
+      "choix": {
+        "Dose actuelle": "7,5 à 8,5 mg"
+      },
       "texte": "6 mg 2 sem puis 5 mg 2 sem puis 4 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — à partir de S4, selon la dose initiale ; sous 4 mg, poursuivre si justifié par paliers de 0,5 à 1 mg toutes les 2 semaines",
@@ -1428,6 +1815,7 @@
     {
       "pathologie": "Lupus : néphropathie lupique (classe III/IV)",
       "nom": "Essai BLISS-LN : décroissance recommandée depuis 60 mg",
+      "protocole": "BLISS-LN",
       "texte": "60 mg 2 sem puis 50 mg 1 sem puis 45 mg 1 sem puis 40 mg 1 sem puis 35 mg 1 sem puis 30 mg 1 sem puis 25 mg 1 sem puis 20 mg 1 sem puis 17,5 mg 1 sem puis 15 mg 1 sem puis 12,5 mg 1 sem puis 10 mg à poursuivre",
       "mgKg": false,
       "statut": "issu d'un essai — après 0 à 3 bolus de méthylprednisolone (non inclus) ; ≤ 10 mg exigé à S24",

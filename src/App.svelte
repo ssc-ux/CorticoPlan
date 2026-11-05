@@ -14,6 +14,7 @@
   import Ordonnance from './components/Ordonnance.svelte';
   import Resultat from './components/Resultat.svelte';
   import Saisie from './components/Saisie.svelte';
+  import Suggestions from './components/Suggestions.svelte';
   import Tableau from './components/Tableau.svelte';
   import { alertes } from './lib/alerts';
   import { aujourdhui, estDateValide } from './lib/dates';
@@ -22,6 +23,7 @@
   import { ordonnance } from './lib/prescription';
   import { calendrier } from './lib/schedule';
   import { SCHEMAS, type Schema } from './lib/schemas';
+  import { chercher } from './lib/protocoles';
   import { EXEMPLES } from './lib/exemples';
   import { decoderPaliers, decoderPartage, encoderPaliers, encoderPartage } from './lib/share';
   import type { Palier } from './lib/types';
@@ -67,6 +69,10 @@
   let lienCopie = $state(false);
 
   const resultat = $derived(analyser(texte, { joursParMois, debut }));
+  // Protocole tapé dans le champ (« pexivas ») : déroulant de choix, sauf si refermé pour ce texte.
+  let ferme = $state<string | null>(null);
+  let suggestionsRef = $state<{ clavier: (e: KeyboardEvent) => boolean }>();
+  const suggestions = $derived(onglet === 'ecrire' && !resultat.ok && texte !== ferme ? chercher(texte) : []);
   const dateOk = $derived(estDateValide(debut));
   const pret = $derived(resultat.ok && resultat.paliers.length > 0 && dateOk);
   const lignes = $derived(pret ? calendrier(resultat.paliers, debut) : []);
@@ -177,7 +183,24 @@
         <p class="logo"><img src="./icon.svg" alt="" width="52" height="52" /> <span>CorticoPlan</span></p>
       {/if}
       <p class="accroche">Écrivez le schéma comme dans un courrier : l'ordonnance se rédige toute seule.</p>
-      <Saisie bind:texte {accueil} />
+      {#if schemaChoisi?.choix && !schemaModifie && !suggestions.length}
+        <p class="choix-proto">
+          <span class="puce-proto principal">{schemaChoisi.protocole}</span>
+          {#each Object.values(schemaChoisi.choix) as v}<span class="puce-proto">{v}</span>{/each}
+          <button type="button" class="lien-action" onclick={() => (texte = schemaChoisi!.protocole)}>Changer</button>
+        </p>
+      {/if}
+      <Saisie bind:texte {accueil} ouvert={suggestions.length > 0} onkeydown={(e) => suggestionsRef?.clavier(e)} />
+      {#if suggestions.length}
+        <Suggestions
+          bind:this={suggestionsRef}
+          {suggestions}
+          requete={texte}
+          precedent={schemaChoisi}
+          onchoix={choisir}
+          onfermer={() => (ferme = texte)}
+        />
+      {/if}
       {#if accueil}
         <div class="boutons">
           <button type="button" onclick={() => (texte = EXEMPLES[Math.floor(Math.random() * EXEMPLES.length)]!)}>Essayer un exemple</button>
@@ -185,7 +208,7 @@
         </div>
         <p class="discret dictee">🎙 Astuce : dictez le schéma avec la dictée vocale de votre téléphone, collez-le ici, et c'est prêt.</p>
       {/if}
-      {#if schemaChoisi}
+      {#if schemaChoisi && !suggestions.length}
         <p class="discret source" class:pnds={/PNDS/.test(schemaChoisi.statut + schemaChoisi.source.document) && !schemaChoisi.statut.startsWith("issu d'un essai")}>
           {schemaModifie ? 'Modifié à partir de' : 'Schéma'} : {schemaChoisi.nom} —
           <strong>{schemaChoisi.valide ? 'vérifié' : 'à vérifier'}</strong><br />
@@ -202,7 +225,7 @@
         </label>
       {/if}
 
-      <Resultat {texte} {resultat} onappliquer={(t) => (texte = t)} />
+      {#if !suggestions.length}<Resultat {texte} {resultat} onappliquer={(t) => (texte = t)} />{/if}
 
       {#if pret}
         <section class="carte o-tableau">
@@ -384,6 +407,30 @@
   .source {
     margin: 0.4rem 0 0;
     line-height: 1.45;
+  }
+  /* Protocole choisi au-dessus du champ : « PEXIVAS · Réduite · PNDS · 50 à 75 kg · Changer ». */
+  .choix-proto {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 8px;
+  }
+  .puce-proto {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--chip);
+    color: var(--fg);
+    font-size: 0.85rem;
+  }
+  .puce-proto.principal {
+    background: var(--accent);
+    color: var(--accent-texte);
+    font-weight: 600;
+  }
+  .choix-proto .lien-action {
+    margin-left: 4px;
+    font-size: 0.9rem;
   }
   /* Accueil : logo au centre, champ arrondi, onglets discrets en haut à droite. */
   .accueil .top {
