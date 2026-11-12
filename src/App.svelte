@@ -268,7 +268,9 @@
       Aide à la rédaction : ne remplace pas le jugement médical ; le schéma reste sous la responsabilité du
       prescripteur. Aucune donnée n'est enregistrée ni envoyée. Ne saisissez jamais de nom de patient.
     </p>
-    <p class="createur">Créé par <strong>Quentin Astouati</strong></p>
+    <p class="createur">
+      Créé par <strong>Quentin Astouati</strong> · <a href="https://ssc-ux.github.io/MedInt-Tools/">Tous les outils MedInt Tools</a>
+    </p>
     <details>
       <summary>Réglages</summary>
       <label>1 mois = <input type="number" min="28" max="31" bind:value={joursParMois} /> jours</label>
