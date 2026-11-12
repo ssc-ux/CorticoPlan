@@ -34,7 +34,9 @@ const CONNUS = new Set([
 ]);
 
 /** Fautes fréquentes impossibles à corriger par la distance seule. */
-const ALIAS: Record<string, string> = { mgs: 'mg', mgr: 'mg', mgrs: 'mg', smn: 'sem', sm: 'sem', jr: 'j', jrs: 'jrs' };
+const ALIAS: Record<string, string> = {
+  mgs: 'mg', mgr: 'mg', mgrs: 'mg', smn: 'sem', sm: 'sem', jr: 'j', jrs: 'jrs', ttes: 'toutes', tte: 'toute', tts: 'tous', ts: 'tous',
+};
 
 /** Mots de même sens pour le moteur : une égalité entre eux n'est pas une ambiguïté. */
 const MEDICAMENT = new Set(['prednisone', 'prednisolone', 'cortancyl', 'solupred', 'cortisone', 'corticotherapie']);
@@ -74,6 +76,24 @@ function corrigerMot(mot: string): string | null {
     } else if (dd === dMin && v !== meilleur && !equivalents(v, meilleur!)) ex = true;
   }
   return meilleur && dMin <= seuil && !ex ? meilleur : null;
+}
+
+/**
+ * Mots du vocabulaire les plus proches d'un mot inconnu (pour proposer une
+ * correction quand la correction automatique n'ose pas : mot trop éloigné ou
+ * plusieurs mots aussi proches).
+ */
+export function motsProches(mot: string, max = 4): string[] {
+  const m = mot.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (ALIAS[m]) return [ALIAS[m]!];
+  const seuil = Math.max(2, Math.ceil(m.length / 2));
+  return [...new Set(VOCABULAIRE)]
+    // Abréviation (« dimi », « decr ») : le mot commencé passe devant.
+    .map((v) => ({ v, d: m.length >= 3 && v.startsWith(m) ? 0.5 : distance(m, v) - (v.startsWith(m.slice(0, 2)) ? 0.5 : 0) }))
+    .filter((x) => x.d <= seuil)
+    .sort((a, b) => a.d - b.d || a.v.length - b.v.length)
+    .slice(0, max)
+    .map((x) => x.v);
 }
 
 export interface TexteCorrige {

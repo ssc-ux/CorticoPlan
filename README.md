@@ -16,7 +16,7 @@ tableau daté, texte d'ordonnance à copier, calendrier patient à imprimer.
 1. **Écrire le schéma** comme dans un courrier, par exemple :
    `40 mg 1 mois puis baisser de 5 mg tous les 15 jours jusqu'à 20 mg puis -2,5 mg toutes les 2 semaines jusqu'à 10 mg`
    — ou **Choisir un schéma** dans la liste.
-2. Vérifier la **reformulation** affichée sous le champ (ce qui n'est pas compris est surligné en rouge).
+2. Vérifier la **reformulation** affichée sous le champ. Si un mot n'est pas compris (faute de frappe, abréviation, « 3-4 semaines »…), une **correction est proposée** (« Vouliez-vous dire ? ») : un clic l'applique. Sans correction possible, le passage est surligné en rouge.
 3. Choisir la **date de début**.
 4. Le **tableau** apparaît : toucher une ligne pour modifier une dose ou une durée.
 5. **Copier le texte de l'ordonnance** et le coller dans votre logiciel.
@@ -36,7 +36,7 @@ ajouté à l'écran d'accueil du téléphone.
 | Borne | `jusqu'à 10`, `→ 10`, `-> 10`, `de 20 à 10`, `jusqu'à l'arrêt` |
 | Un jour sur deux | `20 mg 1 j/2`, `20 mg un jour sur deux` |
 | Dictée vocale | texte dicté au téléphone puis collé : `vingt milligrammes`, `deux virgule cinq`, `à la ligne`, `point` |
-| Objectif daté | `10 mg à 3 mois`, `≤ 5 mg à M6`, `5 mg au plus à 6 mois`, `moins de 5 mg à 6 mois`, `arrêt à 12 mois`, `objectif 10 mg en 6 semaines`, `5 mg jusqu'à M12` (M = mois, S = semaine, J = jour, comptés depuis J1 ; « à 6 mois » tombe à la **date anniversaire** de la date de début) |
+| Objectif daté | `10 mg à 3 mois`, `≤ 5 mg à M6`, `5 mg au plus à 6 mois`, `moins de 5 mg à 6 mois`, `arrêt à 12 mois`, `objectif 3 mois : 10 mg, objectif 6 mois : 5 mg`, `10 mg à 3 mois et 5 mg à 6 mois`, `objectif 10 mg en 6 semaines`, `5 mg jusqu'à M12` (M = mois, S = semaine, J = jour, comptés depuis J1 ; « à 6 mois » tombe à la **date anniversaire** de la date de début) |
 | Fin | `arrêt` ; sinon la dernière dose est **maintenue** (« à poursuivre », « jusqu'à réévaluation » acceptés) |
 
 Conventions : un nombre seul est une dose en mg ; dans une baisse, la première

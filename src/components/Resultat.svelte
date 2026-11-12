@@ -3,9 +3,15 @@
    * Sous le champ : ce que le moteur a compris (reformulation), ce qu'il n'a
    * pas compris (surligné dans le texte), et les avertissements.
    */
+  import type { Proposition } from '../lib/parser/propose';
   import type { ResultatAnalyse, Span } from '../lib/types';
 
-  let { texte, resultat, onappliquer }: { texte: string; resultat: ResultatAnalyse; onappliquer?: (t: string) => void } = $props();
+  let {
+    texte,
+    resultat,
+    propositions = [],
+    onappliquer,
+  }: { texte: string; resultat: ResultatAnalyse; propositions?: Proposition[]; onappliquer?: (t: string) => void } = $props();
 
   function appliquer(position: number, insertion: string) {
     onappliquer?.(texte.slice(0, position) + insertion + texte.slice(position));
@@ -49,7 +55,22 @@
 
 {#if texte.trim()}
   <div class="resultat" aria-live="polite">
-    {#if erreurs.length}
+    {#if propositions.length}
+      <!-- Une correction est trouvée : on la propose plutôt que de signaler l'erreur. -->
+      <div class="bloc proposition">
+        <p class="titre">Vouliez-vous dire ?</p>
+        <div class="choix">
+          {#each propositions as p}
+            <button type="button" onclick={() => onappliquer?.(p.texte)}>
+              <span class="phrase"
+                >{#each p.morceaux as m}{#if m.avant !== undefined}{#if m.avant}<s>{m.avant}</s>{/if}{#if m.apres}<b>{m.apres}</b>{/if}{:else}{m.t}{/if}{/each}</span
+              >
+              <span class="appliquer">{p.ok ? 'Corriger' : 'Corriger en partie'}</span>
+            </button>
+          {/each}
+        </div>
+      </div>
+    {:else if erreurs.length}
       <div class="bloc erreur">
         <p class="titre">{question ? 'Une précision' : 'À corriger'}</p>
         <p class="texte-surligne">
@@ -69,7 +90,7 @@
     {/if}
 
     <!-- Tant qu'il reste une erreur ou une question, un déroulé partiel serait trompeur : on ne l'affiche pas. -->
-    {#if resultat.reformulation.length && !erreurs.length}
+    {#if resultat.reformulation.length && !erreurs.length && !propositions.length}
       <!-- Au-delà de 3 paliers, le détail est replié (il est aussi dans le tableau et l'ordonnance). -->
       <details class="bloc compris" open={resultat.reformulation.length <= 3}>
         <summary class="titre">✓ Compris{resultat.reformulation.length > 3 ? ` : ${resultat.reformulation.length} paliers (afficher le détail)` : ''}</summary>
@@ -144,6 +165,54 @@
   }
   .reponses button:hover {
     background: var(--c1s);
+  }
+  .proposition {
+    background: var(--accent-doux);
+    border-left: 4px solid var(--accent);
+  }
+  .proposition .titre {
+    color: var(--accent);
+  }
+  .choix {
+    display: grid;
+    gap: 8px;
+  }
+  .choix button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--accent);
+    border-radius: var(--rayon);
+    background: var(--card);
+    color: var(--texte);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .choix button:hover {
+    background: var(--c1s);
+  }
+  .phrase {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .phrase s {
+    color: var(--texte-3);
+  }
+  .phrase s + b {
+    margin-left: 0.25em;
+  }
+  .phrase b {
+    color: var(--accent);
+  }
+  .appliquer {
+    flex: none;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
   }
   .compris {
     background: var(--accent-doux);

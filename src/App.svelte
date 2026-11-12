@@ -20,6 +20,7 @@
   import { aujourdhui, estDateValide } from './lib/dates';
   import { versTexte } from './lib/format';
   import { analyser } from './lib/parser';
+  import { proposer } from './lib/parser/propose';
   import { ordonnance } from './lib/prescription';
   import { calendrier } from './lib/schedule';
   import { SCHEMAS, type Schema } from './lib/schemas';
@@ -69,6 +70,8 @@
   let lienCopie = $state(false);
 
   const resultat = $derived(analyser(texte, { joursParMois, debut }));
+  /** Corrections proposées quand le texte n'est pas compris (rien n'est appliqué sans un clic). */
+  const propositions = $derived(proposer(texte, resultat, { joursParMois, debut }));
   // Protocole tapé dans le champ (« pexivas ») : déroulant de choix, sauf si refermé pour ce texte.
   let ferme = $state<string | null>(null);
   let suggestionsRef = $state<{ clavier: (e: KeyboardEvent) => boolean }>();
@@ -225,7 +228,7 @@
         </label>
       {/if}
 
-      {#if !suggestions.length}<Resultat {texte} {resultat} onappliquer={(t) => (texte = t)} />{/if}
+      {#if !suggestions.length}<Resultat {texte} {resultat} {propositions} onappliquer={(t) => (texte = t)} />{/if}
 
       {#if pret}
         <section class="carte o-tableau">

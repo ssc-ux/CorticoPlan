@@ -78,7 +78,29 @@ function segmenter(jetons: Jeton[]): Jeton[][] {
     }
     sortie.push(courant);
   }
-  return sortie.filter((s) => s.length > 0);
+  return sortie.flatMap(couperObjectifs).filter((s) => s.length > 0);
+}
+
+/** La partie contient-elle déjà une échéance (« à 3 mois », « M3 », « objectif 3 mois ») ? */
+const aEcheance = (part: Jeton[]) =>
+  part.some((t, i) => t.type === 'echeance' || ((t.type === 'a' || t.type === 'objectif') && part[i + 1]?.type === 'duree'));
+
+/**
+ * Plusieurs objectifs sans « puis » : « objectif à 3 mois 10 mg objectif à
+ * 6 mois 5 mg », « 10 mg à 3 mois et 5 mg à 6 mois », « 40 mg 1 mois objectif
+ * 10 mg à M3 » : un segment par objectif.
+ */
+function couperObjectifs(seg: Jeton[]): Jeton[][] {
+  const sortie: Jeton[][] = [[]];
+  for (const t of seg) {
+    const courant = sortie[sortie.length - 1]!;
+    const nouveau =
+      (t.type === 'objectif' && courant.some((u) => ['objectif', 'echeance', 'duree', 'a', 'jusqua', 'pas', 'moins'].includes(u.type))) ||
+      (t.type === 'et' && aEcheance(courant));
+    if (nouveau) sortie.push(t.type === 'et' ? [] : [t]);
+    else courant.push(t);
+  }
+  return sortie;
 }
 
 /** Jetons déjà signalés par ailleurs : ils ne participent pas au sens. */
@@ -203,6 +225,12 @@ function lireSegment(seg: Jeton[], problemes: Probleme[], precedent: Bloc | unde
         break;
       case 'objectif':
         objectif = true;
+        // « objectif 3 mois : 10 mg », « objectif 6 mois 5 mg » : échéance comptée depuis J1.
+        if (s1?.type === 'duree') {
+          if (echeance !== null) incompris = true;
+          echeance = jours(s1, ctx.temps);
+          k++;
+        }
         break;
       case 'sevrage':
         sevrageSeul = true;
