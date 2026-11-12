@@ -12,8 +12,9 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('activate', (e) => {
+  // Ne supprime que les anciens caches de CorticoPlan : les autres outils partagent le domaine.
   e.waitUntil(
-    caches.keys().then((cles) => Promise.all(cles.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()),
+    caches.keys().then((cles) => Promise.all(cles.filter((k) => k.startsWith('corticoplan-') && k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()),
   );
 });
 
