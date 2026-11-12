@@ -46,6 +46,11 @@ intermédiaires sont calculés : −5 mg au-dessus de 20 mg, −2,5 mg jusqu'à 
 plus longtemps ; la dose visée commence au plus tard à l'échéance (jusqu'à 6 jours avant, pour garder des semaines entières). Non pris en charge (signalé) :
 doses en mg/kg, en comprimés, fourchettes (« 3-4 semaines »), alternance entre deux doses.
 
+Garde-fous de saisie : une durée écrite sur le dernier palier sans « arrêt » est signalée (bouton
+« Arrêter à la fin de cette durée ») ; une dose de plus de 150 mg/j est signalée, plus de 1000 mg
+refusée ; une durée nulle, non entière en jours ou de plus de 10 ans est refusée ; « prednisolone »
+ou « Solupred » écrit est signalé (l'ordonnance est toujours rédigée en prednisone).
+
 ### Pour le patient
 
 Le calendrier imprimé (une case à cocher par jour) surligne les **jours de changement de dose** et
@@ -86,11 +91,10 @@ npm install
 npm run dev               # site local
 npm test                  # 60+ tests dont bêta-test (5 000 formulations aléatoires)
 BETA_TOURS=10 npm test    # bêta-test étendu (50 000 formulations)
-npm run build             # site statique dans site/ (publié tel quel)
+npm run build             # site statique dans site/ (non enregistré dans le dépôt)
 ```
 
 - `src/lib/` : logique pure et testée (parseur, dates, ordonnance, partage, alertes).
 - `src/components/` : interface (Svelte 5).
-- `web/index.html` : page d'entrée du site ; `index.html` (racine) redirige vers `site/`.
-- `.github/workflows/deploy.yml` : tests puis mise à jour de `site/` (publié par GitHub Pages depuis `main`).
-- Ne pas modifier `site/` à la main : il est régénéré automatiquement.
+- `web/index.html` : page d'entrée du site.
+- `.github/workflows/deploy.yml` : tests, construction, puis publication sur la branche `gh-pages` (servie par GitHub Pages).

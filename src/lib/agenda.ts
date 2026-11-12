@@ -21,7 +21,8 @@ function plier(ligne: string): string {
 const echapper = (t: string) => t.replace(/[\\;,]/g, (c) => '\\' + c).replace(/\n/g, '\\n');
 
 export function versIcs(paliers: Palier[], debut: string, heure = '08:00', maintenant = new Date()): string {
-  const [hh, mm] = heure.split(':');
+  // Heure non valide (champ vidé, lien modifié) : 8 h par défaut.
+  const [hh, mm] = (/^([01]\d|2[0-3]):[0-5]\d$/.test(heure) ? heure : '08:00').split(':');
   const tampon = maintenant.toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
   const lignes = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//CorticoPlan//FR', 'CALSCALE:GREGORIAN', 'X-WR-CALNAME:Prednisone'];
   calendrier(paliers, debut).forEach((l, n) => {

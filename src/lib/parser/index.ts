@@ -16,6 +16,10 @@ import { corriger } from './correct';
 import { decouper } from './lexer';
 import { normaliser } from './normalize';
 
+/** Durée maximale acceptée pour un palier, un rythme ou une échéance : 10 ans. */
+const JOURS_MAX = 3650;
+const dureeValide = (jours: number) => Number.isInteger(jours) && jours >= 1 && jours <= JOURS_MAX;
+
 export function analyser(texte: string, options: Partial<Options> = {}): ResultatAnalyse {
   const opts: Options = { ...OPTIONS_PAR_DEFAUT, ...options };
   // Fautes de frappe corrigées avant le découpage ; les positions sont
@@ -39,9 +43,27 @@ export function analyser(texte: string, options: Partial<Options> = {}): Resulta
     const extrait = texte.slice(t.span[0], t.span[1]);
     if (t.type === 'inconnu') {
       problemes.push({ code: 'mot-inconnu', niveau: 'erreur', message: `Mot non compris : « ${extrait} ».`, span: t.span });
+    } else if ((t.type === 'duree' || t.type === 'rythme') && !dureeValide(t.valeur!)) {
+      problemes.push({
+        code: 'duree-invalide',
+        niveau: 'erreur',
+        message: `Durée « ${extrait} » non valide : un nombre entier de jours, de 1 jour à 10 ans.`,
+        span: t.span,
+      });
+    } else if (t.type === 'echeance' && t.valeur! > JOURS_MAX) {
+      problemes.push({ code: 'duree-invalide', niveau: 'erreur', message: `Échéance « ${extrait} » trop lointaine (10 ans au plus).`, span: t.span });
     } else if (t.type === 'fourchette') {
       problemes.push({ code: 'fourchette', niveau: 'erreur', message: `Fourchette « ${extrait} » : choisissez une valeur.`, span: t.span });
     }
+  }
+  // L'ordonnance est toujours rédigée en prednisone : une autre molécule écrite est signalée.
+  const molecule = /(?<![a-z])(prednisolone|solupred)(?![a-z])/.exec(normaliser(texte));
+  if (molecule) {
+    problemes.push({
+      code: 'autre-molecule',
+      niveau: 'avertissement',
+      message: `« ${molecule[1]} » est écrit, mais l’ordonnance est rédigée en prednisone : corrigez le nom du médicament après l’avoir copiée si besoin.`,
+    });
   }
   // Échéances en mois (« à 6 mois ») : date anniversaire si la date de début est connue.
   const debut = opts.debut && estDateValide(opts.debut) ? opts.debut : null;
@@ -49,7 +71,8 @@ export function analyser(texte: string, options: Partial<Options> = {}): Resulta
     moisEnJours: (n: number) => moisEnJours(n, opts.joursParMois, debut),
     date: debut ? (j: number) => dateFr(ajouterJours(debut, j)) : undefined,
   };
-  const paliers = verifier(assembler(jetons, problemes, temps), problemes);
+  // Une durée hors bornes rendrait le calcul des dates impossible : pas de déroulé.
+  const paliers = problemes.some((p) => p.code === 'duree-invalide') ? [] : verifier(assembler(jetons, problemes, temps), problemes);
   if (jetons.some((t) => t.mois && !t.calendaire)) {
     const anniversaire = jetons.some((t) => t.calendaire) ? ' ; les échéances (« à 6 mois », « M6 ») tombent à la date anniversaire' : '';
     problemes.push({ code: 'convention-mois', niveau: 'info', message: `« 1 mois » est compté ${opts.joursParMois} jours (réglable)${anniversaire}.` });

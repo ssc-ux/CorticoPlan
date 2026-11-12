@@ -2,12 +2,17 @@
  * Service worker : rend le site utilisable hors ligne.
  * - Pages : réseau d'abord (pour avoir la dernière version), cache sinon.
  * - Fichiers (scripts, styles, icônes) : cache d'abord, réseau sinon.
+ * Tous les fichiers sont mis en cache dès l'installation : le site fonctionne
+ *   hors ligne après une seule visite.
  * Aucune donnée médicale n'est mise en cache : seulement les fichiers du site.
  */
-const CACHE = 'corticoplan-v1';
+// La version et la liste des fichiers sont remplies à la construction (vite.config.ts) :
+// le cache change de nom à chaque version, l'ancien est supprimé.
+const CACHE = 'corticoplan-__VERSION__';
+const FICHIERS = __FICHIERS__;
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './icon.svg', './manifest.webmanifest'])));
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FICHIERS)));
   self.skipWaiting();
 });
 
@@ -28,12 +33,12 @@ self.addEventListener('fetch', (e) => {
           caches.open(CACHE).then((c) => c.put('./index.html', copie));
           return rep;
         })
-        .catch(() => caches.match('./index.html')),
+        .catch(() => caches.match('./index.html', { ignoreVary: true })),
     );
     return;
   }
   e.respondWith(
-    caches.match(req).then(
+    caches.match(req, { ignoreVary: true }).then(
       (enCache) =>
         enCache ||
         fetch(req).then((rep) => {

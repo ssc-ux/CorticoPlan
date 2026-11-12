@@ -365,7 +365,7 @@
     align-items: center;
     gap: 8px;
     margin: 0 0 6px;
-    font: 600 1.3rem/1.2 'Plus Jakarta Sans', system-ui, sans-serif;
+    font: 600 1.3rem/1.2 'Plus Jakarta Sans Variable', system-ui, sans-serif;
     letter-spacing: -0.01em;
   }
   .maison {
@@ -478,7 +478,7 @@
     justify-content: center;
     gap: 12px;
     margin: 0 0 18px;
-    font: 600 clamp(2.2rem, 9vw, 3.4rem) / 1 'Plus Jakarta Sans', system-ui, sans-serif;
+    font: 600 clamp(2.2rem, 9vw, 3.4rem) / 1 'Plus Jakarta Sans Variable', system-ui, sans-serif;
     letter-spacing: -0.03em;
   }
   .logo span {

@@ -5,6 +5,10 @@
 import type { Dose, Palier, Probleme } from '../types';
 import { nombreFr } from './normalize';
 
+/** Garde-fous de saisie (pas des seuils cliniques) : au-delà, avertissement puis refus. */
+const DOSE_ELEVEE = 150;
+const DOSE_EXCESSIVE = 1000;
+
 const doseMax = (d: Dose) => (typeof d === 'number' ? d : Math.max(d[0], d[1]));
 const memeDose = (a: Dose, b: Dose) =>
   typeof a === 'number' ? typeof b === 'number' && a === b : typeof b !== 'number' && a[0] === b[0] && a[1] === b[1];
@@ -45,6 +49,19 @@ export function verifier(paliers: Palier[], problemes: Probleme[]): Palier[] {
         code: 'dose-remonte',
         niveau: 'avertissement',
         message: `La dose remonte de ${formatDose(prec.dose)} à ${formatDose(p.dose)} (palier ${i + 1}).`,
+      });
+    }
+    if (doseMax(p.dose) > DOSE_EXCESSIVE) {
+      problemes.push({
+        code: 'dose-excessive',
+        niveau: 'erreur',
+        message: `${formatDose(p.dose)} : dose impossible pour de la prednisone orale (plus de ${DOSE_EXCESSIVE} mg). Vérifiez la saisie.`,
+      });
+    } else if (doseMax(p.dose) > DOSE_ELEVEE) {
+      problemes.push({
+        code: 'dose-elevee',
+        niveau: 'avertissement',
+        message: `${formatDose(p.dose)} par jour : dose inhabituelle pour de la prednisone orale (plus de ${DOSE_ELEVEE} mg). Vérifiez la saisie (bolus ou autre molécule ?).`,
       });
     }
     const valeurs = typeof p.dose === 'number' ? [p.dose] : p.dose;

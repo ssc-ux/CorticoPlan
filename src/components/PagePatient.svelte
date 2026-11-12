@@ -78,6 +78,7 @@
     </section>
 
     <p class="alerte">Ne jamais arrêter brutalement la cortisone sans avis médical. En cas de fièvre, de malaise ou de doute, contactez votre médecin.</p>
+    <p class="petit foi">Cette page reprend le calendrier remis par votre médecin. En cas de différence avec votre ordonnance, c'est l'ordonnance qui compte : suivez-la et prévenez votre médecin.</p>
   {/if}
 </main>
 
@@ -121,6 +122,9 @@
     margin: 0;
     color: var(--muted);
     font-size: 0.88rem;
+  }
+  .foi {
+    margin-top: 12px;
   }
   .change {
     margin: 12px 0 0;

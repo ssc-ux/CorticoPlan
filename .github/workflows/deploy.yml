@@ -1,6 +1,6 @@
 # Mise en ligne automatique : à chaque modification de la branche main,
 # les tests sont lancés puis, s'ils passent, le site construit (site/) est
-# publié sur main (dossier site/) et sur la branche gh-pages.
+# publié sur la branche gh-pages.
 name: Tests et mise en ligne
 
 on:
@@ -29,22 +29,7 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
-      # GitHub Pages publie la branche main : le site construit (site/) y est
-      # enregistré. Un envoi fait avec GITHUB_TOKEN ne relance pas ce workflow.
-      - name: Publier (site/ sur main)
-        if: github.event_name != 'pull_request'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A site
-          if git diff --cached --quiet; then
-            echo "Site déjà à jour."
-          else
-            git commit -q -m "Mise à jour du site publié [skip ci]"
-            git pull -q --rebase && git push
-          fi
-      # Publication aussi sur gh-pages : le site est à jour quel que soit le
-      # réglage de GitHub Pages (branche main ou gh-pages).
+      # GitHub Pages publie la branche gh-pages : le site construit y est envoyé.
       - name: Publier (gh-pages)
         if: github.event_name != 'pull_request'
         run: |
