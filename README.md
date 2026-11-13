@@ -37,7 +37,7 @@ ajouté à l'écran d'accueil du téléphone.
 | Un jour sur deux | `20 mg 1 j/2`, `20 mg un jour sur deux` |
 | Dictée vocale | texte dicté au téléphone puis collé : `vingt milligrammes`, `deux virgule cinq`, `à la ligne`, `point` |
 | Objectif daté | `10 mg à 3 mois`, `≤ 5 mg à M6`, `5 mg au plus à 6 mois`, `moins de 5 mg à 6 mois`, `arrêt à 12 mois`, `objectif 3 mois : 10 mg, objectif 6 mois : 5 mg`, `10 mg à 3 mois et 5 mg à 6 mois`, `objectif 10 mg en 6 semaines`, `5 mg jusqu'à M12` (M = mois, S = semaine, J = jour, comptés depuis J1 ; « à 6 mois » tombe à la **date anniversaire** de la date de début) |
-| Fin | `arrêt` ; sinon la dernière dose est **maintenue** (« à poursuivre », « jusqu'à réévaluation » acceptés) |
+| Fin | `arrêt` ; une **durée écrite sur le dernier palier est respectée** (« 40 mg 5 jours » = arrêt le 6ᵉ jour) ; **sans durée**, la dernière dose est maintenue (« à poursuivre ») |
 
 Conventions : un nombre seul est une dose en mg ; dans une baisse, la première
 diminution a lieu dès le premier jour du bloc. Pour un **objectif daté**, les paliers
@@ -46,8 +46,7 @@ intermédiaires sont calculés : −5 mg au-dessus de 20 mg, −2,5 mg jusqu'à 
 plus longtemps ; la dose visée commence au plus tard à l'échéance (jusqu'à 6 jours avant, pour garder des semaines entières). Non pris en charge (signalé) :
 doses en mg/kg, en comprimés, fourchettes (« 3-4 semaines »), alternance entre deux doses.
 
-Garde-fous de saisie : une durée écrite sur le dernier palier sans « arrêt » est signalée (bouton
-« Arrêter à la fin de cette durée ») ; une dose de plus de 150 mg/j est signalée, plus de 1000 mg
+Garde-fous de saisie : une dose de plus de 150 mg/j est signalée, plus de 1000 mg
 refusée ; une durée nulle, non entière en jours ou de plus de 10 ans est refusée ; « prednisolone »
 ou « Solupred » écrit est signalé (l'ordonnance est toujours rédigée en prednisone).
 

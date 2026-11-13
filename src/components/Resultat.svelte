@@ -50,9 +50,7 @@
   });
 
   const avertissements = $derived(resultat.problemes.filter((p) => p.niveau === 'avertissement'));
-  /** Durée écrite mais non appliquée (« 40 mg 5 jours » → à poursuivre) : mise en avant, avec l'arrêt en un geste. */
-  const sansFin = $derived(resultat.problemes.find((p) => p.code === 'duree-dernier-palier-ignoree'));
-  const infos = $derived(resultat.problemes.filter((p) => p.niveau === 'info' && p !== sansFin));
+  const infos = $derived(resultat.problemes.filter((p) => p.niveau === 'info'));
 </script>
 
 {#if texte.trim()}
@@ -105,14 +103,6 @@
     {#each avertissements as a}
       <p class="bloc attention"><span aria-hidden="true">⚠</span> {a.message}</p>
     {/each}
-    {#if sansFin && !erreurs.length && !propositions.length}
-      <div class="bloc attention">
-        <p style="margin: 0 0 0.5rem"><span aria-hidden="true">⚠</span> {sansFin.message} Pas d’arrêt écrit : le traitement n’a pas de date de fin.</p>
-        <div class="reponses">
-          <button type="button" onclick={() => onappliquer?.(texte.trimEnd() + ' puis arrêt')}>Arrêter à la fin de cette durée</button>
-        </div>
-      </div>
-    {/if}
     {#if !erreurs.length}
       {#each infos as i}
         <p class="info">ⓘ {i.message}</p>

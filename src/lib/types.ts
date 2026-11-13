@@ -37,7 +37,7 @@ export type CodeProbleme =
   | 'dose-excessive'
   | 'autre-molecule'
   | 'duree-deduite'
-  | 'duree-dernier-palier-ignoree'
+  | 'arret-fin-duree'
   | 'pas-manquant'
   | 'rythme-manquant'
   | 'borne-manquante'

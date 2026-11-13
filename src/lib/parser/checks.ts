@@ -32,14 +32,15 @@ export function verifier(paliers: Palier[], problemes: Probleme[]): Palier[] {
   const liste = fusionner(paliers);
   const dernier = liste[liste.length - 1];
 
-  // Le schéma se termine sur la dernière dose écrite, maintenue.
+  // Durée écrite sur le dernier palier : elle est respectée, le traitement
+  // s'arrête à son terme. Sans durée, la dernière dose est maintenue.
   if (dernier && dernier.jours !== null && dernier.dose !== 0) {
     problemes.push({
-      code: 'duree-dernier-palier-ignoree',
+      code: 'arret-fin-duree',
       niveau: 'info',
-      message: `Dernier palier : la durée écrite est remplacée par « à poursuivre » (la dose de ${formatDose(dernier.dose)} est maintenue).`,
+      message: `Arrêt à la fin du dernier palier (${formatDose(dernier.dose)} pendant ${dernier.jours} jour${dernier.jours > 1 ? 's' : ''}). Pour maintenir cette dose, n’écrivez pas de durée.`,
     });
-    dernier.jours = null;
+    liste.push({ dose: 0, jours: null });
   }
 
   liste.forEach((p, i) => {

@@ -26,6 +26,16 @@ describe('durées', () => {
   });
 });
 
+describe('durée du dernier palier', () => {
+  it('est respectée : arrêt à son terme', () => {
+    expect(analyser('40 mg 5 jours').paliers).toEqual([{ dose: 40, jours: 5 }, { dose: 0, jours: null }]);
+    expect(analyser('40 mg 5 jours').problemes.map((p) => p.code)).toEqual(['arret-fin-duree']);
+  });
+  it('sans durée, la dernière dose est maintenue', () => {
+    expect(analyser('40 mg 5 jours puis 20 mg').paliers).toEqual([{ dose: 40, jours: 5 }, { dose: 20, jours: null }]);
+  });
+});
+
 describe('doses hors norme', () => {
   it('avertit au-dessus de 150 mg', () => expect(codes('500 mg 3 jours puis 60 mg 1 mois puis arret')).toEqual(['dose-elevee']));
   it('refuse au-dessus de 1000 mg', () => expect(analyser('99999 mg 3 semaines puis arret').ok).toBe(false));

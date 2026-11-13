@@ -12,8 +12,8 @@
  * - un nombre seul est une dose en mg ;
  * - dans une décroissance sans dose de départ, la première baisse a lieu à J1
  *   (dès le début du bloc) ;
- * - le schéma se termine sur la dernière dose écrite, maintenue (« à
- *   poursuivre »), sauf arrêt explicite.
+ * - une durée écrite sur le dernier palier est respectée (arrêt à son terme) ;
+ *   sans durée, la dernière dose est maintenue (« à poursuivre »).
  * - un objectif daté (« 10 mg à M3 », « arrêt à 12 mois ») est compté depuis
  *   J1 ; « objectif 10 mg en 6 semaines » compte depuis la fin de l'étape
  *   précédente. Les paliers intermédiaires sont calculés (voir `objectif`).

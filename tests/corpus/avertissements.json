@@ -133,10 +133,8 @@
     "id": "baisse-sans-pas",
     "entree": "20 mg 2 sem puis baisser jusqu'à 10 mg en 6 semaines",
     "paliers": [
-      {
-        "dose": 20,
-        "jours": null
-      }
+      { "dose": 20, "jours": 14 },
+      { "dose": 0, "jours": null }
     ],
     "problemes": [
       "pas-manquant"
