@@ -16,7 +16,7 @@ tableau daté, texte d'ordonnance à copier, calendrier patient à imprimer.
 1. **Écrire le schéma** comme dans un courrier, par exemple :
    `40 mg 1 mois puis baisser de 5 mg tous les 15 jours jusqu'à 20 mg puis -2,5 mg toutes les 2 semaines jusqu'à 10 mg`
    — ou **Choisir un schéma** dans la liste.
-2. Vérifier la **reformulation** affichée sous le champ. Si un mot n'est pas compris (faute de frappe, abréviation, « 3-4 semaines »…), une **correction est proposée** (« Vouliez-vous dire ? ») : un clic l'applique. Sans correction possible, le passage est surligné en rouge.
+2. Si le schéma est compris, rien ne s'affiche sous le champ : le tableau et l'ordonnance apparaissent directement. Si un mot n'est pas compris (faute de frappe, abréviation, « 3-4 semaines »…), une **correction est proposée** (« Vouliez-vous dire ? ») : un clic l'applique. Sans correction possible, le passage est surligné en rouge.
 3. Choisir la **date de début**.
 4. Le **tableau** apparaît : toucher une ligne pour modifier une dose ou une durée.
 5. **Copier le texte de l'ordonnance** et le coller dans votre logiciel.

@@ -1,7 +1,7 @@
 <script lang="ts">
   /**
-   * Sous le champ : ce que le moteur a compris (reformulation), ce qu'il n'a
-   * pas compris (surligné dans le texte), et les avertissements.
+   * Sous le champ : uniquement ce qui est à corriger (surligné dans le texte)
+   * ou à vérifier (avertissements). Quand tout est compris, rien n'est affiché.
    */
   import type { Proposition } from '../lib/parser/propose';
   import type { ResultatAnalyse, Span } from '../lib/types';
@@ -50,10 +50,10 @@
   });
 
   const avertissements = $derived(resultat.problemes.filter((p) => p.niveau === 'avertissement'));
-  const infos = $derived(resultat.problemes.filter((p) => p.niveau === 'info'));
 </script>
 
-{#if texte.trim()}
+<!-- Schéma compris : rien n'est affiché ici (le tableau et l'ordonnance suffisent). -->
+{#if texte.trim() && (propositions.length || erreurs.length || avertissements.length)}
   <div class="resultat" aria-live="polite">
     {#if propositions.length}
       <!-- Une correction est trouvée : on la propose plutôt que de signaler l'erreur. -->
@@ -89,25 +89,9 @@
       </div>
     {/if}
 
-    <!-- Tant qu'il reste une erreur ou une question, un déroulé partiel serait trompeur : on ne l'affiche pas. -->
-    {#if resultat.reformulation.length && !erreurs.length && !propositions.length}
-      <!-- Au-delà de 3 paliers, le détail est replié (il est aussi dans le tableau et l'ordonnance). -->
-      <details class="bloc compris" open={resultat.reformulation.length <= 3}>
-        <summary class="titre">✓ Compris{resultat.reformulation.length > 3 ? ` : ${resultat.reformulation.length} paliers (afficher le détail)` : ''}</summary>
-        <ol>
-          {#each resultat.reformulation as ligne}<li>{ligne}</li>{/each}
-        </ol>
-      </details>
-    {/if}
-
     {#each avertissements as a}
       <p class="bloc attention"><span aria-hidden="true">⚠</span> {a.message}</p>
     {/each}
-    {#if !erreurs.length}
-      {#each infos as i}
-        <p class="info">ⓘ {i.message}</p>
-      {/each}
-    {/if}
   </div>
 {/if}
 
@@ -214,21 +198,6 @@
     font-weight: 600;
     font-size: 0.9rem;
   }
-  .compris {
-    background: var(--accent-doux);
-  }
-  .compris summary {
-    margin: 0;
-    cursor: pointer;
-    list-style: none;
-  }
-  .compris summary::-webkit-details-marker {
-    display: none;
-  }
-  .compris[open] summary {
-    margin-bottom: 0.3rem;
-  }
-  ol,
   ul {
     margin: 0;
     padding-left: 1.4rem;
@@ -237,10 +206,5 @@
     background: var(--attention-fond);
     color: var(--texte);
     border-left: 4px solid var(--attention);
-  }
-  .info {
-    margin: 0;
-    color: var(--texte-3);
-    font-size: 0.85rem;
   }
 </style>
