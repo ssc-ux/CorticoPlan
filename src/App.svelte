@@ -268,7 +268,9 @@
       Aide à la rédaction : ne remplace pas le jugement médical ; le schéma reste sous la responsabilité du
       prescripteur. Aucune donnée n'est enregistrée ni envoyée. Ne saisissez jamais de nom de patient.
     </p>
-    <p class="createur">Créé par <strong>Quentin Astouati</strong></p>
+    <p class="createur">
+      Créé par <strong>Quentin Astouati</strong> · <a href="https://ssc-ux.github.io/MedInt-Tools/">Tous les outils MedInt Tools</a>
+    </p>
     <details>
       <summary>Réglages</summary>
       <label>1 mois = <input type="number" min="28" max="31" bind:value={joursParMois} /> jours</label>
@@ -365,7 +367,7 @@
     align-items: center;
     gap: 8px;
     margin: 0 0 6px;
-    font: 600 1.3rem/1.2 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+    font: 600 1.3rem/1.2 'Plus Jakarta Sans', system-ui, sans-serif;
     letter-spacing: -0.01em;
   }
   .maison {
@@ -478,7 +480,7 @@
     justify-content: center;
     gap: 12px;
     margin: 0 0 18px;
-    font: 600 clamp(2.2rem, 9vw, 3.4rem) / 1 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+    font: 600 clamp(2.2rem, 9vw, 3.4rem) / 1 'Plus Jakarta Sans', system-ui, sans-serif;
     letter-spacing: -0.03em;
   }
   .logo span {
