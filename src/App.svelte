@@ -152,6 +152,7 @@
 {:else}
 <div class="ecran wrap" class:accueil class:large={!accueil && (onglet !== 'ecrire' || pret)}>
   <header class="top">
+    <a class="mit" href="https://ssc-ux.github.io/MedInt-Tools/" title="Retour à MedInt Tools">‹ MedInt Tools</a>
     <h1>
       <a href="./" class="maison" onclick={allerAccueil}><img src="./icon.svg" alt="" width="22" height="22" /> CorticoPlan</a>
     </h1>
@@ -445,6 +446,25 @@
   }
   .accueil .top h1 {
     display: none;
+  }
+  .mit {
+    display: inline-block;
+    margin: 0 0 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .mit:hover {
+    color: var(--fg);
+  }
+  .accueil .top {
+    display: flex;
+    align-items: center;
+  }
+  .accueil .mit {
+    margin: 0 auto 0 0;
   }
   .accueil .tabs {
     justify-content: flex-end;
