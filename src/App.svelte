@@ -252,7 +252,8 @@
             <Ordonnance texte={texteOrdonnance} />
           </section>
           <div class="actions o-actions">
-            <button type="button" class="lien-action" onclick={() => window.print()}>Imprimer le calendrier patient</button>
+            <!-- Calendrier patient et QR code désactivés pour l'instant. -->
+            <button type="button" class="lien-action" disabled title="Bientôt disponible">Imprimer le calendrier patient (QR code)</button>
             <button type="button" class="lien-action" onclick={partager}>{lienCopie ? '✓ Lien copié' : 'Partager ce schéma'}</button>
           </div>
           <section class="carte o-courbe">
@@ -601,7 +602,12 @@
     font-weight: 600;
     cursor: pointer;
   }
-  .lien-action:hover {
+  .lien-action:disabled {
+    color: var(--muted);
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .lien-action:hover:not(:disabled) {
     text-decoration: underline;
   }
   footer {
