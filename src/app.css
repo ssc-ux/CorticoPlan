@@ -180,7 +180,8 @@ button {
 }
 
 @media print {
-  .ecran {
+  /* L'écran n'est masqué que si le calendrier patient est présent. */
+  body:has(.impression) .ecran {
     display: none !important;
   }
   .impression {

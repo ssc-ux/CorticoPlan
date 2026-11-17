@@ -288,7 +288,8 @@
   </footer>
 </div>
 
-{#if pret}
+<!-- Calendrier patient (et son QR code) désactivé : remettre `pret` pour le réactiver. -->
+{#if false && pret}
   <CalendrierPatient paliers={resultat.paliers} {debut} ordonnance={texteOrdonnance} lienPatient={lienPatient} />
 {/if}
 {/if}
